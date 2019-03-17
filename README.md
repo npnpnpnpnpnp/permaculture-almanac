@@ -9,7 +9,7 @@ The *pw-vue-kickstart* repository serves as a starting point for websites built 
 2. Switch to the project folder and run the following commands to duplicate the *pw-vue-kickstart* repository:
 
     ```
-    $ git clone --bare git@gitlab.com:dsdsdsdsdsds/pw-vue-propaedeutikum.git
+    $ git clone --bare git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
     $ cd pw-vue-kickstart.git
     $ git push --mirror git@gitlab.com:dsdsdsdsdsds/pw-vue-PROJECT.git
     $ cd ..
@@ -21,7 +21,7 @@ The *pw-vue-kickstart* repository serves as a starting point for websites built 
 4. Switch to the new repo directory and add *pw-vue-kickstart* as a remote:
 
     ```
-    $ git remote add default git@gitlab.com:dsdsdsdsdsds/pw-vue-propaedeutikum.git
+    $ git remote add default git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
     ```
 
 ## Backend
