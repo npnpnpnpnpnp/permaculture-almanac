@@ -1,0 +1,47 @@
+@include meyer-reset;
+
+/*
+@font-face {
+  font-family: '';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/.woff2') format('woff2'),
+    url('./assets/fonts/.woff') format('woff');
+}
+*/
+
+html {
+  @include fs-base;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  @include ff-regular;
+  @include fs-body;
+  color: $black;
+  background-color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  //@include link-reset;
+}
+
+em {
+  //font-style: italic;
+}
+
+strong {
+  //font-style: bold;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
