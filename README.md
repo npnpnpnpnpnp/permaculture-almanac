@@ -72,8 +72,8 @@ Add the following code to the newly created `post-receive` file. Make sure to ad
 
 ```
 #!/bin/sh
-GIT_DIR=/pw-vue-PROJECT.git
-WORK_DIR=/domain.com
+GIT_DIR=/git/pw-vue-PROJECT.git
+WORK_DIR=/public_html
 
 # remove any untracked files and directories (except the excluded ones)
 git --work-tree=${WORK_DIR} --git-dir=${GIT_DIR} clean -fd --exclude=/.htaccess --exclude=/site/config.php --exclude=/site/assets
@@ -81,9 +81,9 @@ git --work-tree=${WORK_DIR} --git-dir=${GIT_DIR} clean -fd --exclude=/.htaccess 
 # force checkout of the latest deploy
 git --work-tree=${WORK_DIR} --git-dir=${GIT_DIR} checkout -f
 
-# copy contents of dist/ to working directory and remove dist/ afterwards
-cp -a ${WORK_DIR}/dist/. ${WORK_DIR}
-rm -rf ${WORK_DIR}/dist
+# copy contents of dist/ to working directory and remove backend/dist/ afterwards
+cp -a ${WORK_DIR}/backend/dist/. ${WORK_DIR}
+rm -rf ${WORK_DIR}/backend
 ```
 
 Set the correct permissions:
