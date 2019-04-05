@@ -1,0 +1,19 @@
+@mixin input-reset {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  font: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  //outline: none;
+  appearance: none;
+}
+
+@mixin button-reset {
+  @include input-reset;
+  user-select: none;
+  cursor: pointer;
+}
