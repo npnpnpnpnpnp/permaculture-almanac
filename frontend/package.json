@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "normalize.css": "^8.0.1",
     "vue": "^2.6.6",
     "vue-meta": "^1.5.8",
     "vue-router": "^3.0.1",
@@ -53,4 +54,5 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }}
+  }
+}
