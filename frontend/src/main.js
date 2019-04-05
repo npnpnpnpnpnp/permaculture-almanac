@@ -8,6 +8,18 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL
 
+// get api routes and init data before everything else:
+router.beforeEach(async (to, from, next) => {
+  if (store.state.initialized) {
+    return next()
+  }
+  await store.dispatch('getDefaults')
+  next({
+    path: to.fullPath,
+    replace: true
+  })
+})
+
 new Vue({
   router,
   store,

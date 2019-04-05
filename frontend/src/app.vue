@@ -28,9 +28,6 @@ export default {
   },
   computed: {
     ...mapState(['initialized', 'pageTitle', 'metaDescription'])
-  },
-  created() {
-    this.$store.dispatch('getDefaults')
   }
 }
 </script>
