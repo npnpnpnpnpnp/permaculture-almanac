@@ -78,13 +78,9 @@ FileETag None
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Redirect to HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Redirect to non-www URL
+    # Redirect to non-www HTTPS URL
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
     # Always serve index.html for SPA
     RewriteBase /
