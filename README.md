@@ -24,6 +24,32 @@ The *pw-vue-kickstart* repository serves as a starting point for websites built 
     $ git remote add default git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
     ```
 
+## Update repository
+
+Whenever there are new commits made to the *pw-vue-kickstart* that should be applied to one of its instances, simply [fetch](https://git-scm.com/docs/git-fetch) them:
+
+```
+$ git fetch default master
+```
+
+List the new commits:
+
+```
+$ git log --oneline master..default/master
+```
+
+Pick commits with [git-cherry-pick](https://git-scm.com/docs/git-cherry-pick):
+
+```
+$ git cherry-pick -x <commit>`
+```
+
+If everything works fine, [push](https://help.github.com/articles/pushing-to-a-remote/) them to *origin*:
+
+```
+$ git push origin master
+```
+
 ## Backend
 
 All paths in this chapter are relative to the `/backend/` folder.
