@@ -1,5 +1,5 @@
 <template>
-  <ul :class="$style['nav-list']">
+  <ul :class="$style.list">
     <NavBarRoutes :routes="routes" />
   </ul>
 </template>
@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style lang="scss" module>
-//.nav-list {}
+//.list {}
 </style>

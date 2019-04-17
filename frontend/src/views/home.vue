@@ -1,17 +1,20 @@
 <template>
-  <Layout>
-    <h1>{{ pageTitle }}</h1>
-  </Layout>
+  <div :class="$style.view">
+    <h1 :class="$style.title">{{ pageTitle }}</h1>
+  </div>
 </template>
 
 <script>
-import Layout from '@/layouts/default'
 import { mapState } from 'vuex'
 
 export default {
-  components: { Layout },
   computed: {
     ...mapState(['pageTitle'])
   }
 }
 </script>
+
+<style lang="scss" module>
+//.view {}
+//.title {}
+</style>

@@ -1,13 +1,9 @@
 <template>
-  <Layout>
+  <div :class="$style.view">
     <p>404 Page not found</p>
-  </Layout>
+  </div>
 </template>
 
-<script>
-import Layout from '@/layouts/default'
-
-export default {
-  components: { Layout }
-}
-</script>
+<style lang="scss" module>
+//.view {}
+</style>

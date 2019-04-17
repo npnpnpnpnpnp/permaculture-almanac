@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['layout']">
+  <div :class="$style.layout">
     <NavBar />
     <slot />
   </div>

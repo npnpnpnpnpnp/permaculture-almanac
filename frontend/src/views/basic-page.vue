@@ -1,17 +1,15 @@
 <template>
-  <Layout>
+  <div :class="$style.view">
     <h2 :class="$style.title">{{ pageTitle }}</h2>
     <div :class="$style.body" @click="delegateLinks" v-html="page.body"></div>
-  </Layout>
+  </div>
 </template>
 
 <script>
-import Layout from '@/layouts/default'
 import { delegateLinks } from '@/mixins/delegate-links'
 import axios from 'axios'
 
 export default {
-  components: { Layout },
   mixins: [delegateLinks],
   props: {
     id: { type: Number, required: true }
@@ -63,6 +61,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+//.view {}
 //.title {}
 //.body {}
 </style>
