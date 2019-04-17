@@ -9,3 +9,9 @@ if (wire()->config->_productionFrontendUrl) {
     $event->return = $value;
   });
 }
+
+// Clear all caches when a page is saved
+$pages->addHookAfter('saveReady', function($event) {
+  $procache = wire()->modules->get("ProCache");
+  $procache->clearAll();
+});

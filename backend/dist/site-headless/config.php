@@ -38,7 +38,6 @@ $config->imageSizerOptions = array(
 	'upscaling' => false,
 	'interlace' => true,
 );
-$config->_production = false;
 $config->_productionFrontendUrl = '';
 
 
