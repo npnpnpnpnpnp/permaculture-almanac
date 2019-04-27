@@ -1,8 +1,8 @@
 <template>
-  <div :class="$style.view">
+  <main :class="$style.view">
     <h2 :class="$style.title">{{ pageTitle }}</h2>
     <div :class="$style.body" @click="delegateLinks" v-html="page.body"></div>
-  </div>
+  </main>
 </template>
 
 <script>
