@@ -1,15 +1,15 @@
 <template>
   <div :class="$style.layout">
-    <NavBar />
+    <SiteHeader />
     <slot />
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/nav-bar'
+import SiteHeader from '@/components/site-header'
 
 export default {
-  components: { NavBar },
+  components: { SiteHeader },
   metaInfo() {
     return {
       title: this.$route.meta.title

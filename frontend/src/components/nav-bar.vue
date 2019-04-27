@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NavBarRoutes from './nav-bar-routes'
+import NavBarRoutes from '@/components/nav-bar-routes'
 import { mapState } from 'vuex'
 
 export default {
