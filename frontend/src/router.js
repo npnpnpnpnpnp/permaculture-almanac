@@ -44,10 +44,8 @@ export const addRoutesFromApi = routes => {
 
 function walkRoutes(routes) {
   routes.forEach(route => {
-    // route.component = DefaultView
-
-    //if (route.template === 'basic-page') route.component = BasicPage
     route.component = BasicPage
+    //if (route.template === 'basic-page') route.component = BasicPage
 
     route.path = route.url
     route.meta = {
