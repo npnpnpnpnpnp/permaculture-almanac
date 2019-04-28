@@ -1,7 +1,14 @@
 <template>
   <img
+    v-if="resizeImage"
     :sizes="sizes()"
     :srcset="srcset()"
+    :alt="image.description"
+    :class="imgClass"
+  />
+  <img
+    v-else
+    :src="image.urls[0].url"
     :alt="image.description"
     :class="imgClass"
   />
@@ -14,15 +21,17 @@ export default {
     image: {
       type: Object,
       required: true
-      //default: () => {}
     }
   },
   computed: {
     isPortrait() {
-      return this.image.ratio > 1 ? true : false
+      return this.image.ratio < 1 ? true : false
     },
     imgClass() {
       return this.isPortrait ? 'is-portrait' : ''
+    },
+    resizeImage() {
+      return this.image.ext !== 'svg'
     }
   },
   methods: {
