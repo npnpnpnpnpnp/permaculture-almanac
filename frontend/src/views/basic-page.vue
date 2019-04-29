@@ -11,9 +11,6 @@ import axios from 'axios'
 
 export default {
   mixins: [delegateLinks],
-  props: {
-    id: { type: Number, required: true }
-  },
   data() {
     return {
       page: [],
