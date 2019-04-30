@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       page: [],
+      loading: false,
       error: null
     }
   },
@@ -23,36 +24,23 @@ export default {
     }
   },
   methods: {
-    setData(response) {
-      this.page = response.data
-    },
-    handleError(error) {
-      console.log(error)
+    fetchData() {
+      this.page = []
+      this.loading = true
+      this.error = null
+      axios
+        .get(`page/${this.$route.meta.id}`)
+        .then(response => {
+          this.page = response.data
+          this.loading = false
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
-  // Based on https://router.vuejs.org/guide/advanced/data-fetching.html#fetching-before-navigation
-  beforeRouteEnter(to, from, next) {
-    axios
-      .get(`page/${to.meta.id}`)
-      .then(response => {
-        next(vm => vm.setData(response))
-      })
-      .catch(error => {
-        next(vm => vm.handleError(error))
-      })
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.page = []
-    axios
-      .get(`page/${to.meta.id}`)
-      .then(response => {
-        this.setData(response)
-        next()
-      })
-      .catch(error => {
-        this.handleError(error)
-        next()
-      })
+  created() {
+    this.fetchData()
   }
 }
 </script>
