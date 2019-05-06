@@ -1,7 +1,9 @@
 <template>
   <div :class="$style.layout">
     <SiteHeader />
-    <slot />
+    <keep-alive>
+      <slot />
+    </keep-alive>
   </div>
 </template>
 
