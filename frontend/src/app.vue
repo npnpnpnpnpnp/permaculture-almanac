@@ -40,11 +40,6 @@ export default {
   },
   watch: {
     initialized() {
-      /*
-      this.$nextTick(() => {
-        this.pageInitialized = true
-      })
-      */
       this.pageInitialized = true
     }
   }
