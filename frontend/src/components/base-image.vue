@@ -1,7 +1,7 @@
 <template>
   <img
     v-if="resizeImage"
-    :sizes="sizes()"
+    :sizes="sizes"
     :srcset="srcset()"
     :alt="image.description"
     :class="imgClass"
@@ -21,6 +21,10 @@ export default {
     image: {
       type: Object,
       required: true
+    },
+    sizes: {
+      type: String,
+      default: '100vw'
     }
   },
   computed: {
@@ -35,14 +39,6 @@ export default {
     }
   },
   methods: {
-    sizes() {
-      // TODO: sizes should be set by the layout and not this generic component
-      let sizes = '100vw'
-      if (this.isPortrait) {
-        sizes = '75vw'
-      }
-      return sizes
-    },
     srcset() {
       let response = ''
       Object.values(this.image.urls).forEach(url => {
