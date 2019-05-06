@@ -1,4 +1,4 @@
-# --- WireDatabaseBackup {"time":"2019-04-17 10:17:12","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
+# --- WireDatabaseBackup {"time":"2019-05-06 17:36:11","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
 
 DROP TABLE IF EXISTS `caches`;
 CREATE TABLE `caches` (
@@ -764,6 +764,8 @@ CREATE TABLE `pages_procache` (
   KEY `pages_id` (`pages_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/defaults/', '1044', '46', '2019-05-06 12:25:15');
+INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/page/1042/', '1044', '46', '2019-05-06 12:25:28');
 
 DROP TABLE IF EXISTS `pages_sortfields`;
 CREATE TABLE `pages_sortfields` (
@@ -806,4 +808,4 @@ INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, 
 
 UPDATE pages SET created_users_id=41, modified_users_id=41, created=NOW(), modified=NOW();
 
-# --- /WireDatabaseBackup {"numTables":20,"numCreateTables":26,"numInserts":500,"numSeconds":0}
+# --- /WireDatabaseBackup {"numTables":20,"numCreateTables":26,"numInserts":502,"numSeconds":0}
