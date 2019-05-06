@@ -56,7 +56,7 @@ All paths in this chapter are relative to the `/backend/` folder.
 
 ### Installation
 
-1. [Download](https://processwire.com/download/) the latest ProcessWire archive and extract its content to the `dist/` folder.
+1. [Download](https://processwire.com/download/core/) the latest ProcessWire archive and extract its content to the `dist/` folder.
 2. Create a MySQL database with a *utfmb4_unicode_ci* collation.
 3. Initiate the ProcessWire installer in the browser.
 4. Select the *Headless* site profile during installation.
