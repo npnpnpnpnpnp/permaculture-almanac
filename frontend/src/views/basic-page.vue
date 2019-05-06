@@ -1,6 +1,6 @@
 <template>
   <main :class="$style.view">
-    <h2 :class="$style.title">{{ pageTitle }}</h2>
+    <h2 :class="$style.title" v-html="page.title" />
     <BaseBodytext :text="page.body" :class="$style.body" />
   </main>
 </template>
@@ -16,11 +16,6 @@ export default {
       page: [],
       loading: false,
       error: null
-    }
-  },
-  computed: {
-    pageTitle() {
-      return this.$route.meta.title
     }
   },
   methods: {
