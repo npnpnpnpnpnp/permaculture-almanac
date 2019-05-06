@@ -1,16 +1,16 @@
 <template>
   <main :class="$style.view">
     <h2 :class="$style.title">{{ pageTitle }}</h2>
-    <div :class="$style.body" @click="delegateLinks" v-html="page.body"></div>
+    <BaseBodytext v-if="page.body" :text="page.body" :class="$style.body" />
   </main>
 </template>
 
 <script>
-import { delegateLinks } from '@/mixins/delegate-links'
+import BaseBodytext from '@/components/base-bodytext'
 import axios from 'axios'
 
 export default {
-  mixins: [delegateLinks],
+  components: { BaseBodytext },
   data() {
     return {
       page: [],
