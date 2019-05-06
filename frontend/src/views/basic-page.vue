@@ -1,7 +1,7 @@
 <template>
   <main :class="$style.view">
     <h2 :class="$style.title">{{ pageTitle }}</h2>
-    <BaseBodytext v-if="page.body" :text="page.body" :class="$style.body" />
+    <BaseBodytext :text="page.body" :class="$style.body" />
   </main>
 </template>
 
