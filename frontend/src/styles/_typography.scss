@@ -1,12 +1,12 @@
-@mixin ff-regular {
+%ff-regular {
   font-family: sans-serif;
 }
 
-@mixin fs-base {
+%fs-base {
   font-size: $fs-base;
   line-height: $lh-base;
 }
 
-@mixin fs-body {
+%fs-regular {
   font-size: 1.6em;
 }

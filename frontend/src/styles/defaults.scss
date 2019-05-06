@@ -11,7 +11,7 @@
 */
 
 html {
-  @include fs-base;
+  @extend %fs-base;
   box-sizing: border-box;
 }
 
@@ -20,8 +20,8 @@ html {
 }
 
 body {
-  @include ff-regular;
-  @include fs-body;
+  @extend %ff-regular;
+  @extend %fs-regular;
   color: $black;
   background-color: $white;
   -webkit-font-smoothing: antialiased;
@@ -63,5 +63,5 @@ ol {
 }
 
 button {
-  @include button-reset;
+  @extend %button-reset;
 }
