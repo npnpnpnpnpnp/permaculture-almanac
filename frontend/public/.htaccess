@@ -76,16 +76,16 @@ FileETag None
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+  RewriteEngine On
 
-    # Redirect to non-www HTTPS URL
-    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+  # Redirect to non-www HTTPS URL
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-    # Always serve index.html for SPA
-    RewriteBase /
-    RewriteRule ^index\.html$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.html [L]
+  # Always serve index.html for SPA
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
 </IfModule>
