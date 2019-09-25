@@ -72,7 +72,7 @@ On a live server, make sure to [optimize the handling of 404s](https://processwi
 
 There is currently only a `dist/` directory that initially holds the *Headless* site profile. After installing ProcessWire, it contains all files that are meant to be deployed to the webserver on a separate subdomain (e.g. backend.mydomain.com).
 
-Within `dist/site/api/` resides the API. It is by default reachable via `/api/ROUTE` in the browser.
+Within `dist/site/templates/api/` resides the API. It is by default reachable via `/api/` in the browser.
 
 ### Deployment
 
@@ -157,8 +157,6 @@ $ npm run serve
 ```
 
 ### Setup
-
-Depending on the webserver, copy `public/htaccess.txt` and rename it to `.htaccess`.
 
 Adjust the values inside `.env` and `.env.production` and add `.env.development.local` to set the local development variables.
 
