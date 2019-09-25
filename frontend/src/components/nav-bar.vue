@@ -1,21 +1,27 @@
 <template>
-  <ul :class="$style.list">
-    <NavBarRoutes :routes="routes" />
+  <ul :class="$style.component">
+    <li v-for="route in apiRoutes" :key="route.id">
+      <router-link
+        :to="route.url[currentLanguage]"
+        :exact-active-class="$style['is-active']"
+      >
+        {{ route.title[currentLanguage] }}
+      </router-link>
+    </li>
   </ul>
 </template>
 
 <script>
-import NavBarRoutes from '@/components/nav-bar-routes'
 import { mapState } from 'vuex'
 
 export default {
-  components: { NavBarRoutes },
   computed: {
-    ...mapState(['routes'])
+    ...mapState(['currentLanguage', 'apiRoutes'])
   }
 }
 </script>
 
 <style lang="scss" module>
-//.list {}
+// .component {}
+// .is-active {}
 </style>

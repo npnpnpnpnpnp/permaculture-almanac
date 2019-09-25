@@ -1,7 +1,7 @@
 <template>
-  <div :class="$style.view">
+  <main :class="$style.view">
     <p>404 Page not found</p>
-  </div>
+  </main>
 </template>
 
 <style lang="scss" module>

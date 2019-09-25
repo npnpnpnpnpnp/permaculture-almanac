@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.layout">
-    <SiteHeader />
+    <site-header />
     <keep-alive>
       <slot />
     </keep-alive>
@@ -11,12 +11,7 @@
 import SiteHeader from '@/components/site-header'
 
 export default {
-  components: { SiteHeader },
-  metaInfo() {
-    return {
-      title: this.$route.meta.title
-    }
-  }
+  components: { SiteHeader }
 }
 </script>
 

@@ -12,63 +12,52 @@ const scrollBehavior = function() {
 }
 
 const router = new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior,
-  routes: [
-    {
-      path: '/',
-      component: Home
-    }
-  ]
+  mode: 'history',
+  routes: [],
+  scrollBehavior
 })
 
 export const addRoutesFromApi = routes => {
   routes = walkRoutes(routes)
   router.addRoutes(routes)
 
-  // add wildcard route that redirects to 404 view
   router.addRoutes([
     {
       path: '/404',
-      name: '404',
+      name: '404-error',
       component: require('@/views/_404').default,
       props: true
     },
     {
       path: '*',
-      redirect: '404'
+      redirect: '404-error'
     }
   ])
 }
 
 function walkRoutes(routes) {
   routes.forEach(route => {
-    route.component = BasicPage
-    //if (route.template === 'basic-page') route.component = BasicPage
-
-    route.path = route.url
     route.meta = {
-      id: route.id,
-      title: route.title
+      url: route.url
     }
-    route.props = { id: route.id }
 
-    if (route.root) route.meta.root = route.root
+    route.component = Home
+    if (route.template === 'basic-page') route.component = BasicPage
 
-    if (route.parent) route.meta.parent = route.parent
+    route.name = route.id
 
-    if (route.children) {
-      let subnavigation = []
-      route.children.forEach(child => {
-        subnavigation.push(child)
+    const langUrls = '(' + Object.values(route.url).join('|') + ')'
+    route.path = route.dynamicRoute ? langUrls + route.dynamicRoute : langUrls
+
+    // TODO: This is called apiChildren because otherwise vue-router confuses it with its own route.children
+    if (route.apiChildren) {
+      let metaChildren = []
+      route.apiChildren.forEach(child => {
+        metaChildren.push(child)
       })
-
-      route.meta.subnavigation = subnavigation
-
-      routes = [...routes, ...walkRoutes(route.children, subnavigation)]
-
-      delete route.children
+      route.meta.children = metaChildren
+      routes = [...routes, ...walkRoutes(route.apiChildren, metaChildren)]
     }
   })
 
