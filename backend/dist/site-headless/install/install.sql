@@ -1,4 +1,4 @@
-# --- WireDatabaseBackup {"time":"2019-05-06 21:43:05","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
+# --- WireDatabaseBackup {"time":"2019-09-25 16:44:42","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
 
 DROP TABLE IF EXISTS `caches`;
 CREATE TABLE `caches` (
@@ -511,7 +511,7 @@ CREATE TABLE `modules` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `class` (`class`)
-) ENGINE=MyISAM AUTO_INCREMENT=206 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
 
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('1', 'FieldtypeTextarea', '1', '', '0000-00-00 00:00:00');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('2', 'FieldtypeNumber', '0', '', '0000-00-00 00:00:00');
@@ -603,9 +603,9 @@ INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('159', 
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('160', 'LanguageSupport', '35', '{\"languagesPageID\":1012,\"defaultLanguagePageID\":1013,\"otherLanguagePageIDs\":[1039],\"languageTranslatorPageID\":1014}', '2015-03-10 22:22:48');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('161', 'ProcessLanguage', '1', '', '2015-03-10 22:22:48');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('162', 'ProcessLanguageTranslator', '1', '', '2015-03-10 22:22:48');
-INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('201', 'RestApi', '3', '{\"authMethod\":\"none\",\"jwtSecret\":\"5UErooZgjtxKHdlorkUSxH\\/f2eFz6ItFU56ROObNXwfL8Uk9ZG9RFIAN13oycur6MPOYfrad21BilSIYFREmbO7uqTgqSKPsGn\\/C7pAswwrN6m1h5bas6MZPCRGIU18qFKPJYdlQ+6Mvn0MYWF+6lLxpo3Gcp0meVcvokGrqsKE=\",\"endpoint\":\"live-api\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\"}', '2019-03-08 16:53:00');
+INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('201', 'RestApi', '3', '{\"authMethod\":\"none\",\"jwtSecret\":\"5UErooZgjtxKHdlorkUSxH\\/f2eFz6ItFU56ROObNXwfL8Uk9ZG9RFIAN13oycur6MPOYfrad21BilSIYFREmbO7uqTgqSKPsGn\\/C7pAswwrN6m1h5bas6MZPCRGIU18qFKPJYdlQ+6Mvn0MYWF+6lLxpo3Gcp0meVcvokGrqsKE=\",\"endpoint\":\"api\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\"}', '2019-03-08 16:53:00');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('202', 'InputfieldPageAutocomplete', '0', '', '2019-03-15 17:37:32');
-INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('204', 'ProCache', '3', '{\"licenseKey\":\"PWPC3.per2284.af9b22291fe60c0807c9824f91cd3452daa1c1c5\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\",\"cacheOn\":true,\"debug\":\"0\",\"cacheTime\":86400,\"cacheTimeCustom\":\"\",\"cacheClear\":[4],\"cacheClearCustom\":\"\",\"htAllow\":\"1\",\"minifyTemplates\":[],\"minifyIgnoreTags\":\"textarea pre\",\"minifyBlocks\":\"!doctype address article aside audio blockquote body br button canvas caption col colgroup dd div dl dt embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hgroup hr html li link main map meta nav noscript object ol optgroup option output p pre progress script section table tbody td tfoot th thead title tr ul video\",\"minifyRemoveBlankAttr\":\"class dir for id lang style title\",\"minifyOptions\":[],\"minifyHTMLOptions\":[\"js\",\"css\",\"uncomment\",\"noXHTML\",\"unblank\",\"untag\",\"unattr\",\"unbool\",\"unquote\"],\"minifyMaxImportCSS\":5,\"noCacheCookies\":\"wire_challenge\\nwires_challenge\",\"noCacheGetVars\":\"*\",\"urlSegments\":\"4\",\"https\":\"\",\"cacheHosts\":[],\"bodyClass\":\"\",\"canonical\":\"0\",\"docRootPath\":\"\",\"busterUrlType\":\"qstr\",\"cdnHosts\":\"\",\"cdnExts\":\"\",\"cdnAttrs\":\"src srcset href\",\"cdnTemplates\":[],\"cdnStatus\":\"0\",\"cacheTemplates\":[46]}', '2019-04-17 09:50:52');
+INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('204', 'ProCache', '3', '{\"licenseKey\":\"PWPC3.per2284.af9b22291fe60c0807c9824f91cd3452daa1c1c5\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\",\"cacheOn\":true,\"debug\":\"0\",\"cacheTime\":31449600,\"cacheTimeCustom\":\"\",\"cacheClear\":[4],\"cacheClearCustom\":\"\",\"htAllow\":\"1\",\"minifyTemplates\":[],\"minifyIgnoreTags\":\"textarea pre\",\"minifyBlocks\":\"!doctype address article aside audio blockquote body br button canvas caption col colgroup dd div dl dt embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hgroup hr html li link main map meta nav noscript object ol optgroup option output p pre progress script section table tbody td tfoot th thead title tr ul video\",\"minifyRemoveBlankAttr\":\"class dir for id lang style title\",\"minifyOptions\":[],\"minifyHTMLOptions\":[\"js\",\"css\",\"uncomment\",\"noXHTML\",\"unblank\",\"untag\",\"unattr\",\"unbool\",\"unquote\"],\"minifyMaxImportCSS\":5,\"noCacheCookies\":\"wire_challenge\\nwires_challenge\",\"noCacheGetVars\":\"*\",\"urlSegments\":\"4\",\"https\":\"\",\"cacheHosts\":[],\"bodyClass\":\"\",\"canonical\":\"0\",\"docRootPath\":\"\",\"busterUrlType\":\"qstr\",\"cdnHosts\":\"\",\"cdnExts\":\"\",\"cdnAttrs\":\"src srcset href\",\"cdnTemplates\":[],\"cdnStatus\":\"0\",\"cacheTemplates\":[46]}', '2019-04-17 09:50:52');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('205', 'ProcessProCache', '1', '', '2019-04-17 09:50:52');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('172', 'MarkupCache', '3', '', '2015-03-11 09:12:57');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('173', 'MaintenanceMode', '3', '{\"inMaintenance\":\"\",\"bypassRoles\":[],\"showPage\":1019,\"showURL\":\"\",\"allowPages\":[]}', '2015-03-11 09:13:11');
@@ -637,9 +637,9 @@ CREATE TABLE `pages` (
   KEY `created` (`created`),
   KEY `status` (`status`),
   KEY `published` (`published`)
-) ENGINE=MyISAM AUTO_INCREMENT=1046 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1047 DEFAULT CHARSET=utf8;
 
-INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1', '0', '1', 'home', '9', '2015-03-11 10:03:23', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1', '0', '1', 'home', '9', '2019-09-25 11:11:18', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('2', '1', '2', 'manage', '1035', '2016-10-24 16:25:12', '40', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '5');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('3', '2', '2', 'page', '21', '2011-03-29 21:37:06', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('6', '3', '2', 'add', '21', '2015-11-02 15:57:07', '40', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '1');
@@ -690,8 +690,8 @@ INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modif
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1032', '22', '2', 'db-backups', '1', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '10');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1033', '31', '5', 'db-backup', '1', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '14');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1039', '1012', '43', 'en', '1', '2016-10-24 17:07:04', '41', '2016-10-24 17:07:04', '41', '2016-10-24 17:07:04', '1');
-INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1042', '1', '45', 'hello-world', '1', '2019-04-17 10:15:16', '41', '2019-03-13 16:38:40', '41', '2019-03-13 16:38:57', '3');
-INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1044', '1', '46', 'api', '1029', '2019-04-17 09:48:56', '41', '2019-04-17 09:48:40', '41', '2019-04-17 09:48:40', '4');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1042', '1', '45', 'hello-world', '1', '2019-09-25 12:18:01', '41', '2019-03-13 16:38:40', '41', '2019-03-13 16:38:57', '3');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1044', '1', '46', 'api', '1029', '2019-09-25 11:52:42', '41', '2019-04-17 09:48:40', '41', '2019-04-17 09:48:40', '4');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1045', '22', '2', 'procache', '1', '2019-04-17 09:50:52', '41', '2019-04-17 09:50:52', '41', '2019-04-17 09:50:52', '7');
 
 DROP TABLE IF EXISTS `pages_access`;
@@ -764,8 +764,6 @@ CREATE TABLE `pages_procache` (
   KEY `pages_id` (`pages_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/defaults/', '1044', '46', '2019-05-06 12:25:15');
-INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/page/1042/', '1044', '46', '2019-05-06 12:25:28');
 
 DROP TABLE IF EXISTS `pages_sortfields`;
 CREATE TABLE `pages_sortfields` (
@@ -800,12 +798,12 @@ INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, 
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('3', 'user', '3', '8', '0', '{\"useRoles\":1,\"noChildren\":1,\"parentTemplates\":[2],\"slashUrls\":1,\"pageClass\":\"User\",\"noGlobal\":1,\"noMove\":1,\"noTrash\":1,\"noSettings\":1,\"noChangeTemplate\":1,\"nameContentTab\":1}');
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('4', 'role', '4', '8', '0', '{\"noChildren\":1,\"parentTemplates\":[2],\"slashUrls\":1,\"pageClass\":\"Role\",\"noGlobal\":1,\"noMove\":1,\"noTrash\":1,\"noSettings\":1,\"noChangeTemplate\":1,\"nameContentTab\":1}');
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('5', 'permission', '5', '8', '0', '{\"noChildren\":1,\"parentTemplates\":[2],\"slashUrls\":1,\"guestSearchable\":1,\"pageClass\":\"Permission\",\"noGlobal\":1,\"noMove\":1,\"noTrash\":1,\"noSettings\":1,\"noChangeTemplate\":1,\"nameContentTab\":1}');
-INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('1', 'home', '1', '0', '0', '{\"useRoles\":1,\"noParents\":1,\"slashUrls\":1,\"compile\":3,\"modified\":1522910597,\"ns\":\"ProcessWire\",\"roles\":[37,1020]}');
+INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('1', 'home', '1', '0', '0', '{\"useRoles\":1,\"noParents\":1,\"slashUrls\":1,\"compile\":3,\"modified\":1569416503,\"ns\":\"ProcessWire\",\"roles\":[37,1020]}');
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('45', 'basic-page', '99', '0', '0', '{\"slashUrls\":1,\"compile\":3,\"modified\":1554985437,\"ns\":\"ProcessWire\"}');
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('43', 'language', '97', '8', '0', '{\"parentTemplates\":[2],\"slashUrls\":1,\"pageClass\":\"Language\",\"pageLabelField\":\"name\",\"noGlobal\":1,\"noMove\":1,\"noTrash\":1,\"noChangeTemplate\":1,\"noUnpublish\":1,\"nameContentTab\":1,\"modified\":1426022568}');
 INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('44', 'http-status', '98', '0', '0', '{\"useRoles\":1,\"noChildren\":1,\"slashUrls\":1,\"compile\":3,\"modified\":1552061875,\"ns\":\"ProcessWire\",\"roles\":[37,1020]}');
-INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('46', 'api', '100', '0', '0', '{\"noChildren\":1,\"noParents\":-1,\"urlSegments\":1,\"slashUrls\":1,\"compile\":3,\"modified\":1555488251,\"contentType\":\"json\",\"ns\":\"ProcessWire\"}');
+INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, `data`) VALUES('46', 'api', '100', '0', '0', '{\"noChildren\":1,\"noParents\":-1,\"urlSegments\":1,\"slashUrls\":1,\"compile\":3,\"modified\":1569406439,\"contentType\":\"json\",\"ns\":\"ProcessWire\"}');
 
 UPDATE pages SET created_users_id=41, modified_users_id=41, created=NOW(), modified=NOW();
 
-# --- /WireDatabaseBackup {"numTables":20,"numCreateTables":26,"numInserts":502,"numSeconds":0}
+# --- /WireDatabaseBackup {"numTables":20,"numCreateTables":26,"numInserts":500,"numSeconds":0}

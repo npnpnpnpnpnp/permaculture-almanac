@@ -38,6 +38,9 @@ $config->imageSizerOptions = array(
 	'upscaling' => false,
 	'interlace' => true,
 );
+$config->_defaultLanguage = 'de';
+$config->_availableLanguages = [$config->_defaultLanguage];
+$config->_productionBackendUrl = '';
 $config->_productionFrontendUrl = '';
 
 
