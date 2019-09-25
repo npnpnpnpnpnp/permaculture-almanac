@@ -8,8 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     initialized: false,
-    routes: [],
-    pageTitle: undefined,
+    apiRoutes: [],
+    siteTitle: undefined,
     metaDescription: undefined
   },
 
