@@ -1,5 +1,5 @@
 <template>
-  <component :is="layout" v-if="pageInitialized">
+  <component :is="layout" v-if="initialized">
     <RouterView :key="$route.fullPath" />
   </component>
 </template>
@@ -25,22 +25,12 @@ export default {
       ]
     }
   },
-  data() {
-    return {
-      pageInitialized: false
-    }
-  },
   computed: {
     ...mapState(['initialized', 'pageTitle', 'metaDescription']),
     layout() {
       return this.$route.meta.layout
         ? `${this.$route.meta.layout}Layout`
         : 'DefaultLayout'
-    }
-  },
-  watch: {
-    initialized() {
-      this.pageInitialized = true
     }
   }
 }
