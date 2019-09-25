@@ -21,7 +21,7 @@ html {
 
 body {
   @extend %ff-regular;
-  @extend %fs-regular;
+  @extend %fs-body;
   color: $black;
   background-color: $white;
   -webkit-font-smoothing: antialiased;
@@ -29,7 +29,7 @@ body {
 }
 
 a {
-  //@include link-reset;
+  // @extend %link-reset;
 }
 
 em {
