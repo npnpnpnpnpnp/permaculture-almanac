@@ -2,13 +2,13 @@
 
 /**
  * Router.php
- * 
+ *
  * Stuff taken from https://gist.github.com/clsource/dc7be74afcbfc5fe752c
  * and Example Code from @lostkobrakai
  * and some stuff I put in there by myself
  */
 
-// $routesPath = "{$this->config->paths->site}api/Routes.php";
+// $routesPath = "{$this->config->paths->templates}api/Routes.php";
 
 require_once __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/RestApiHelper.php";
@@ -18,7 +18,7 @@ require_once __DIR__ . "/Auth.php";
 use \Firebase\JWT\JWT;
 
 class Router
-{ 
+{
   public static function go()
   {
     set_error_handler("ProcessWire\Router::handleError");
@@ -28,7 +28,7 @@ class Router
     header("Content-Type: application/json");
 
     // $routes are coming from this file:
-    require_once wire('config')->paths->site . "api/Routes.php";
+    require_once wire('config')->paths->templates . "api/Routes.php";
 
     $flatUserRoutes = [];
     self::flattenGroup($flatUserRoutes, $routes);
@@ -59,10 +59,10 @@ class Router
 
     $httpMethod = $_SERVER['REQUEST_METHOD'];
     $url = wire('sanitizer')->url(wire('input')->url);
-    
+
     // strip /api from request url:
     $endpoint = wire('modules')->RestApi->endpoint;
-    
+
     // support / in endpoint url:
     $endpoint = str_replace("/", "\/", $endpoint);
 
@@ -136,7 +136,7 @@ class Router
       if(wire('user')->isGuest()) self::displayError('user does not have authorization', 401);
     }
 
-    // If the code runs until here, the request is authenticated 
+    // If the code runs until here, the request is authenticated
     // or the request does not need authentication
     // Get Data:
     try {
@@ -151,12 +151,12 @@ class Router
 
       // convert array to object:
       $vars = json_decode(json_encode($vars));
-      
+
       $data = $class::$method($vars);
 
       if(gettype($data) == "string") $return->message = $data;
       else $return = $data;
-    } 
+    }
     catch (\Throwable $e) {
       $responseCode = 404;
       $return->error = $e->getMessage();
@@ -165,12 +165,12 @@ class Router
       if($e->getCode()) $responseCode = $e->getCode();
       http_response_code($responseCode);
     }
-  
+
     echo json_encode($return);
   }
 
 
-  public static function params($index=null, $default = null, $source = null) 
+  public static function params($index=null, $default = null, $source = null)
   {
     // check for php://input and merge with $_REQUEST
       if ((isset($_SERVER["CONTENT_TYPE"]) &&
@@ -198,17 +198,17 @@ class Router
   }
 
 
-  public static function fetch_from_array(&$array, $index=null, $default = null) 
+  public static function fetch_from_array(&$array, $index=null, $default = null)
   {
-    if (is_null($index)) 
+    if (is_null($index))
     {
       return $array;
-    } 
-    elseif (isset($array[$index])) 
+    }
+    elseif (isset($array[$index]))
     {
       return $array[$index];
-    } 
-    elseif (strpos($index, '/')) 
+    }
+    elseif (strpos($index, '/'))
     {
       $keys = explode('/', $index);
 
@@ -252,7 +252,7 @@ class Router
 
     if(array_key_exists('authorization', $headers)) return $headers['authorization'];
     if(array_key_exists('http_authorization', $headers)) return $headers['http_authorization'];
-    
+
     return null;
   }
 
@@ -299,7 +299,7 @@ class Router
 
   public static function displayError ($message, $status = 500) {
     if(error_reporting() === 0) return;
-    
+
     http_response_code($status);
     $return = new \StdClass();
     $return->error = $message;
