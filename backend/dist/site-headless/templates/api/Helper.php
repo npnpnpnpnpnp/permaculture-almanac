@@ -72,6 +72,7 @@ class Helper {
 
   public static function getPageReferences($pages) {
     $array = [];
+    if (!$pages) return $array;
     foreach ($pages as $p) {
       $p->of(true);
       $item = new \StdClass();
