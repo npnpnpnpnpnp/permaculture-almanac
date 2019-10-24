@@ -52,6 +52,11 @@ class Helper {
         continue;
       }
 
+      if ($field->type instanceof FieldtypeTextarea) {
+        $pdata[$field->name] = self::convertToAbsolutePaths($value);
+        continue;
+      }
+
       $pdata[$field->name] = $field->type->sleepValue($page, $field, $value);
     }
 
