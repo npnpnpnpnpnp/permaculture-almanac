@@ -39,14 +39,3 @@ function mirrorFiles($event) {
     $http->download($url, $file);
   }
 }
-
-// Set some generic information on template "work"
-wire()->addHookAfter('Pages::saveReady', null, 'populateArtist');
-function populateArtist($event) {
-  $page = $event->arguments(0);
-
-  if ($page->template->name !== 'work') return;
-
-  $page->artist = 'Oscar Wiggli';
-  $page->type_of_work = __('Skulptur');
-}
