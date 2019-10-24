@@ -22,8 +22,8 @@ html {
 body {
   @extend %ff-regular;
   @extend %fs-body;
-  color: $black;
-  background-color: $white;
+  color: var(--black);
+  background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -3,8 +3,8 @@
 }
 
 %fs-base {
-  font-size: $fs-base;
-  line-height: $lh-base;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
 }
 
 %fs-body {
