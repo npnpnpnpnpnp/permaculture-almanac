@@ -1,0 +1,25 @@
+:root {
+  /* Colors */
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+
+  /* Breakpoints */
+  --xxsmall: 20em;
+  --xsmall: 30em;
+  --small: 40em;
+  --medium: 48em;
+  --large: 64em;
+  --xlarge: 80em;
+  --xxlarge: 90em;
+
+  /* Typography */
+  --fs-base: 0.625em;
+  --lh-base: 1.25;
+
+  /* Spacing */
+  --blank-line: --lh-base * 1em;
+  --gutter: 1em;
+
+  /* Easing */
+  --swift-out: cubic-bezier(0.55, 0, 0.1, 1);
+}
