@@ -24,14 +24,8 @@ export const addRoutesFromApi = routes => {
 
   router.addRoutes([
     {
-      path: '/404',
-      name: '404-error',
-      component: require('@/views/_404').default,
-      props: true
-    },
-    {
       path: '*',
-      redirect: '404-error'
+      component: require('@/views/_404').default
     }
   ])
 }
