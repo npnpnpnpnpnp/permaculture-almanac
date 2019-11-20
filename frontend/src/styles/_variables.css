@@ -3,15 +3,6 @@
   --black: rgb(0, 0, 0);
   --white: rgb(255, 255, 255);
 
-  /* Breakpoints */
-  --xxsmall: 20em;
-  --xsmall: 30em;
-  --small: 40em;
-  --medium: 48em;
-  --large: 64em;
-  --xlarge: 80em;
-  --xxlarge: 90em;
-
   /* Typography */
   --fs-base: 0.625em;
   --lh-base: 1.25;
