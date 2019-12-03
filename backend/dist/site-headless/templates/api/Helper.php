@@ -63,16 +63,17 @@ class Helper {
     return $pdata;
   }
 
-  public static function getChildren($page) {
-    $children = [];
-    foreach ($page->children as $child) {
-      $child->of(true);
+  public static function getPages($pages, $flag = false) {
+    $array = [];
+    foreach ($pages as $p) {
+      $p->of(true);
       $item = new \StdClass();
-      $item->meta = self::getMetadata($child);
-      $item->fields = self::getFields($child);
-      array_push($children, $item);
+      $item->meta = self::getMetadata($p);
+      $item->fields = self::getFields($p, $flag);
+      $item->parent = self::getMetadata($p->parent);
+      array_push($array, $item);
     }
-    return $children;
+    return $array;
   }
 
   public static function getPageReferences($pages) {
@@ -97,6 +98,34 @@ class Helper {
       'title' => $field->title,
       'value' => $field->value
     ];
+  }
+
+  public static function getFile($field) {
+    $array = [];
+    if (!$field) return $array;
+    foreach ($field as $p) {
+      $item = new \StdClass();
+      $item->ext = $p->ext;
+      $item->description = $p->description;
+      $item->url = $p->httpUrl;
+      array_push($array, $item);
+    }
+    return $array;
+  }
+
+  public static function getTable($field) {
+    $array = [];
+    if (!$field) return $array;
+    // TODO: make code more universal by looking up columns dynamically
+    // $columns = $field->columns;
+    foreach ($field as $row) {
+      $item = [
+        'key' => $row->key,
+        'value' => $row->value
+      ];
+      array_push($array, $item);
+    }
+    return $array;
   }
 
   public static function convertToAbsolutePaths($field) {

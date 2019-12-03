@@ -11,21 +11,28 @@ class Content {
       $item = new \StdClass();
       $item->type = $contentItem->type;
 
-      if ($contentItem->type === 'section') {
-        $item->title = $contentItem->title;
+      if ($contentItem->type === 'type_section') {
+        $title = $contentItem->title;
+        if (!$title) continue;
+        $item->title = $title;
       }
 
-      if ($contentItem->type === 'body') {
+      if ($contentItem->type === 'type_body') {
         $body = $contentItem->body;
+        if (!$body) continue;
         $item->body = Helper::convertToAbsolutePaths($contentItem->body);
       }
 
-      if ($contentItem->type === 'images') {
-        $item->images = Images::get($contentItem->images);
+      if ($contentItem->type === 'type_images') {
+        $images = $contentItem->images;
+        if (!$images->count) continue;
+        $item->images = Images::get($images);
       }
 
-      if ($contentItem->type === 'video') {
-        //$item->media_id = $contentItem->media_id;
+      if ($contentItem->type === 'type_video') {
+        // $mediaId = $contentItem->media_id;
+        // if (!$mediaId) continue;
+        //$item->mediaId = $media_id;
       }
 
       array_push($content, $item);
