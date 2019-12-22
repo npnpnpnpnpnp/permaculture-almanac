@@ -8,12 +8,19 @@ class Image {
     $response->ext = $image->ext;
     $response->ratio = number_format(($image->width / $image->height), 3, '.', '');
 
-    foreach ($widths as $width) {
-      $resizedImage = $image->width($width);
+    if ($image->ext == 'svg') {
       $url = new \StdClass();
-      $url->url = $resizedImage->httpUrl;
-      $url->width = $resizedImage->width;
+      $url->url = $image->httpUrl;
+      // $url->width = $resizedImage->width;
       array_push($response->urls, $url);
+    } else {
+      foreach ($widths as $width) {
+        $resizedImage = $image->width($width);
+        $url = new \StdClass();
+        $url->url = $resizedImage->httpUrl;
+        $url->width = $resizedImage->width;
+        array_push($response->urls, $url);
+      }
     }
 
     return $response;
