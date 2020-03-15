@@ -28,7 +28,7 @@ class Helper {
       }
 
       if ($field->type instanceof FieldtypeImage || $field->type instanceof FieldtypeImages) {
-        $pdata[$field->name] = Images::get($value, ['200']);
+        $pdata[$field->name] = Images::get($value);
         continue;
       };
 
