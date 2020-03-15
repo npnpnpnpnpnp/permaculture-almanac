@@ -5,6 +5,8 @@ class Image {
     $widths = isset($widths) ? $widths : [200, 400, 800, 1200, 1600, 2000];
 
     $response = new \StdClass();
+    if (!$image->width) return $response;
+
     $response->urls = [];
     $response->description = $image->description;
     $response->ext = $image->ext;
