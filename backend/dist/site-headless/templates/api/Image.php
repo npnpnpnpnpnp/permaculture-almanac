@@ -1,7 +1,9 @@
 <?php namespace ProcessWire;
 
 class Image {
-  public static function get ($image, $widths = [400, 800, 1200]) {
+  public static function get ($image, $widths) {
+    $widths = isset($widths) ? $widths : [200, 400, 800, 1200, 1600, 2000];
+
     $response = new \StdClass();
     $response->urls = [];
     $response->description = $image->description;
