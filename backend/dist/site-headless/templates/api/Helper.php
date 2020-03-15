@@ -57,6 +57,14 @@ class Helper {
         continue;
       }
 
+      if ($field->type instanceof FieldtypeDatetime) {
+        $pdata[$field->name] = [
+          'formatted' => $value,
+          'timestamp' => $page->getUnformatted($field->name)
+        ];
+        continue;
+      }
+
       $pdata[$field->name] = $field->type->sleepValue($page, $field, $value);
     }
 
