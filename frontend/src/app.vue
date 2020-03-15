@@ -1,6 +1,6 @@
 <template>
   <component :is="layout" v-if="initialized">
-    <RouterView :key="$route.fullPath" />
+    <router-view :key="$route.fullPath" />
   </component>
 </template>
 
