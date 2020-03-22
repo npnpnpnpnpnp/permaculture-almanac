@@ -5,5 +5,5 @@
 </template>
 
 <style lang="scss" module>
-//.view {}
+// .view {}
 </style>

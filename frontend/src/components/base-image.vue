@@ -70,6 +70,7 @@ export default {
   opacity: 0;
   transition: opacity 150ms ease;
 
+  // stylelint-disable-next-line selector-class-pattern
   &:global(.is-loaded) {
     opacity: 1;
   }

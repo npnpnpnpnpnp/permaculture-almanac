@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-//.view {}
-//.title {}
-//.body {}
+// .view {}
+// .title {}
+// .body {}
 </style>

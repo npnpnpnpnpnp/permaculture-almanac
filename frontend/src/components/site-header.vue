@@ -21,6 +21,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-//.component {}
-//.title {}
+// .component {}
+// .title {}
 </style>

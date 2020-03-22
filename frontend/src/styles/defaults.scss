@@ -13,16 +13,20 @@
 
 html {
   @extend %fs-base;
+
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 body {
   @extend %ff-regular;
   @extend %fs-body;
+
   color: var(--black);
   background-color: var(--white);
   -webkit-font-smoothing: antialiased;
@@ -34,11 +38,11 @@ a {
 }
 
 em {
-  //font-style: italic;
+  // font-style: italic;
 }
 
 strong {
-  //font-weight: bold;
+  // font-weight: bold;
 }
 
 img {
@@ -47,7 +51,12 @@ img {
   height: auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font: inherit;
 }
@@ -58,8 +67,8 @@ p {
 
 ul,
 ol {
-  margin: 0;
   padding: 0;
+  margin: 0;
   list-style-type: none;
 }
 
