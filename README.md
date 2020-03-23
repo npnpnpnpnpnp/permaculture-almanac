@@ -1,53 +1,53 @@
 # README
 
-The *pw-vue-kickstart* repository serves as a starting point for websites built on top of [ProcessWire](https://processwire.com/)  and [Vue.js](https://vuejs.org/). They reside in their separate directories inside `/backend/` and `/frontend/` respectively.
+The _pw-vue-kickstart_ repository serves as a starting point for websites built on top of [ProcessWire](https://processwire.com/) and [Vue.js](https://vuejs.org/). They reside in their separate directories inside `/backend/` and `/frontend/` respectively.
 
 ## Preparation
 
 1. Initialize a new (private) repository on GitLab.
 
-2. Switch to the project folder and run the following commands to duplicate the *pw-vue-kickstart* repository:
+2. Switch to the project folder and run the following commands to duplicate the _pw-vue-kickstart_ repository:
 
-    ```
-    $ git clone --bare git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
-    $ cd pw-vue-kickstart.git
-    $ git push --mirror git@gitlab.com:dsdsdsdsdsds/pw-vue-PROJECT.git
-    $ cd ..
-    $ rm -rf pw-vue-kickstart.git
-    ```
+   ```
+   git clone --bare git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
+   cd pw-vue-kickstart.git
+   git push --mirror git@gitlab.com:dsdsdsdsdsds/pw-vue-PROJECT.git
+   cd ..
+   rm -rf pw-vue-kickstart.git
+   ```
 
 3. Clone the repository to localhost and continue with installation.
 
-4. Switch to the new repo directory and add *pw-vue-kickstart* as a remote:
+4. Switch to the new repo directory and add _pw-vue-kickstart_ as a remote:
 
-    ```
-    $ git remote add default git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
-    ```
+   ```
+   git remote add default git@gitlab.com:dsdsdsdsdsds/pw-vue-kickstart.git
+   ```
 
 ## Update repository
 
-Whenever there are new commits made to the *pw-vue-kickstart* that should be applied to one of its instances, simply [fetch](https://git-scm.com/docs/git-fetch) them:
+Whenever there are new commits made to the _pw-vue-kickstart_ that should be applied to one of its instances, simply [fetch](https://git-scm.com/docs/git-fetch) them:
 
 ```
-$ git fetch default master
+git fetch default master
 ```
 
 List the new commits:
 
 ```
-$ git log --oneline master..default/master
+git log --oneline master..default/master
 ```
 
 Pick commits with [git-cherry-pick](https://git-scm.com/docs/git-cherry-pick):
 
 ```
-$ git cherry-pick -x <commit>`
+git cherry-pick -x <commit>`
 ```
 
-If everything works fine, [push](https://help.github.com/articles/pushing-to-a-remote/) them to *origin*:
+If everything works fine, [push](https://help.github.com/articles/pushing-to-a-remote/) them to _origin_:
 
 ```
-$ git push origin master
+git push origin master
 ```
 
 ## Backend
@@ -57,9 +57,9 @@ All paths in this chapter are relative to the `/backend/` folder.
 ### Installation
 
 1. [Download](https://processwire.com/download/core/) the latest ProcessWire archive and extract its content to the `dist/` folder.
-2. Create a MySQL database with a *utfmb4_unicode_ci* collation.
+2. Create a MySQL database with a _utfmb4_unicode_ci_ collation.
 3. Initiate the ProcessWire installer in the browser.
-4. Select the *Headless* site profile during installation.
+4. Select the _Headless_ site profile during installation.
 5. After installation, duplicate `config.php` and rename it to `config-default.php`. Clear out the database connection credentials.
 
 ### Setup
@@ -70,7 +70,7 @@ On a live server, make sure to [optimize the handling of 404s](https://processwi
 
 ### Directory structure
 
-There is currently only a `dist/` directory that initially holds the *Headless* site profile. After installing ProcessWire, it contains all files that are meant to be deployed to the webserver on a separate subdomain (e.g. backend.mydomain.com).
+There is currently only a `dist/` directory that initially holds the _Headless_ site profile. After installing ProcessWire, it contains all files that are meant to be deployed to the webserver on a separate subdomain (e.g. backend.mydomain.com).
 
 Within `dist/site/templates/api/` resides the API. It is by default reachable via `/api/` in the browser.
 
@@ -79,19 +79,19 @@ Within `dist/site/templates/api/` resides the API. It is by default reachable vi
 In order to set up the website deployment, login to your webserver via SSH and switch to the document root. Make sure Git is available:
 
 ```
-$ git --version
+git --version
 ```
 
 Then run the following commands:
 
 ```
-$ [ -d ~/git ] || mkdir ~/git && cd ~/git
-$ mkdir pw-vue-PROJECT.git
-$ cd pw-vue-PROJECT.git
-$ git init --bare
-$ git config core.sparseCheckout true
-$ echo backend/dist >> info/sparse-checkout
-$ touch hooks/post-receive
+[ -d ~/git ] || mkdir ~/git && cd ~/git
+mkdir pw-vue-PROJECT.git
+cd pw-vue-PROJECT.git
+git init --bare
+git config core.sparseCheckout true
+echo backend/dist >> info/sparse-checkout
+touch hooks/post-receive
 ```
 
 Add the following code to the newly created `post-receive` file. Make sure to adjust the paths at the top accordingly:
@@ -115,25 +115,25 @@ rm -rf ${WORK_DIR}/backend
 Set the correct permissions:
 
 ```
-$ chmod +x hooks/post-receive
+chmod +x hooks/post-receive
 ```
 
 Switch back to your local machine and add a new remote to the repository:
 
 ```
-$ git remote add production ssh://USER@SERVER:PORT/git/pw-vue-PROJECT.git
+git remote add production ssh://USER@SERVER:PORT/git/pw-vue-PROJECT.git
 ```
 
 List remotes to check if everything is configured correctly:
 
 ```
-$ git remote -v
+git remote -v
 ```
 
 To push changes to production, run the following command. **Warning: Changes will be online immediately!**
 
 ```
-$ git push production master
+git push production master
 ```
 
 ## Frontend
@@ -147,13 +147,13 @@ All paths in this chapter are relative to the `/frontend/` folder.
 Within the `/frontend/` folder run the following command:
 
 ```
-$ npm i
+npm i
 ```
 
 To start developing, run...
 
 ```
-$ npm run serve
+npm run serve
 ```
 
 ### Setup

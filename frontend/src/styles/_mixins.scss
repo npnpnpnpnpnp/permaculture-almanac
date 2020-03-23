@@ -1,21 +1,22 @@
 %input-reset {
-  margin: 0;
-  border: none;
-  border-radius: 0;
   padding: 0;
-  color: inherit;
-  background-color: transparent;
+  margin: 0;
   font: inherit;
   line-height: inherit;
+  color: inherit;
   text-transform: inherit;
-  //outline: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  // outline: none;
   appearance: none;
 }
 
 %button-reset {
   @extend %input-reset;
-  user-select: none;
+
   cursor: pointer;
+  user-select: none;
 }
 
 %link-reset {
