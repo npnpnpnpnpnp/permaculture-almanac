@@ -13,10 +13,7 @@
 
   // Configure glob patterns for excluding files and folders
   "files.exclude": {
-    "**/*.log": true,
-    "**/*.log*": true,
-    "**/dist": true,
-    "**/coverage": true
+    "frontend/dist": true
   },
 
   // Configure file associations to languages
