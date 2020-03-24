@@ -33,7 +33,8 @@ export const addRoutesFromApi = routes => {
 function walkRoutes(routes) {
   routes.forEach(route => {
     route.meta = {
-      url: route.url
+      url: route.url,
+      template: route.template
     }
 
     route.component = Home
