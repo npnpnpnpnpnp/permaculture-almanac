@@ -1,12 +1,12 @@
 # README
 
-The _pw-vue-kickstart_ repository serves as a starting point for websites built on top of [ProcessWire](https://processwire.com/) and [Vue.js](https://vuejs.org/). They reside in their separate directories inside `/backend/` and `/frontend/` respectively.
+The _pw-vue-kickstart_ repository serves as a starting point for websites built on top of a [ProcessWire](https://processwire.com/) backend and a [Vue.js](https://vuejs.org/) frontend. They reside in their separate directories inside `/backend/` and `/frontend/` respectively.
 
 ## Preparation
 
-1. Initialize a new (private) repository on GitHub.
+1. Initialize a (private) repository on GitHub.
 
-2. Switch to the project folder and run the following commands to duplicate the _pw-vue-kickstart_ repository:
+2. Run the following commands to duplicate the _pw-vue-kickstart_ repository:
 
 ```console
 git clone --bare git@github.com:dsdsdsdsdsds/pw-vue-kickstart.git
@@ -16,9 +16,7 @@ cd ..
 rm -rf pw-vue-kickstart.git
 ```
 
-3. Clone the repository to localhost and continue with installation.
-
-4. Switch to the new repo directory and add _pw-vue-kickstart_ as a remote:
+3. Clone the new repository and add _pw-vue-kickstart_ as a remote:
 
 ```console
 git remote add default git@github.com:dsdsdsdsdsds/pw-vue-kickstart.git
@@ -56,7 +54,7 @@ All paths in this chapter are relative to the `/backend/` folder.
 
 ### Installation
 
-Note: In case ProcessWire is already installed, then directly go to _Setup_.
+Note: In case ProcessWire has already been installed, then directly go to _Setup_.
 
 1. [Download](https://processwire.com/download/core/) the latest ProcessWire archive and extract its content to the `dist/` folder.
 2. Create a MySQL database with a _utfmb4_unicode_ci_ collation.
@@ -78,7 +76,7 @@ Within `dist/site/templates/api/` resides the API. It is by default reachable vi
 
 ### Deployment
 
-TBD
+The backend deployment is handeled by [GitHub actions](https://help.github.com/en/actions). The corresponding workflow can be found under `/.github/workflows/backend.yml`. Make sure to set the environment variables accordingly and to create a [GitHub secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) called `BACKEND_PASSWORD` that holds the FTP password (no special characters allowed!).
 
 ## Frontend
 
@@ -110,4 +108,4 @@ The directory structure closely follows the one initiated by Vue CLI.
 
 ### Deployment
 
-TBD
+The frontend build and deployment is handeled by [GitHub actions](https://help.github.com/en/actions). The corresponding workflow can be found under `/.github/workflows/frontend.yml`. Make sure to set the environment variables accordingly and to create a [GitHub secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) called `FRONTEND_PASSWORD` that holds the FTP password (no special characters allowed!).
