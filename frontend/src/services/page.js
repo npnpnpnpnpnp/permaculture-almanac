@@ -10,7 +10,7 @@ const PageService = {
       return response.data
     } catch (e) {
       // TODO: implement proper error handling
-      console.log(e)
+      alert(e)
     }
   }
 }
