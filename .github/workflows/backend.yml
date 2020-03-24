@@ -1,4 +1,4 @@
-name: Frontend
+name: Backend
 
 env:
   server:
@@ -10,34 +10,23 @@ on:
     branches:
       - master
     paths:
-      - "frontend/**"
+      - "backend/**"
 
 jobs:
-  build-and-deploy:
-    name: Build and deploy
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
 
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: "10.x"
-
-      - name: Build project
-        run: |
-          cd frontend
-          npm ci
-          npm run build
-
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
         with:
           ftp-server: ${{ env.server }}
           ftp-username: ${{ env.username }}
-          local-dir: frontend/dist/
-          ftp-password: ${{ secrets.FRONTEND_PASSWORD }}
+          local-dir: backend/dist/
+          ftp-password: ${{ secrets.BACKEND_PASSWORD }}
           # git-ftp-args: --insecure --remote-root ${{ env.remote-root }}
           git-ftp-args: --insecure
