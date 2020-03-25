@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Use Node.js 10.x
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
@@ -35,7 +35,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: FTP-Deploy-Action
+      - name: Deploy project
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
         with:
           ftp-server: ${{ env.server }}
