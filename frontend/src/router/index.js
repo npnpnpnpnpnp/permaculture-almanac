@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
+import main from '@/main'
 import Home from '@/views/home.vue'
 import BasicPage from '@/views/basic-page.vue'
 
 Vue.use(Router)
 Vue.use(Meta)
 
-const scrollBehavior = function() {
-  return { x: 0, y: 0 }
+const scrollBehavior = (to, from, savedPosition) => {
+  // https://github.com/quasarframework/quasar/issues/1466#issuecomment-414066098
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
+  return new Promise(resolve => {
+    main.$root.$once('triggerScroll', () => {
+      if (savedPosition) {
+        resolve(savedPosition)
+      } else {
+        resolve({ x: 0, y: 0 })
+      }
+    })
+  })
 }
 
 const router = new Router({
