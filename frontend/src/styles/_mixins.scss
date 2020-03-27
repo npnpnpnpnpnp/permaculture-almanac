@@ -10,6 +10,10 @@
   }
 }
 
+%tap-highlight-reset {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 %input-reset {
   padding: 0;
   margin: 0;
