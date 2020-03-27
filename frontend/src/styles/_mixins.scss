@@ -1,3 +1,15 @@
+@mixin focus-default($color: var(--color-focus-default)) {
+  &:focus {
+    background-color: $color;
+    outline: 0;
+  }
+
+  // Reset outline styling set by normalize.css
+  &:-moz-focusring {
+    outline: none;
+  }
+}
+
 %input-reset {
   padding: 0;
   margin: 0;
@@ -5,10 +17,10 @@
   line-height: inherit;
   color: inherit;
   text-transform: inherit;
+  letter-spacing: inherit;
   background-color: transparent;
   border: none;
   border-radius: 0;
-  // outline: none;
   appearance: none;
 }
 

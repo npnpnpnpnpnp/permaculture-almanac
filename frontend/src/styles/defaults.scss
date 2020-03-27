@@ -37,6 +37,7 @@ body {
 }
 
 a {
+  @include focus-default;
   // @extend %link-reset;
 }
 
@@ -75,6 +76,17 @@ ol {
   list-style-type: none;
 }
 
-button {
+input[type='text'],
+input[type='search'],
+textarea {
+  @include focus-default;
+  @extend %input-reset;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  @include focus-default;
   @extend %button-reset;
 }
