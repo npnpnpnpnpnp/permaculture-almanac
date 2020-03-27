@@ -22,6 +22,10 @@ rm -rf pw-vue-kickstart.git
 git remote add default git@github.com:dsdsdsdsdsds/pw-vue-kickstart.git
 ```
 
+4. Create a _dev_ branch and publish it to the remote repository.
+
+5. Protect the master branch (see GitHub repository settings).
+
 ## Update repository
 
 Whenever there are new commits made to the _pw-vue-kickstart_ that should be applied to one of its instances, simply [fetch](https://git-scm.com/docs/git-fetch) them:
