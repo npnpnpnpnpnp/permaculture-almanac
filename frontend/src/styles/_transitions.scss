@@ -1,7 +1,7 @@
-@mixin t-fade($name: 't-fade', $duration: 450, $easing: ease) {
+@mixin t-fade($name: 't-fade', $duration: 450ms, $easing: ease, $delay: 0ms) {
   .#{$name}-enter-active,
   .#{$name}-leave-active {
-    transition: opacity #{$duration}ms $easing;
+    transition: opacity $duration $easing $delay;
   }
 
   .#{$name}-enter,
