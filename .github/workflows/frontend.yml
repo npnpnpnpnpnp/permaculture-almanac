@@ -1,6 +1,7 @@
 name: Frontend
 
 env:
+  working-directory: ./frontend
   server:
   username:
   # remote-root:
@@ -26,14 +27,13 @@ jobs:
         with:
           node-version: "10.x"
 
-      - name: Change directory
-        run: cd frontend
-
       - name: Install dependencies
         run: npm ci
+        working-directory: ${{ env.working-directory }}
 
       - name: Build project
         run: npm run build
+        working-directory: ${{ env.working-directory }}
 
       - name: Deploy project
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
