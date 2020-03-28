@@ -5,7 +5,7 @@ node_modules/
 /dist/.index*
 /dist/.wire*
 /dist/site/assets/cache/
-/dist/site/assets/files/
+/dist/site/assets/files/*
 !/dist/site/assets/files/1013/
 /dist/site/assets/files/1013/.*
 /dist/site/assets/logs/
