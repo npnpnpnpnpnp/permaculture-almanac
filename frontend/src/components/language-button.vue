@@ -16,19 +16,22 @@ export default {
   },
   computed: {
     ...mapState(['currentLanguage']),
+    isCurrent() {
+      return this.language.name === this.currentLanguage
+    },
     buttonClass() {
       return [
         this.$style.component,
-        this.language === this.currentLanguage ? this.$style['is-active'] : ''
+        this.isCurrent ? this.$style['is-active'] : ''
       ]
     }
   },
   methods: {
     switchLanguage() {
-      if (this.language.name === this.currentLanguage) return
+      if (this.isCurrent) return
 
       this.$store.commit('setLanguage', {
-        currentLanguage: this.language
+        lang: this.language.name
       })
     }
   }
