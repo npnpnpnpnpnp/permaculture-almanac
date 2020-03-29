@@ -23,7 +23,7 @@ export default new Vuex.Store({
       })
     },
     setLanguage(state, payload) {
-      state.currentLanguage = localStorage.lang = payload.currentLanguage.name
+      state.currentLanguage = localStorage.lang = payload.lang
       EventBus.$emit('language-change')
     },
     recallLanguage(state) {
