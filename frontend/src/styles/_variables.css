@@ -9,7 +9,7 @@
   --lh-base: 1.25;
 
   /* Spacing */
-  --blank-line: --lh-base * 1em;
+  --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
 
   /* Easing */
