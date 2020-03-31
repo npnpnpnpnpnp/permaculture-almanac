@@ -9,7 +9,7 @@ class Images {
     $response = [];
 
     foreach ($images as $imageItem) {
-      $image = Image::get($imageItem, $widths);
+      $image = Image::get($imageItem);
       array_push($response, $image);
     }
 
