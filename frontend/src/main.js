@@ -13,7 +13,7 @@ router.beforeEach(async (to, from, next) => {
   if (store.state.initialized) {
     return next()
   }
-  await store.dispatch('getDefaults')
+  await store.dispatch('getDefaults', { to: to })
   next({
     path: to.fullPath,
     replace: true
