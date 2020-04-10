@@ -22,7 +22,7 @@ rm -rf pw-vue-kickstart.git
 git remote add default git@github.com:dsdsdsdsdsds/pw-vue-kickstart.git
 ```
 
-4. Create a _dev_ branch and publish it to the remote repository.
+4. Create a _dev_ branch (if not already existing) and publish it to the remote repository.
 
 5. Protect the master branch (see GitHub repository settings).
 
@@ -81,6 +81,12 @@ Within `dist/site/templates/api/` resides the API. It is by default reachable vi
 ### Deployment
 
 The backend deployment is handeled by [GitHub actions](https://help.github.com/en/actions). The corresponding workflow can be found under `/.github/workflows/backend.yml`. Make sure to set the environment variables accordingly and to create a [GitHub secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) called `BACKEND_PASSWORD` that holds the FTP password (no special characters allowed!).
+
+After the first deployment, make sure to add `.htaccess` and `config.php` as described under _Setup_. In order to give the frontend access to the backend API, also add the following line to the `.htaccess`:
+
+```
+Header set Access-Control-Allow-Origin "https://project-domain.com"
+```
 
 ## Frontend
 
