@@ -58,9 +58,14 @@ class Helper {
       }
 
       if ($field->type instanceof FieldtypeDatetime) {
+        $timestamp = intval($page->getUnformatted($field->name));
+        if (!$timestamp) continue;
         $pdata[$field->name] = [
-          'formatted' => $value,
-          'timestamp' => $page->getUnformatted($field->name)
+          'formatted' => [
+            'date' => strftime('%d.%m.%Y', $timestamp),
+            'time' => strftime('%H:%S', $timestamp)
+          ],
+          'timestamp' => $timestamp
         ];
         continue;
       }
