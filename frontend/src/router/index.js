@@ -13,7 +13,7 @@ const scrollBehavior = (to, from, savedPosition) => {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
 
   return new Promise(resolve => {
-    main.$root.$once('triggerScroll', () => {
+    main.$root.$once('trigger-scroll', () => {
       if (savedPosition) {
         resolve(savedPosition)
       } else {

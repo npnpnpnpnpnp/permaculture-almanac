@@ -16,7 +16,7 @@ export default {
   components: { SiteHeader },
   methods: {
     beforeEnter() {
-      this.$root.$emit('triggerScroll')
+      this.$root.$emit('trigger-scroll')
     }
   }
 }
