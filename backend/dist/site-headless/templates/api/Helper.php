@@ -12,11 +12,12 @@ class Helper {
     return $response;
   }
 
-  public static function getFields($page) {
+  public static function getFields($page, $exclude = []) {
     $page->of(true);
     $pdata = [];
     foreach ($page->template->fieldgroup as $field) {
       // Skip the following fields
+      if (in_array($field->name, $exclude)) continue;
       if ($field->type instanceof FieldtypeFieldsetOpen) continue;
       if ($field->name == 'pdfs') continue;
 
@@ -76,13 +77,13 @@ class Helper {
     return $pdata;
   }
 
-  public static function getPages($pages, $flag = false) {
+  public static function getPages($pages, $exclude = []) {
     $array = [];
     foreach ($pages as $p) {
       $p->of(true);
       $item = new \StdClass();
       $item->meta = self::getMetadata($p);
-      $item->fields = self::getFields($p, $flag);
+      $item->fields = self::getFields($p, $exclude);
       $item->parent = self::getMetadata($p->parent);
       array_push($array, $item);
     }
