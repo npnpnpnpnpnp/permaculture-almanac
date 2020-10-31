@@ -54,7 +54,11 @@ function walkRoutes(routes) {
 
     route.name = route.id
 
-    const langUrls = '(' + Object.values(route.url).join('|') + ')'
+    const langUrls =
+      Object.keys(route.url).length > 1
+        ? '(' + Object.values(route.url).join('|') + ')'
+        : Object.values(route.url).join('|')
+
     route.path = route.dynamicRoute ? langUrls + route.dynamicRoute : langUrls
 
     // TODO: This is called apiChildren because otherwise vue-router confuses it with its own route.children
