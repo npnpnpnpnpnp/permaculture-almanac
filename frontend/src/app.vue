@@ -7,25 +7,29 @@
 <script>
 import { mapState } from 'vuex'
 import EventBus from '@/event-bus'
+import { decodeHtml } from '@/mixins/decode-html'
 
 export default {
   components: {
     DefaultLayout: () => import('@/layouts/default')
   },
+  mixins: [decodeHtml],
   metaInfo() {
     return {
       titleTemplate: titleChunk => {
         if (!this.siteTitle) return
         return titleChunk
-          ? `${titleChunk} – ${this.siteTitle[this.currentLanguage]}`
-          : this.siteTitle[this.currentLanguage]
+          ? `${titleChunk} – ${this.decodeHtml(
+              this.siteTitle[this.currentLanguage]
+            )}`
+          : this.decodeHtml(this.siteTitle[this.currentLanguage])
       },
       meta: [
         {
           vmid: 'description',
           name: 'description',
           content: this.metaDescription
-            ? this.metaDescription[this.currentLanguage]
+            ? this.decodeHtml(this.metaDescription[this.currentLanguage])
             : ''
         }
       ]

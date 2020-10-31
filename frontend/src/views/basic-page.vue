@@ -7,16 +7,13 @@
 
 <script>
 import PageService from '@/services/page'
+import { metaInfo } from '@/mixins/meta-info'
 
 export default {
   components: {
     BaseBodytext: () => import('@/components/base-bodytext')
   },
-  metaInfo() {
-    return {
-      title: this.page.fields ? this.page.fields.title : ''
-    }
-  },
+  mixins: [metaInfo],
   data() {
     return {
       page: {}
