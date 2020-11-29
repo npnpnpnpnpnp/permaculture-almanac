@@ -1,7 +1,7 @@
 <?php namespace ProcessWire;
 
-require_once __DIR__ . '/Content.php';
 require_once __DIR__ . '/Images.php';
+require_once __DIR__ . '/RepeaterMatrix.php';
 
 class Helper {
   public static function getMetadata($page) {
@@ -25,12 +25,7 @@ class Helper {
 
       $value = $page->get($field->name);
 
-      if ($field->name == 'content') {
-        $pdata[$field->name] = Content::get($value);
-        continue;
-      }
-
-      if ($field->type instanceof FieldtypeImage || $field->type instanceof FieldtypeImages) {
+      if ($field->type instanceof FieldtypeImage) {
         $pdata[$field->name] = Images::get($value);
         continue;
       };
@@ -46,12 +41,12 @@ class Helper {
       }
 
       if ($field->type instanceof FieldtypeRepeater) {
-        $items = [];
-        foreach ($value as $singleValue) {
-          $item = self::getFields($singleValue);
-          array_push($items, $item);
-        }
-        $pdata[$field->name] = $items;
+        $pdata[$field->name] = self::getRepeater($value);
+        continue;
+      }
+
+      if ($field->type instanceof FieldtypeRepeaterMatrix) {
+        $pdata[$field->name] = RepeaterMatrix::get($value);
         continue;
       }
 
@@ -86,10 +81,24 @@ class Helper {
       $item = new \StdClass();
       $item->meta = self::getMetadata($p);
       $item->fields = self::getFields($p, $exclude);
-      $item->parent = self::getMetadata($p->parent);
+      // $item->parent = self::getMetadata($p->parent);
       if ($recursive && $p->hasChildren) {
         $item->children = self::getPages($p->children, $recursive, $exclude);
       }
+      array_push($array, $item);
+    }
+    return $array;
+  }
+
+  public static function getRepeater($pages) {
+    $array = [];
+    if (!$pages) return $array;
+    foreach ($pages as $p) {
+      $p->of(true);
+      // $item = new \StdClass();
+      // $item->meta = self::getMetadata($p);
+      // $item->fields = self::getFields($p);
+      $item = self::getFields($p);
       array_push($array, $item);
     }
     return $array;
