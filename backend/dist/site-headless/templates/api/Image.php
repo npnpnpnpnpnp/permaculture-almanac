@@ -1,12 +1,12 @@
 <?php namespace ProcessWire;
 
 class Image {
-  public static function get ($image, $widths = null) {
+  public static function get ($image, array $widths = null) {
     $widths = isset($widths) ? $widths : [200, 400, 800, 1200, 1600, 2000];
 
-    $response = new \StdClass();
-    if (!$image && !$image->width) return $response;
+    if (!$image && !$image->width) return null;
 
+    $response = new \StdClass();
     $response->urls = [];
     $response->description = $image->description;
     $response->ext = $image->ext;
