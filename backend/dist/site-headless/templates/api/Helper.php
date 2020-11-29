@@ -9,17 +9,19 @@ class Helper {
     $response = new \StdClass();
     $response->id = $page->id;
     $response->url = $page->url;
+    // $response->template = $page->template->name;
     return $response;
   }
 
-  public static function getFields($page, $exclude = []) {
+  public static function getFields($page, array $exclude = null) {
     $page->of(true);
     $pdata = [];
     foreach ($page->template->fieldgroup as $field) {
       // Skip the following fields
-      if (in_array($field->name, $exclude)) continue;
+      if (is_array($exclude) && in_array($field->name, $exclude)) continue;
       if ($field->type instanceof FieldtypeFieldsetOpen) continue;
       if ($field->name == 'pdfs') continue;
+      if ($field->name == 'files') continue;
 
       $value = $page->get($field->name);
 
@@ -77,7 +79,7 @@ class Helper {
     return $pdata;
   }
 
-  public static function getPages($pages, $exclude = []) {
+  public static function getPages($pages, bool $recursive = false, array $exclude = null) {
     $array = [];
     foreach ($pages as $p) {
       $p->of(true);
@@ -85,6 +87,9 @@ class Helper {
       $item->meta = self::getMetadata($p);
       $item->fields = self::getFields($p, $exclude);
       $item->parent = self::getMetadata($p->parent);
+      if ($recursive && $p->hasChildren) {
+        $item->children = self::getPages($p->children, $recursive, $exclude);
+      }
       array_push($array, $item);
     }
     return $array;
