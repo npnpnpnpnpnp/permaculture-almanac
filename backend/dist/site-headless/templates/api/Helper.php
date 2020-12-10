@@ -68,6 +68,8 @@ class Helper {
         continue;
       }
 
+      // TODO: Why do we have to turn of output formatting to (sometimes) get the sleepValue?
+      // $page->of(false);
       $pdata[$field->name] = $field->type->sleepValue($page, $field, $value);
     }
 
