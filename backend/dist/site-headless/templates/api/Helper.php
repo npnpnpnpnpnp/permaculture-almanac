@@ -40,13 +40,13 @@ class Helper {
         continue;
       }
 
-      if ($field->type instanceof FieldtypeRepeater) {
-        $pdata[$field->name] = self::getRepeater($value);
-        continue;
-      }
-
       if ($field->type instanceof FieldtypeRepeaterMatrix) {
         $pdata[$field->name] = RepeaterMatrix::get($value);
+        continue;
+      }
+      
+      if ($field->type instanceof FieldtypeRepeater) {
+        $pdata[$field->name] = self::getRepeater($value);
         continue;
       }
 
