@@ -32,7 +32,10 @@ export default {
             ? this.decodeHtml(this.metaDescription[this.currentLanguage])
             : ''
         }
-      ]
+      ],
+      htmlAttrs: {
+        lang: this.currentLanguage
+      }
     }
   },
   computed: {
