@@ -12,6 +12,7 @@ on:
       - master
     paths:
       - "frontend/**"
+      - ".github/workflows/frontend.yml"
 
 jobs:
   build-and-deploy:
