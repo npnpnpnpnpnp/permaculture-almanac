@@ -24,9 +24,9 @@ jobs:
           fetch-depth: 2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: "10.x"
+          node-version: "14"
 
       - name: Install dependencies
         run: npm ci
@@ -36,7 +36,7 @@ jobs:
         run: npm run build
         working-directory: ${{ env.working-directory }}
 
-      - name: Deploy project
+      - name: Deploy project (FTP)
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
         with:
           ftp-server: ${{ env.server }}
@@ -45,3 +45,14 @@ jobs:
           ftp-password: ${{ secrets.FRONTEND_PASSWORD }}
           # git-ftp-args: --insecure --remote-root ${{ env.remote-root }}
           git-ftp-args: --insecure
+
+      # https://github.com/easingthemes/ssh-deploy
+      # - name: Deploy project (SSH)
+      #   uses: easingthemes/ssh-deploy@v2.1.6
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+      #     ARGS: "-avzr --delete"
+      #     SOURCE: "frontend/dist/"
+      #     REMOTE_HOST: ${{ env.server }}
+      #     REMOTE_USER: ${{ env.username }}
+      #     # TARGET: ${{ env.remote-root }}
