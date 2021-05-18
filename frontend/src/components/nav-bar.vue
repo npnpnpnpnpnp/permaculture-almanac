@@ -1,11 +1,11 @@
 <template>
   <ul :class="$style.component">
-    <li v-for="route in apiRoutes" :key="route.id">
+    <li v-for="route in routes" :key="route.id">
       <router-link
-        :to="route.url[currentLanguage]"
+        :to="route.meta.url"
         :exact-active-class="$style['is-active']"
       >
-        {{ route.title[currentLanguage] }}
+        {{ route.meta.title }}
       </router-link>
     </li>
   </ul>
@@ -16,7 +16,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['currentLanguage', 'apiRoutes'])
+    ...mapState(['routes'])
   }
 }
 </script>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
 import main from '@/main'
+import store from '@/store'
 import Home from '@/views/home.vue'
 import BasicPage from '@/views/basic-page.vue'
 
@@ -24,55 +25,49 @@ const scrollBehavior = (to, from, savedPosition) => {
 }
 
 const router = new Router({
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   mode: 'history',
   routes: [],
   scrollBehavior
 })
 
-export const addRoutesFromApi = routes => {
-  routes = walkRoutes(routes)
-  router.addRoutes(routes)
+// Get API routes and basic data before loading view
+router.beforeEach(async (to, from, next) => {
+  // Check if URL has language segment
+  const languages = store.state.availableLanguagesFallback.split(',')
+  const lang = to.fullPath.split('/').filter(segment => segment)[0]
+  // If yes, then update the language
+  if (languages.includes(lang) && lang !== store.state.currentLanguage) {
+    store.dispatch('setLanguage', lang)
+  }
 
-  router.addRoutes([
-    {
-      path: '*',
-      component: require('@/views/_404').default
-    }
-  ])
-}
+  if (store.state.initialized) {
+    return next()
+  } else {
+    await store.dispatch('getDefaults')
+    addRoutesFromApi(store.state.routes)
+    next({
+      path: to.fullPath,
+      replace: true
+    })
+  }
+})
 
-function walkRoutes(routes) {
+const addRoutesFromApi = routes => {
   routes.forEach(route => {
-    route.meta = {
-      url: route.url,
-      template: route.template
-    }
-
+    // Map backend templates to frontend views
     route.component = Home
-    if (route.template === 'basic-page') route.component = BasicPage
+    if (route.meta.template === 'basic-page') route.component = BasicPage
 
-    route.name = route.id
-
-    const langUrls =
-      Object.keys(route.url).length > 1
-        ? '(' + Object.values(route.url).join('|') + ')'
-        : Object.values(route.url).join('|')
-
-    route.path = route.dynamicRoute ? langUrls + route.dynamicRoute : langUrls
-
-    // TODO: This is called apiChildren because otherwise vue-router confuses it with its own route.children
-    if (route.apiChildren) {
-      let metaChildren = []
-      route.apiChildren.forEach(child => {
-        metaChildren.push(child)
-      })
-      route.meta.children = metaChildren
-      routes = [...routes, ...walkRoutes(route.apiChildren, metaChildren)]
-    }
+    router.addRoute(route)
   })
 
-  return routes
+  router.addRoute({
+    path: '*',
+    component: require('@/views/_404').default
+  })
+
+  // console.log(router.getRoutes())
 }
 
 export default router

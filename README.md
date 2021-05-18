@@ -70,6 +70,8 @@ Note: In case ProcessWire has already been installed, then directly go to _Setup
 
 In case ProcessWire is already installed in the `dist/` directory, then simply grab the latest database dump under `dist/site/assets/backups/database/` and import it to a local database. Afterwards **duplicate** `config-default.php`, rename the copy to `config.php` and enter the database credentials. Also **duplicate** `htaccess.txt` and rename the copy to `.htaccess`. When setting up a local webserver, the document root has to point to the `dist/` directory.
 
+Make sure to update the existing API key in the AppApi module settings.
+
 On a live server, make sure to [optimize the handling of 404s](https://processwire.com/blog/posts/optimizing-404s-in-processwire/) and only allow HTTPS connections (inside `.htaccess` file).
 
 ### Directory structure
@@ -82,11 +84,7 @@ Within `dist/site/templates/api/` resides the API. It is by default reachable vi
 
 The backend deployment is handeled by [GitHub actions](https://help.github.com/en/actions). The corresponding workflow can be found under `/.github/workflows/backend.yml`. Make sure to set the environment variables accordingly and to create a [GitHub secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) called `BACKEND_PASSWORD` that holds the FTP password (no special characters allowed!).
 
-After the first deployment, make sure to add `.htaccess` and `config.php` as described under _Setup_. In order to give the frontend access to the backend API, also add the following line to the `.htaccess`:
-
-```
-Header set Access-Control-Allow-Origin "https://project-domain.com"
-```
+After the first deployment, make sure to add `.htaccess` and `config.php` as described under _Setup_.
 
 ## Frontend
 

@@ -1,8 +1,8 @@
 <template>
   <ul :class="$style.component">
     <li
-      v-for="language in availableLanguages"
-      :key="language.name"
+      v-for="(language, index) in availableLanguages"
+      :key="`language-${index}`"
       :class="$style.item"
     >
       <language-button :language="language" />

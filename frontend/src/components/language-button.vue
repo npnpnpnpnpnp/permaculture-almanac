@@ -1,6 +1,6 @@
 <template>
   <button @click.stop="switchLanguage" :class="buttonClass" type="button">
-    {{ language.name }}
+    {{ language }}
   </button>
 </template>
 
@@ -10,14 +10,14 @@ import { mapState } from 'vuex'
 export default {
   props: {
     language: {
-      type: Object,
+      type: String,
       required: true
     }
   },
   computed: {
     ...mapState(['currentLanguage']),
     isCurrent() {
-      return this.language.name === this.currentLanguage
+      return this.language === this.currentLanguage
     },
     buttonClass() {
       return [
@@ -28,11 +28,7 @@ export default {
   },
   methods: {
     switchLanguage() {
-      if (this.isCurrent) return
-
-      this.$store.commit('setLanguage', {
-        lang: this.language.name
-      })
+      if (!this.isCurrent) this.$store.dispatch('setLanguage', this.language)
     }
   }
 }

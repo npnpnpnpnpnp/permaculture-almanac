@@ -1,6 +1,6 @@
 <?php if(!defined("PROCESSWIRE_INSTALL")) die();
 $info = array(
-	'title' => "", 
+	'title' => "Headless", 
 	'summary' => "", 
 	'screenshot' => ""
 	);
