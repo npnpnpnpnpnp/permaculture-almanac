@@ -22,7 +22,8 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Deploy project
+      # https://github.com/SamKirkland/FTP-Deploy-Action
+      - name: Deploy project (FTP)
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
         with:
           ftp-server: ${{ env.server }}
@@ -31,3 +32,15 @@ jobs:
           ftp-password: ${{ secrets.BACKEND_PASSWORD }}
           # git-ftp-args: --insecure --remote-root ${{ env.remote-root }}
           git-ftp-args: --insecure
+
+      # https://github.com/easingthemes/ssh-deploy
+      # - name: Deploy project (SSH)
+      #   uses: easingthemes/ssh-deploy@v2.1.6
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+      #     ARGS: "-avzr --delete"
+      #     SOURCE: "backend/dist/"
+      #     REMOTE_HOST: ${{ env.server }}
+      #     REMOTE_USER: ${{ env.username }}
+      #     # TARGET: ${{ env.remote-root }}
+      #     EXCLUDE: "/.htaccess, /site/config.php, /site/assets/backups/*, /site/assets/cache/*, /site/assets/files/*, /site/assets/logs/*, /site/assets/sessions/"
