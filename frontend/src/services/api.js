@@ -1,22 +1,24 @@
 // Based on https://medium.com/@zitko/structuring-a-vue-project-authentication-87032e5bfe16
 import axios from 'axios'
+import store from '@/store'
 
 const ApiService = {
   init(baseURL) {
     axios.defaults.baseURL = baseURL
   },
 
-  // setHeader() {
-  //   axios.defaults.headers.common[
-  //     'Authorization'
-  //   ] = `Bearer ${TokenService.getToken()}`
-  // },
+  setHeader() {
+    // axios.defaults.withCredentials = true
+    axios.defaults.headers.common['X-API-Key'] = process.env.VUE_APP_API_KEY
+    axios.defaults.headers['Accept-Language'] = store.state.currentLanguage
+  },
 
   removeHeader() {
     axios.defaults.headers.common = {}
   },
 
   get(resource) {
+    this.setHeader()
     return axios.get(resource)
   },
 

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { addRoutesFromApi } from '@/router'
 import EventBus from '@/event-bus'
 import ApiService from '@/services/api'
 
@@ -8,13 +7,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiRoutes: [],
     availableLanguages: [],
     availableLanguagesFallback:
       process.env.VUE_APP_AVAILABLE_LANGUAGES_FALLBACK,
     currentLanguage: process.env.VUE_APP_I18N_LOCALE,
     initialized: false,
     metaDescription: undefined,
+    routes: [],
     siteTitle: undefined
   },
 
@@ -25,31 +24,22 @@ export default new Vuex.Store({
       })
     },
     setLanguage(state, payload) {
-      state.currentLanguage = localStorage.lang = payload.lang
-      EventBus.$emit('language-change')
-    },
-    recallLanguage(state, payload) {
-      const languages = state.availableLanguagesFallback.split(',')
-      const segmentsRaw = payload.to.fullPath.split('/')
-      const segments = segmentsRaw.filter(segment => segment != '')
-      const urlLang = segments[0]
-
-      if (languages.includes(urlLang)) {
-        state.currentLanguage = urlLang
-        // i18n.locale = urlLang
-        document.documentElement.setAttribute('lang', urlLang)
-      }
+      state.currentLanguage = payload
+      // localStorage.lang = payload
+      // i18n.locale = payload
     }
   },
 
   actions: {
-    async getDefaults({ commit, state }, payload) {
-      commit('recallLanguage', payload)
-      const { data } = await ApiService.get('defaults/' + state.currentLanguage)
+    async getDefaults({ commit }) {
+      const { data } = await ApiService.get('defaults')
       commit('set', data)
       commit('set', { initialized: true })
-
-      addRoutesFromApi(data.apiRoutes)
+    },
+    async setLanguage({ dispatch, commit }, payload) {
+      commit('setLanguage', payload)
+      await dispatch('getDefaults')
+      EventBus.$emit('set-language')
     }
   }
 })

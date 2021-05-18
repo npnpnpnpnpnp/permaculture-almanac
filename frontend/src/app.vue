@@ -19,17 +19,15 @@ export default {
       titleTemplate: titleChunk => {
         if (!this.siteTitle) return
         return titleChunk
-          ? `${titleChunk} – ${this.decodeHtml(
-              this.siteTitle[this.currentLanguage]
-            )}`
-          : this.decodeHtml(this.siteTitle[this.currentLanguage])
+          ? `${titleChunk} – ${this.decodeHtml(this.siteTitle)}`
+          : this.decodeHtml(this.siteTitle)
       },
       meta: [
         {
           vmid: 'description',
           name: 'description',
           content: this.metaDescription
-            ? this.decodeHtml(this.metaDescription[this.currentLanguage])
+            ? this.decodeHtml(this.metaDescription)
             : ''
         }
       ],
@@ -40,10 +38,11 @@ export default {
   },
   computed: {
     ...mapState([
-      'initialized',
       'currentLanguage',
-      'siteTitle',
-      'metaDescription'
+      'initialized',
+      'metaDescription',
+      'routes',
+      'siteTitle'
     ]),
     layout() {
       return this.$route.meta.layout
@@ -51,14 +50,11 @@ export default {
         : 'DefaultLayout'
     }
   },
-  methods: {
-    changeLanguage() {
-      const newPath = this.$route.meta.url[this.currentLanguage]
-      this.$router.push(newPath)
-    }
-  },
   created() {
-    EventBus.$on('language-change', this.changeLanguage)
+    EventBus.$on('set-language', () => {
+      const route = this.routes.find(route => route.name === this.$route.name)
+      this.$router.push(route.meta.url)
+    })
   }
 }
 </script>

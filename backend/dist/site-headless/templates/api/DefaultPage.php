@@ -1,20 +1,16 @@
 <?php namespace ProcessWire;
 
-require_once __DIR__ . '/Helper.php';
-
 class DefaultPage {
   public static function get($data) {
-    $data = RestApiHelper::checkAndSanitizeRequiredParameters($data, ['id|int', 'lang']);
+    Helper::setLanguage();
+    $data = AppApiHelper::checkAndSanitizeRequiredParameters($data, ['id|int']);
+
     $page = wire('pages')->findOne($data->id);
-    $response = new \StdClass();
-
-    $language = wire('user')->language;
-    wire('user')->language = wire('languages')->get($data->lang);
-
-    if (!$page->id) throw new \Exception("Page not found", 404);
+    if (!($page && $page->id)) throw new AppApiException("Page not found", 404);
 
     $page->of(true);
 
+    $response = new \StdClass();
     $response->meta = Helper::getMetadata($page);
     $response->fields = Helper::getFields($page);
 
@@ -24,8 +20,7 @@ class DefaultPage {
     //   $response->children = Helper::getPages($page->children);
     // }
 
-    wire('user')->language = $language;
-
+    Helper::unsetLanguage();
     return $response;
   }
 }
