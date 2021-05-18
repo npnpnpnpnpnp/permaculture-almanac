@@ -4,6 +4,35 @@ require_once __DIR__ . '/Images.php';
 require_once __DIR__ . '/RepeaterMatrix.php';
 
 class Helper {
+  public static function setLanguage() {
+    if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+      throw new AppApiException("Required header Accept-Language is missing", 400);
+    }
+
+    // Sanitize Accept-Language value
+    $requestedLang = wire('sanitizer')->selectorValue($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
+    // Check if requested language is default language (as its name is always 'default')
+    $requestedLang = $requestedLang == wire('config')->_defaultLanguage ? 'default' : $requestedLang;
+
+    // Get language
+    $lang = wire('languages')->getLanguage($requestedLang);
+
+    // Throw error if language couldn’t be found
+    if (!($lang && $lang->id)) {
+      throw new AppApiException("Requested language '$requestedLang' not available", 400);
+    }
+
+    // Set language
+    wire('languages')->setLanguage($lang);
+    // wire('user')->language = $lang;
+  }
+
+  public static function unsetLanguage() {
+    // Recall previous language
+    wire('languages')->unsetLanguage();
+  }
+
   public static function getMetadata($page) {
     $page->of(true);
     $response = new \StdClass();
@@ -44,7 +73,7 @@ class Helper {
         $pdata[$field->name] = RepeaterMatrix::get($value);
         continue;
       }
-      
+
       if ($field->type instanceof FieldtypeRepeater) {
         $pdata[$field->name] = self::getRepeater($value);
         continue;

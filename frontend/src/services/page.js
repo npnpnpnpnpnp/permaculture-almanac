@@ -1,16 +1,14 @@
 import ApiService from '@/services/api'
-import store from '@/store'
 
 const PageService = {
   get: async function(request) {
     try {
-      const response = await ApiService.get(
-        `page/${request.id}/${store.state.currentLanguage}`
-      )
+      const response = await ApiService.get('page/' + request.id)
       return response.data
     } catch (e) {
       // TODO: implement proper error handling
-      alert(e)
+      // eslint-disable-next-line
+      console.error(e)
     }
   }
 }

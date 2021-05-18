@@ -1,4 +1,57 @@
-# --- WireDatabaseBackup {"time":"2020-11-29 22:37:17","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
+# --- WireDatabaseBackup {"time":"2021-05-18 20:14:01","user":"","dbName":"pw-vue-kickstart","description":"","tables":[],"excludeTables":["pages_drafts","pages_roles","permissions","roles","roles_permissions","users","users_roles","user","role","permission"],"excludeCreateTables":[],"excludeExportTables":["field_roles","field_permissions","field_email","field_pass","caches","session_login_throttle","page_path_history"]}
+
+DROP TABLE IF EXISTS `appapi_apikeys`;
+CREATE TABLE `appapi_apikeys` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `application_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `created_user_id` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_user_id` int(11) NOT NULL,
+  `key` varchar(100) NOT NULL,
+  `version` varchar(100) NOT NULL,
+  `description` text,
+  `accessable_until` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+INSERT INTO `appapi_apikeys` (`id`, `application_id`, `created`, `created_user_id`, `modified`, `modified_user_id`, `key`, `version`, `description`, `accessable_until`) VALUES('1', '1', '2021-05-12 19:56:15', '41', '2021-05-12 19:56:15', '41', 'zjoHA859mRXTJe1xBzsn2', '1.0.0', '', '1970-01-01 01:00:00');
+
+DROP TABLE IF EXISTS `appapi_applications`;
+CREATE TABLE `appapi_applications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created` datetime NOT NULL,
+  `created_user_id` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_user_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text,
+  `authtype` int(11) NOT NULL,
+  `token_secret` varchar(100) NOT NULL,
+  `expires_in` int(11) NOT NULL,
+  `accesstoken_secret` varchar(100) NOT NULL,
+  `default_application` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+INSERT INTO `appapi_applications` (`id`, `created`, `created_user_id`, `modified`, `modified_user_id`, `title`, `description`, `authtype`, `token_secret`, `expires_in`, `accesstoken_secret`, `default_application`) VALUES('1', '2021-05-12 19:37:39', '41', '2021-05-12 19:37:50', '41', 'default', '', '0', 'g+7xhbePyr37UautereikQzlVjqplKkcjI+jtjCQD3MqI085EnySV093', '2592000', 'nr4sWjfvdrsMCUglOOAcMoQ0edx+NLTNejeHy2jK', '0');
+
+DROP TABLE IF EXISTS `appapi_apptokens`;
+CREATE TABLE `appapi_apptokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `application_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `created_user_id` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_user_id` int(11) NOT NULL,
+  `token_id` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `last_used` datetime DEFAULT NULL,
+  `expiration_time` datetime DEFAULT NULL,
+  `not_before_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `caches`;
 CREATE TABLE `caches` (
@@ -357,6 +410,7 @@ INSERT INTO `field_process` (`pages_id`, `data`) VALUES('1022', '177');
 INSERT INTO `field_process` (`pages_id`, `data`) VALUES('1045', '205');
 INSERT INTO `field_process` (`pages_id`, `data`) VALUES('1032', '186');
 INSERT INTO `field_process` (`pages_id`, `data`) VALUES('1037', '190');
+INSERT INTO `field_process` (`pages_id`, `data`) VALUES('1049', '211');
 
 DROP TABLE IF EXISTS `field_roles`;
 CREATE TABLE `field_roles` (
@@ -372,7 +426,7 @@ CREATE TABLE `field_title` (
   `pages_id` int(10) unsigned NOT NULL,
   `data` text NOT NULL,
   PRIMARY KEY (`pages_id`),
-  KEY `data_exact` (`data`(255)),
+  KEY `data_exact` (`data`(250)),
   FULLTEXT KEY `data` (`data`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -423,9 +477,11 @@ INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1032', 'DB Backups');
 INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1033', 'Manage database backups (recommended for superuser only)');
 INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1037', 'Export Site Profile');
 INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1039', 'English');
-INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1042', 'Hello World');
+INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1042', 'Hallo Welt');
 INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1044', 'API');
 INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1045', 'ProCache');
+INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1049', 'AppApi');
+INSERT INTO `field_title` (`pages_id`, `data`) VALUES('1050', 'Manage AppApi settings');
 
 DROP TABLE IF EXISTS `fieldgroups`;
 CREATE TABLE `fieldgroups` (
@@ -487,7 +543,7 @@ CREATE TABLE `fields` (
   KEY `type` (`type`)
 ) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
-INSERT INTO `fields` (`id`, `type`, `name`, `flags`, `label`, `data`) VALUES('1', 'FieldtypePageTitle', 'title', '13', 'Titel', '{\"required\":1,\"textformatters\":[\"TextformatterEntities\"],\"size\":0,\"maxlength\":255,\"label1039\":\"Title\",\"collapsed\":0,\"minlength\":0,\"showCount\":0}');
+INSERT INTO `fields` (`id`, `type`, `name`, `flags`, `label`, `data`) VALUES('1', 'FieldtypePageTitle', 'title', '13', 'Titel', '{\"required\":1,\"textformatters\":[\"TextformatterEntities\"],\"size\":0,\"maxlength\":255,\"label1039\":\"Title\",\"minlength\":0,\"showCount\":0,\"langBlankInherit\":0}');
 INSERT INTO `fields` (`id`, `type`, `name`, `flags`, `label`, `data`) VALUES('2', 'FieldtypeModule', 'process', '25', 'Process', '{\"description\":\"The process that is executed on this page. Since this is mostly used by ProcessWire internally, it is recommended that you don\'t change the value of this unless adding your own pages in the admin.\",\"collapsed\":1,\"required\":1,\"moduleTypes\":[\"Process\"],\"permanent\":1}');
 INSERT INTO `fields` (`id`, `type`, `name`, `flags`, `label`, `data`) VALUES('3', 'FieldtypePassword', 'pass', '24', 'Set Password', '{\"collapsed\":1,\"size\":50,\"maxlength\":128}');
 INSERT INTO `fields` (`id`, `type`, `name`, `flags`, `label`, `data`) VALUES('5', 'FieldtypePage', 'permissions', '24', 'Permissions', '{\"derefAsPage\":0,\"parent_id\":31,\"labelFieldName\":\"title\",\"inputfield\":\"InputfieldCheckboxes\"}');
@@ -511,7 +567,7 @@ CREATE TABLE `modules` (
   `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `class` (`class`)
-) ENGINE=MyISAM AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=219 DEFAULT CHARSET=utf8;
 
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('1', 'FieldtypeTextarea', '1', '', '0000-00-00 00:00:00');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('2', 'FieldtypeNumber', '0', '', '0000-00-00 00:00:00');
@@ -603,9 +659,10 @@ INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('159', 
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('160', 'LanguageSupport', '35', '{\"languagesPageID\":1012,\"defaultLanguagePageID\":1013,\"otherLanguagePageIDs\":[1039],\"languageTranslatorPageID\":1014}', '2015-03-10 22:22:48');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('161', 'ProcessLanguage', '1', '', '2015-03-10 22:22:48');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('162', 'ProcessLanguageTranslator', '1', '', '2015-03-10 22:22:48');
-INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('201', 'RestApi', '3', '{\"authMethod\":\"none\",\"jwtSecret\":\"5UErooZgjtxKHdlorkUSxH\\/f2eFz6ItFU56ROObNXwfL8Uk9ZG9RFIAN13oycur6MPOYfrad21BilSIYFREmbO7uqTgqSKPsGn\\/C7pAswwrN6m1h5bas6MZPCRGIU18qFKPJYdlQ+6Mvn0MYWF+6lLxpo3Gcp0meVcvokGrqsKE=\",\"endpoint\":\"live-api\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\"}', '2019-03-08 16:53:00');
+INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('210', 'ProcessCustomUploadNames', '3', '', '2021-05-12 19:33:01');
+INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('211', 'AppApi', '3', '{\"endpoint\":\"api\",\"routes_path\":\"site\\/templates\\/api\\/Routes.php\",\"access_logging\":\"\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\"}', '2021-05-12 19:33:38');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('202', 'InputfieldPageAutocomplete', '0', '', '2019-03-15 17:37:32');
-INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('204', 'ProCache', '3', '{\"licenseKey\":\"PWPC3.per2284.af9b22291fe60c0807c9824f91cd3452daa1c1c5\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\",\"cacheOn\":true,\"debug\":\"0\",\"cacheTime\":31449600,\"cacheTimeCustom\":\"\",\"cacheClear\":[4],\"cacheClearCustom\":\"\",\"htAllow\":\"1\",\"minifyTemplates\":[],\"minifyIgnoreTags\":\"textarea pre\",\"minifyBlocks\":\"!doctype address article aside audio blockquote body br button canvas caption col colgroup dd div dl dt embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hgroup hr html li link main map meta nav noscript object ol optgroup option output p pre progress script section table tbody td tfoot th thead title tr ul video\",\"minifyRemoveBlankAttr\":\"class dir for id lang style title\",\"minifyOptions\":[],\"minifyHTMLOptions\":[\"js\",\"css\",\"uncomment\",\"noXHTML\",\"unblank\",\"untag\",\"unattr\",\"unbool\",\"unquote\"],\"minifyMaxImportCSS\":5,\"noCacheCookies\":\"wire_challenge\\nwires_challenge\",\"noCacheGetVars\":\"*\",\"urlSegments\":\"4\",\"https\":\"\",\"cacheHosts\":[],\"bodyClass\":\"\",\"canonical\":\"0\",\"docRootPath\":\"\",\"busterUrlType\":\"qstr\",\"cdnHosts\":\"\",\"cdnExts\":\"\",\"cdnAttrs\":\"src srcset href\",\"cdnTemplates\":[],\"cdnStatus\":\"0\",\"cacheTemplates\":[46]}', '2019-04-17 09:50:52');
+INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('204', 'ProCache', '3', '{\"licenseKey\":\"PWPC3.per2284.af9b22291fe60c0807c9824f91cd3452daa1c1c5\",\"uninstall\":\"\",\"submit_save_module\":\"Submit\",\"cacheOn\":false,\"debug\":\"0\",\"cacheTime\":31449600,\"cacheTimeCustom\":\"\",\"cacheClear\":[4],\"cacheClearCustom\":\"\",\"htAllow\":\"1\",\"minifyTemplates\":[],\"minifyIgnoreTags\":\"textarea pre\",\"minifyBlocks\":\"!doctype address article aside audio blockquote body br button canvas caption col colgroup dd div dl dt embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hgroup hr html li link main map meta nav noscript object ol optgroup option output p pre progress script section table tbody td tfoot th thead title tr ul video\",\"minifyRemoveBlankAttr\":\"class dir for id lang style title\",\"minifyOptions\":[],\"minifyHTMLOptions\":[\"js\",\"css\",\"uncomment\",\"noXHTML\",\"unblank\",\"untag\",\"unattr\",\"unbool\",\"unquote\"],\"minifyMaxImportCSS\":5,\"noCacheCookies\":\"wire_challenge\\nwires_challenge\",\"noCacheGetVars\":\"*\",\"urlSegments\":\"4\",\"https\":\"\",\"cacheHosts\":[],\"bodyClass\":\"\",\"canonical\":\"0\",\"docRootPath\":\"\",\"busterUrlType\":\"qstr\",\"cdnHosts\":\"\",\"cdnExts\":\"\",\"cdnAttrs\":\"src srcset href\",\"cdnTemplates\":[],\"cdnStatus\":\"0\",\"cacheTemplates\":[]}', '2019-04-17 09:50:52');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('205', 'ProcessProCache', '1', '', '2019-04-17 09:50:52');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('172', 'MarkupCache', '3', '', '2015-03-11 09:12:57');
 INSERT INTO `modules` (`id`, `class`, `flags`, `data`, `created`) VALUES('173', 'MaintenanceMode', '3', '{\"inMaintenance\":\"\",\"bypassRoles\":[],\"showPage\":1019,\"showURL\":\"\",\"allowPages\":[]}', '2015-03-11 09:13:11');
@@ -637,9 +694,9 @@ CREATE TABLE `pages` (
   KEY `created` (`created`),
   KEY `status` (`status`),
   KEY `published` (`published`)
-) ENGINE=MyISAM AUTO_INCREMENT=1047 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1051 DEFAULT CHARSET=utf8;
 
-INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1', '0', '1', 'home', '9', '2019-09-25 11:11:18', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1', '0', '1', 'home', '9', '2021-05-18 19:49:18', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('2', '1', '2', 'manage', '1035', '2016-10-24 16:25:12', '40', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '5');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('3', '2', '2', 'page', '21', '2011-03-29 21:37:06', '41', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '0');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('6', '3', '2', 'add', '21', '2015-11-02 15:57:07', '40', '0000-00-00 00:00:00', '2', '0000-00-00 00:00:00', '1');
@@ -690,9 +747,11 @@ INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modif
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1032', '22', '2', 'db-backups', '1', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '10');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1033', '31', '5', 'db-backup', '1', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '41', '2015-06-23 15:52:38', '14');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1039', '1012', '43', 'en', '1', '2016-10-24 17:07:04', '41', '2016-10-24 17:07:04', '41', '2016-10-24 17:07:04', '1');
-INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1042', '1', '45', 'hello-world', '1', '2019-10-24 10:31:00', '41', '2019-03-13 16:38:40', '41', '2019-03-13 16:38:57', '3');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1042', '1', '45', 'hallo-welt', '1', '2021-05-13 16:55:01', '41', '2019-03-13 16:38:40', '41', '2019-03-13 16:38:57', '3');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1044', '1', '46', 'api', '1029', '2019-09-25 11:52:42', '41', '2019-04-17 09:48:40', '41', '2019-04-17 09:48:40', '4');
 INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1045', '22', '2', 'procache', '1', '2019-04-17 09:50:52', '41', '2019-04-17 09:50:52', '41', '2019-04-17 09:50:52', '7');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1049', '22', '2', 'appapi', '1', '2021-05-12 19:33:38', '41', '2021-05-12 19:33:38', '41', '2021-05-12 19:33:38', '8');
+INSERT INTO `pages` (`id`, `parent_id`, `templates_id`, `name`, `status`, `modified`, `modified_users_id`, `created`, `created_users_id`, `published`, `sort`) VALUES('1050', '31', '5', 'appapi_manage_applications', '1', '2021-05-12 19:33:38', '41', '2021-05-12 19:33:38', '41', '2021-05-12 19:33:38', '15');
 
 DROP TABLE IF EXISTS `pages_access`;
 CREATE TABLE `pages_access` (
@@ -725,6 +784,7 @@ INSERT INTO `pages_access` (`pages_id`, `templates_id`, `ts`) VALUES('1039', '2'
 INSERT INTO `pages_access` (`pages_id`, `templates_id`, `ts`) VALUES('1041', '2', '2019-03-08 17:03:19');
 INSERT INTO `pages_access` (`pages_id`, `templates_id`, `ts`) VALUES('1042', '1', '2019-03-13 16:38:40');
 INSERT INTO `pages_access` (`pages_id`, `templates_id`, `ts`) VALUES('1044', '1', '2019-04-17 09:48:41');
+INSERT INTO `pages_access` (`pages_id`, `templates_id`, `ts`) VALUES('1050', '2', '2021-05-12 19:33:38');
 
 DROP TABLE IF EXISTS `pages_parents`;
 CREATE TABLE `pages_parents` (
@@ -764,8 +824,6 @@ CREATE TABLE `pages_procache` (
   KEY `pages_id` (`pages_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/defaults/de/', '1044', '46', '2020-03-27 17:52:05');
-INSERT INTO `pages_procache` (`path`, `pages_id`, `templates_id`, `created`) VALUES('/api/page/1042/de/', '1044', '46', '2020-03-27 17:52:06');
 
 DROP TABLE IF EXISTS `pages_sortfields`;
 CREATE TABLE `pages_sortfields` (
@@ -808,4 +866,4 @@ INSERT INTO `templates` (`id`, `name`, `fieldgroups_id`, `flags`, `cache_time`, 
 
 UPDATE pages SET created_users_id=41, modified_users_id=41, created=NOW(), modified=NOW();
 
-# --- /WireDatabaseBackup {"numTables":20,"numCreateTables":26,"numInserts":502,"numSeconds":1}
+# --- /WireDatabaseBackup {"numTables":23,"numCreateTables":29,"numInserts":509,"numSeconds":0}
