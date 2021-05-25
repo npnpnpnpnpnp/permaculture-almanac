@@ -59,6 +59,11 @@ class Helper {
         continue;
       };
 
+      if ($field->type instanceof FieldtypeFile) {
+        $pdata[$field->name] = self::getFile($value);
+        continue;
+      }
+
       if ($field->type instanceof FieldtypePage) {
         $pdata[$field->name] = self::getPageReferences($value);
         continue;
