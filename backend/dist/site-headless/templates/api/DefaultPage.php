@@ -3,9 +3,14 @@
 class DefaultPage {
   public static function get($data) {
     Helper::setLanguage();
-    $data = AppApiHelper::checkAndSanitizeRequiredParameters($data, ['id|int']);
 
-    $page = wire('pages')->findOne($data->id);
+    if (isset($data->path)) {
+      $data = AppApiHelper::checkAndSanitizeRequiredParameters($data, ['path|pagePathNameUTF8']);
+      $page = wire('pages')->findOne('/' . $data->path);
+    } else {
+      $page = wire('pages')->get(1);
+    }
+
     if (!($page && $page->id)) throw new AppApiException("Page not found", 404);
 
     $page->of(true);

@@ -60,7 +60,7 @@ class Helper {
       };
 
       if ($field->type instanceof FieldtypeFile) {
-        $pdata[$field->name] = self::getFile($value);
+        $pdata[$field->name] = self::getFiles($value);
         continue;
       }
 
@@ -110,20 +110,35 @@ class Helper {
     return $pdata;
   }
 
-  public static function getPages($pages, bool $recursive = false, array $exclude = null) {
-    $array = [];
-    foreach ($pages as $p) {
-      $p->of(true);
-      $item = new \StdClass();
-      $item->meta = self::getMetadata($p);
-      $item->fields = self::getFields($p, $exclude);
-      // $item->parent = self::getMetadata($p->parent);
-      if ($recursive && $p->hasChildren) {
-        $item->children = self::getPages($p->children, $recursive, $exclude);
+  public static function getPages($pages, bool $recursive = false, array $exclude = null, $returnArray = true) {
+    if (!$pages) return null;
+    if ($pages instanceof PageArray && $pages->count) {
+      $response = [];
+      foreach ($pages as $p) {
+        $item = self::getPage($p, $recursive, $exclude);
+        array_push($response, $item);
       }
-      array_push($array, $item);
+      return $response;
+    } else if ($pages && $pages instanceof Page) {
+      $p = self::getPage($pages, $recursive, $exclude);
+      if ($returnArray) {
+        return array($p);
+      } else {
+        return $p;
+      }
     }
-    return $array;
+  }
+
+  public static function getPage($page, bool $recursive = false, array $exclude = null) {
+    // $p->of(true);
+    $item = new \StdClass();
+    $item->meta = self::getMetadata($page);
+    $item->fields = self::getFields($page, $exclude);
+    // $item->parent = self::getMetadata($p->parent);
+    if ($recursive && $page->hasChildren) {
+      $item->children = self::getPages($page->children, $recursive, $exclude);
+    }
+    return $item;
   }
 
   public static function getRepeater($pages) {
@@ -141,18 +156,27 @@ class Helper {
   }
 
   public static function getPageReferences($pages) {
-    $array = [];
-    if (!$pages) return $array;
-    foreach ($pages as $p) {
-      $p->of(true);
-      $item = new \StdClass();
-      $item->meta = self::getMetadata($p);
-      $item->fields = [
-        'title' => $p->title
-      ];
-      array_push($array, $item);
+    if (!$pages) return null;
+    if ($pages instanceof PageArray && $pages->count) {
+      $response = [];
+      foreach ($pages as $p) {
+        $item = self::getPageReference($p);
+        array_push($response, $item);
+      }
+      return $response;
+    } else if ($pages && $pages instanceof Page) {
+      return self::getPageReference($pages);
     }
-    return $array;
+  }
+
+  public static function getPageReference($page) {
+    // $p->of(true);
+    $item = new \StdClass();
+    $item->meta = self::getMetadata($page);
+    $item->fields = [
+      'title' => $page->title
+    ];
+    return $item;
   }
 
   // TODO: check if multiple items or single
@@ -164,17 +188,27 @@ class Helper {
     ];
   }
 
-  public static function getFile($field) {
-    $array = [];
-    if (!$field) return $array;
-    foreach ($field as $p) {
-      $item = new \StdClass();
-      $item->ext = $p->ext;
-      $item->description = $p->description;
-      $item->url = $p->httpUrl;
-      array_push($array, $item);
+  public static function getFiles($field) {
+    if (!$field) return null;
+    if ($field instanceof Pagefiles && $field->count) {
+      $response = [];
+      foreach ($field as $f) {
+        $item = self::getFile($f);
+        array_push($response, $item);
+      }
+      return $response;
+    } else if ($field && $field instanceof Pagefile) {
+      return self::getFile($field);
     }
-    return $array;
+  }
+
+  public static function getFile($file) {
+    // $p->of(true);
+    $item = new \StdClass();
+    $item->ext = $file->ext;
+    $item->description = $file->description;
+    $item->url = $file->httpUrl;
+    return $item;
   }
 
   public static function getTable($field) {

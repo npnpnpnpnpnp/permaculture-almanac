@@ -20,7 +20,7 @@ export default {
     }
   },
   async created() {
-    this.page = await PageService.get({ id: this.$route.name })
+    this.page = await PageService.get({ path: this.$route.path })
   }
 }
 </script>

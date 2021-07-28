@@ -3,6 +3,7 @@ name: Frontend
 env:
   working-directory: ./frontend
   server:
+  # port: 
   username:
   # remote-root:
 
@@ -54,5 +55,6 @@ jobs:
       #     ARGS: "-avzr --delete"
       #     SOURCE: "frontend/dist/"
       #     REMOTE_HOST: ${{ env.server }}
+      #     # REMOTE_PORT: ${{ env.port }}
       #     REMOTE_USER: ${{ env.username }}
       #     # TARGET: ${{ env.remote-root }}
