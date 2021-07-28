@@ -3,7 +3,7 @@ import ApiService from '@/services/api'
 const PageService = {
   get: async function(request) {
     try {
-      const response = await ApiService.get('page/' + request.id)
+      const response = await ApiService.get('page' + request.path)
       return response.data
     } catch (e) {
       // TODO: implement proper error handling
