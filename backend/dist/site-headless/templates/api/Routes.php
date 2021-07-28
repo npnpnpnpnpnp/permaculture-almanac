@@ -15,8 +15,10 @@ $routes = [
       ['GET', '', Defaults::class, 'get'],
     ],
     'page' => [
-      ['OPTIONS', '{id:\d+}', ['GET']],
-      ['GET', '{id:\d+}', DefaultPage::class, 'get'],
+      ['OPTIONS', '{path:.+}', ['GET']],
+      ['OPTIONS', '', ['GET']],
+      ['GET', '{path:.+}', DefaultPage::class, 'get'],
+      ['GET', '', DefaultPage::class, 'get'],
     ]
   ]
 ];
