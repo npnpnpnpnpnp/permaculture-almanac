@@ -2,6 +2,7 @@ name: Backend
 
 env:
   server:
+  # port: 
   username:
   # remote-root:
 
@@ -41,6 +42,7 @@ jobs:
       #     ARGS: "-avzr --delete"
       #     SOURCE: "backend/dist/"
       #     REMOTE_HOST: ${{ env.server }}
+      #     # REMOTE_PORT: ${{ env.port }}
       #     REMOTE_USER: ${{ env.username }}
       #     # TARGET: ${{ env.remote-root }}
       #     EXCLUDE: "/.htaccess, /site/config.php, /site/assets/backups/*, /site/assets/cache/*, /site/assets/files/*, /site/assets/logs/*, /site/assets/sessions/"
