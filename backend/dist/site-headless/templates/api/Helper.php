@@ -134,7 +134,7 @@ class Helper {
     $item = new \StdClass();
     $item->meta = self::getMetadata($page);
     $item->fields = self::getFields($page, $exclude);
-    // $item->parent = self::getMetadata($p->parent);
+    // $item->parent = self::getMetadata($page->parent);
     if ($recursive && $page->hasChildren) {
       $item->children = self::getPages($page->children, $recursive, $exclude);
     }
