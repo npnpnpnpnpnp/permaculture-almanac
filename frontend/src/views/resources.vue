@@ -1,17 +1,18 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
     <h2 :class="$style.title" v-html="page.fields.title" />
-    <base-bodytext :text="page.fields.body" :class="$style.body" />
+    <repeater-matrix :items="page.children" />
   </main>
 </template>
 
 <script>
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
+import RepeaterMatrix from '@/components/repeater-matrix'
 
 export default {
   components: {
-    BaseBodytext: () => import('@/components/base-bodytext')
+    RepeaterMatrix
   },
   mixins: [metaInfo],
   data() {
