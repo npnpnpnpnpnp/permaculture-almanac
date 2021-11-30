@@ -20,10 +20,10 @@ class DefaultPage {
     $response->fields = Helper::getFields($page);
 
     // Include children for the following templates
-    // $includeChildren = ['home'];
-    // if (in_array($page->template->name, $includeChildren)) {
-    //   $response->children = Helper::getPages($page->children);
-    // }
+    $includeChildren = ['resources'];
+    if (in_array($page->template->name, $includeChildren)) {
+      $response->children = Helper::getPages($page->children);
+    }
 
     Helper::unsetLanguage();
     return $response;
