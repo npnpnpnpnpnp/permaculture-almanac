@@ -4,6 +4,7 @@ import Meta from 'vue-meta'
 import main from '@/main'
 import store from '@/store'
 import Home from '@/views/home.vue'
+import Resources from '@/views/resources.vue'
 import BasicPage from '@/views/basic-page.vue'
 
 Vue.use(Router)
@@ -58,6 +59,7 @@ const addRoutesFromApi = routes => {
     // Map backend templates to frontend views
     route.component = Home
     if (route.meta.template === 'basic-page') route.component = BasicPage
+    if (route.meta.template === 'resources') route.component = Resources
 
     router.addRoute(route)
   })
