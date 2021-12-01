@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component" v-if="items.length">
     <label>Filter:</label>
-    <input class="form-control" v-model="filters.filter.value" />
+    <search-input @change-value="handleValue" :value="filters.filter.value" />
     <v-table
       :data="items"
       :filters="filters"
@@ -26,9 +26,10 @@
 <script>
 import RepeaterMatrixItem from '@/components/repeater-matrix-item'
 import ResourceHeader from '@/components/resource-header'
+import SearchInput from '@/components/search-input'
 
 export default {
-  components: { RepeaterMatrixItem, ResourceHeader },
+  components: { RepeaterMatrixItem, ResourceHeader, SearchInput },
   props: {
     items: {
       type: Array,
@@ -45,6 +46,9 @@ export default {
     }
   },
   methods: {
+    handleValue(value) {
+      this.filters.filter.value = value
+    },
     authorFilter(filterValue, row) {
       let filter = null
       row.fields.author.map(author => {
