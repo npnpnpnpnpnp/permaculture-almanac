@@ -20,6 +20,7 @@
         :key="`tag-${index}`"
       />
     </ul>
+    <div v-html="item.meta.template" />
   </a>
   <!-- </li> -->
 </template>

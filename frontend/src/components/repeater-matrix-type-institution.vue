@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.component">
     <div v-html="item.fields.title" :class="$style.title" />
+    <div v-html="item.meta.template" />
   </div>
 </template>
 

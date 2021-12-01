@@ -4,6 +4,7 @@
     <div :class="$style.body">
       <base-bodytext :class="$style.text" :text="item.body" />
     </div>
+    <div v-html="item.meta.template" />
   </div>
 </template>
 
