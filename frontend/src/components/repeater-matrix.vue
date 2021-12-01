@@ -1,6 +1,13 @@
 <template>
   <div :class="$style.component" v-if="items.length">
-    <v-table :data="items" :hideSortIcons="false" :class="$style.table">
+    <label>Filter:</label>
+    <input class="form-control" v-model="filters.author.value" />
+    <v-table
+      :data="items"
+      :filters="filters"
+      :hideSortIcons="false"
+      :class="$style.table"
+    >
       <thead slot="head" :class="$style.head">
         <resource-header />
       </thead>
@@ -27,6 +34,33 @@ export default {
       type: Array,
       // required: true,
       default: () => []
+    }
+  },
+  data() {
+    return {
+      filters: {
+        title: { value: '', keys: ['fields.title'] },
+        author: { value: '', custom: this.authorFilter },
+        tags: { value: '', custom: this.tag }
+      }
+    }
+  },
+  computed: {
+    modelKeys() {
+      return (
+        this.filters.title.value ||
+        this.filters.author.value ||
+        this.filters.tags.value
+      )
+    }
+  },
+  methods: {
+    authorFilter(filterValue, row) {
+      let filter = null
+      row.fields.author.map(author => {
+        filter = author.fields.title.includes(filterValue)
+      })
+      return filter
     }
   }
 }
