@@ -1,10 +1,10 @@
 <template>
-  <li :class="$style.component">
+  <div :class="$style.component">
     <div v-html="item.fields.title" />
     <div :class="$style.body">
       <base-bodytext :class="$style.text" :text="item.body" />
     </div>
-  </li>
+  </div>
 </template>
 
 <script>

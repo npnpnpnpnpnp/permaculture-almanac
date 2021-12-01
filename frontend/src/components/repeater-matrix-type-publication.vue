@@ -1,7 +1,7 @@
 <template>
-  <li :class="$style.component">
+  <div :class="$style.component">
     <div v-html="item.fields.title" />
-  </li>
+  </div>
 </template>
 
 <script>
