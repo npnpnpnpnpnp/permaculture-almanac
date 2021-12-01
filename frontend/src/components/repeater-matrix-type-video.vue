@@ -1,39 +1,65 @@
 <template>
-  <li :class="$style.component">
-    <div v-html="item.fields.title" :class="$style.video" />
-  </li>
+  <!-- <li :class="$style.component"> -->
+  <a :href="item.meta.url" rel="noopener" :class="$style.link">
+    <div
+      v-if="item.fields.title"
+      v-html="item.fields.title"
+      :class="$style.video"
+    />
+    <ul v-if="item.fields.author">
+      <author-item
+        v-for="(author, index) in item.fields.author"
+        :author="author"
+        :key="`author-${index}`"
+      />
+    </ul>
+    <ul v-if="item.fields.tags">
+      <tag-item
+        v-for="(tag, index) in item.fields.tags"
+        :tag="tag"
+        :key="`tag-${index}`"
+      />
+    </ul>
+  </a>
+  <!-- </li> -->
 </template>
 
 <script>
-import EventBus from '@/event-bus'
+// import EventBus from '@/event-bus'
+import AuthorItem from '@/components/author-item'
+import TagItem from '@/components/tag-item'
 
 export default {
+  components: {
+    AuthorItem,
+    TagItem
+  },
   props: {
     item: {
       type: Object,
       required: true,
       default: () => {}
-    },
+    }
     // active: {
     //   type: Boolean,
     //   default: false
     // },
-    aspectRatio: {
-      type: String,
-      default: ''
-    },
-    controls: {
-      type: Boolean,
-      default: true
-    },
-    isScaling: {
-      type: Boolean,
-      default: true
-    },
-    stretching: {
-      type: String,
-      default: 'uniform'
-    }
+    // aspectRatio: {
+    //   type: String,
+    //   default: ''
+    // },
+    // controls: {
+    //   type: Boolean,
+    //   default: true
+    // },
+    // isScaling: {
+    //   type: Boolean,
+    //   default: true
+    // },
+    // stretching: {
+    //   type: String,
+    //   default: 'uniform'
+    // }
     // isCurrent: {
     //   type: Boolean,
     //   required: true
@@ -41,66 +67,67 @@ export default {
   },
   data() {
     return {
-      scale: 1
+      // scale: 1
     }
   },
   computed: {
     classes() {
       return {
         component: [
-          this.$style.component,
-          this.isFullBleed ? this.$style.isFullBleed : ''
+          this.$style.component
+          // this.isFullBleed ? this.$style.isFullBleed : ''
         ]
       }
-    },
-    isActive() {
-      return this.isCurrent ? true : false
-    },
-    isFullBleed() {
-      return this.item.full_bleed === 1 ? true : false
-    },
-    autostart() {
-      return this.item.autoplay === 1 ? 'viewable' : 'false'
-    },
-    repeat() {
-      return this.item.loop === 1 ? true : false
-    },
-    showFigure() {
-      return this.item.number
-    },
-    scaled() {
-      return this.isScaling
-        ? { transform: 'translate(-50%, -50%) scale(' + this.scale + ')' }
-        : ''
     }
+
+    // isActive() {
+    //   return this.isCurrent ? true : false
+    // },
+    // isFullBleed() {
+    //   return this.item.full_bleed === 1 ? true : false
+    // },
+    // autostart() {
+    //   return this.item.autoplay === 1 ? 'viewable' : 'false'
+    // },
+    // repeat() {
+    //   return this.item.loop === 1 ? true : false
+    // },
+    // showFigure() {
+    //   return this.item.number
+    // },
+    // scaled() {
+    //   return this.isScaling
+    //     ? { transform: 'translate(-50%, -50%) scale(' + this.scale + ')' }
+    //     : ''
+    // }
   },
   methods: {
-    contain() {
-      const outer = this.$refs.component
-      const inner = this.$refs.wrapper
-      if (outer === undefined || inner === undefined) return
-      const scale = Math.min(
-        outer.offsetWidth / inner.offsetWidth,
-        outer.offsetHeight / inner.offsetHeight
-      )
-      this.scale = scale
-    }
+    // contain() {
+    //   const outer = this.$refs.component
+    //   const inner = this.$refs.wrapper
+    //   if (outer === undefined || inner === undefined) return
+    //   const scale = Math.min(
+    //     outer.offsetWidth / inner.offsetWidth,
+    //     outer.offsetHeight / inner.offsetHeight
+    //   )
+    //   this.scale = scale
+    // }
   },
   mounted() {
-    if (this.isScaling) {
-      EventBus.$on('video-ready', () => {
-        this.contain()
-      })
-      window.addEventListener('resize', this.contain)
-    }
+    // if (this.isScaling) {
+    //   EventBus.$on('video-ready', () => {
+    //     this.contain()
+    //   })
+    //   window.addEventListener('resize', this.contain)
+    // }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.contain)
+    // window.removeEventListener('resize', this.contain)
   },
   watch: {
-    active() {
-      if (this.isScaling && this.active) this.contain()
-    }
+    // active() {
+    //   if (this.isScaling && this.active) this.contain()
+    // }
   }
 }
 </script>
@@ -127,6 +154,11 @@ export default {
   // @media print {
   //   display: none;
   // }
+}
+
+.link {
+  // display: inline-block;
+  // width: 100%;
 }
 
 .wrapper {
