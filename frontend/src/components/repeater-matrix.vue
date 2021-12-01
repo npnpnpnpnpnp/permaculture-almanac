@@ -1,12 +1,18 @@
 <template>
   <div :class="$style.component" v-if="items.length">
-    <resource-header />
-    <repeater-matrix-item
-      v-for="(item, index) in items"
-      :item="item"
-      :key="`item-${index}`"
-      :class="$style.item"
-    />
+    <v-table :data="items" :hideSortIcons="true" :class="$style.table">
+      <thead slot="head" :class="$style.head">
+        <resource-header />
+      </thead>
+      <tbody slot="body" slot-scope="{ displayData }">
+        <repeater-matrix-item
+          v-for="(item, index) in displayData"
+          :item="item"
+          :key="`item-${index}`"
+          :class="$style.item"
+        />
+      </tbody>
+    </v-table>
   </div>
 </template>
 

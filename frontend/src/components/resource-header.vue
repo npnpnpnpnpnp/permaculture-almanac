@@ -1,17 +1,32 @@
 <template>
-  <div :class="$style.component">
-    <div>title</div>
-    <div>author</div>
-    <div>tags</div>
-  </div>
+  <tr :class="$style.component">
+    <!-- NOTE: the actual data does not have to be passed into header. "fields.title" only serves as a reference for the structure within the actual item -->
+    <v-th sortKey="fields.title">{{ labels.title }}</v-th>
+    <!-- TODO: how to deal with multiple values like in author or tags? -->
+    <v-th :sortKey="authorSort">{{ labels.author }}</v-th>
+    <v-th :sortKey="tagSort">{{ labels.tags }}</v-th>
+  </tr>
 </template>
 
 <script>
 export default {
   // components: {},
-  computed: {
-    classes() {
-      return {}
+  data() {
+    return {
+      labels: {
+        title: 'Title',
+        author: 'Author',
+        tags: 'Tags'
+      }
+    }
+  },
+  methods: {
+    // NOTE: for now, only use first letter of first author / tags for sorting, refined function tbd
+    authorSort(row) {
+      return `${row.fields.author[0].fields.title}`
+    },
+    tagSort(row) {
+      return `${row.fields.tags[0].fields.title}`
     }
   }
 }
