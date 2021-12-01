@@ -3,6 +3,9 @@ import App from '@/app.vue'
 import router from '@/router'
 import store from '@/store'
 import ApiService from '@/services/api'
+import SmartTable from 'vuejs-smart-table'
+
+Vue.use(SmartTable)
 
 Vue.config.productionTip = false
 
