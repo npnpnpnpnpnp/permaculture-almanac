@@ -13,8 +13,8 @@
   --gutter: 1em;
 
   /* Grids */
-  --resource-header-columns: auto calc(var(--gutter) * 20)
-    calc(var(--gutter) * 10);
+  --resource-header-columns: auto calc(var(--gutter) * 10)
+    calc(var(--gutter) * 10) calc(var(--gutter) * 10);
 
   /* Easing */
   --swift-out: cubic-bezier(0.55, 0, 0.1, 1);
