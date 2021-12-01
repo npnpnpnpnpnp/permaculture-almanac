@@ -1,19 +1,21 @@
 <template>
-  <ul :class="$style.component" v-if="items.length">
+  <div :class="$style.component" v-if="items.length">
+    <resource-header />
     <repeater-matrix-item
       v-for="(item, index) in items"
       :item="item"
       :key="`item-${index}`"
       :class="$style.item"
     />
-  </ul>
+  </div>
 </template>
 
 <script>
 import RepeaterMatrixItem from '@/components/repeater-matrix-item'
+import ResourceHeader from '@/components/resource-header'
 
 export default {
-  components: { RepeaterMatrixItem },
+  components: { RepeaterMatrixItem, ResourceHeader },
   props: {
     items: {
       type: Array,
