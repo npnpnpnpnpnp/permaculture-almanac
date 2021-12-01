@@ -1,11 +1,33 @@
 <template>
-  <div :class="$style.component">
+  <a :href="item.meta.url" rel="noopener" :class="$style.link">
     <div v-html="item.fields.title" />
-  </div>
+    <ul v-if="item.fields.author">
+      <author-item
+        v-for="(author, index) in item.fields.author"
+        :author="author"
+        :key="`author-${index}`"
+      />
+    </ul>
+    <ul v-if="item.fields.tags">
+      <tag-item
+        v-for="(tag, index) in item.fields.tags"
+        :tag="tag"
+        :key="`tag-${index}`"
+      />
+    </ul>
+    <div v-html="item.meta.template" />
+  </a>
 </template>
 
 <script>
+import AuthorItem from '@/components/author-item'
+import TagItem from '@/components/tag-item'
+
 export default {
+  components: {
+    AuthorItem,
+    TagItem
+  },
   props: {
     item: {
       type: Object,
