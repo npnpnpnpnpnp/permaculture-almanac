@@ -17,6 +17,7 @@
           :item="item"
           :key="`item-${index}`"
           :class="$style.item"
+          :selected-categories="selectedCategories"
         />
       </tbody>
     </v-table>
@@ -35,6 +36,10 @@ export default {
       type: Array,
       // required: true,
       default: () => []
+    },
+    selectedCategories: {
+      type: Array,
+      required: true
     }
   },
   data() {

@@ -5,6 +5,7 @@
     <!-- TODO: how to deal with multiple values like in author or tags? -->
     <v-th :sortKey="authorSort">{{ labels.author }}</v-th>
     <v-th :sortKey="tagSort">{{ labels.tags }}</v-th>
+    <v-th :sortKey="tagSort">{{ labels.type }}</v-th>
   </tr>
 </template>
 
@@ -16,7 +17,8 @@ export default {
       labels: {
         title: 'Title',
         author: 'Author',
-        tags: 'Tags'
+        tags: 'Tags',
+        type: 'Type'
       }
     }
   },

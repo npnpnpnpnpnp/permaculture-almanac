@@ -1,9 +1,16 @@
 <template>
-  <component :is="type" :item="item" :class="classes.component" />
+  <component
+    v-show="hasFilterApplied"
+    :is="type"
+    :item="item"
+    :class="classes.component"
+  />
   <!-- :is-current="isCurrent" -->
 </template>
 
 <script>
+import EventBus from '@/event-bus'
+
 export default {
   components: {
     RepeaterMatrixTypeInstitution: () =>
@@ -23,6 +30,10 @@ export default {
     item: {
       type: [Array, Object], // to account for media AND title
       required: true
+    },
+    selectedCategories: {
+      type: Array,
+      required: true
     }
     // id: {
     //   type: String,
@@ -39,12 +50,33 @@ export default {
         component: [this.$style.component, this.type]
       }
     },
-    isCurrent() {
-      return `item-${this.currentIndex}` === this.id
+    category() {
+      return this.item.meta.template
     },
+    // isCurrent() {
+    //   return `item-${this.currentIndex}` === this.id
+    // },
     type() {
       return `repeater-matrix-type-${this.item.meta.template}`
+    },
+    isFiltered() {
+      let result = false
+      this.selectedCategories.forEach(category => {
+        result = category === this.item.meta.template
+      })
+      return result
+    },
+    hasFilterApplied() {
+      return this.selectedCategories.length === 0 || this.isFiltered
     }
+  },
+  methods: {
+    emitCategory() {
+      EventBus.$emit('item-category', this.category)
+    }
+  },
+  mounted() {
+    this.emitCategory()
   }
 }
 </script>
