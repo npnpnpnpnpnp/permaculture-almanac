@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.component" v-if="items.length">
-    <v-table :data="items" :hideSortIcons="true" :class="$style.table">
+    <v-table :data="items" :hideSortIcons="false" :class="$style.table">
       <thead slot="head" :class="$style.head">
         <resource-header />
       </thead>
