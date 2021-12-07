@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.component">
+    <label v-html="labels.name" />
     <div :class="classes.content">
       <category-filter-item
         v-for="(item, index) in defaultCategories"
@@ -39,6 +40,7 @@ export default {
     return {
       selectedCategories: [],
       labels: {
+        name: 'Categories',
         openFilter: 'Filter',
         deleteFilter: 'Filter löschen'
       }
@@ -111,97 +113,97 @@ export default {
   watch: {
     selectedCategories() {
       // whenever this.selectedCategories is updated, emit to parent, pass down via prop to child to handle selected category design
-      this.$emit('update-filter', this.selectedCategories)
+      this.$emit('update-categories', this.selectedCategories)
     }
   }
 }
 </script>
 
 <style lang="scss" module>
-.component {
-  position: sticky;
-  z-index: 2;
-  left: 0;
-  height: 100%;
-  top: calc(100vh - var(--gutter) * 5);
+// .component {
+//   position: sticky;
+//   z-index: 2;
+//   left: 0;
+//   height: 100%;
+//   top: calc(100vh - var(--gutter) * 5);
 
-  @media (min-width: $medium) {
-    width: 33.333%;
-    padding-left: var(--gutter);
-    top: calc(var(--gutter) * 9);
-  }
+//   @media (min-width: $medium) {
+//     width: 33.333%;
+//     padding-left: var(--gutter);
+//     top: calc(var(--gutter) * 9);
+//   }
 
-  @media (min-width: $xlarge) {
-    top: calc(var(--gutter) * 10);
-  }
+//   @media (min-width: $xlarge) {
+//     top: calc(var(--gutter) * 10);
+//   }
 
-  // @media (min-width: $xxxlarge) {
-  //   width: 28%;
-  // }
-}
+//   // @media (min-width: $xxxlarge) {
+//   //   width: 28%;
+//   // }
+// }
 
-.content {
-  display: none;
+// .content {
+//   display: none;
 
-  @media (max-width: $medium) {
-    &.is-visible {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-      padding: calc(var(--gutter) / 2);
-      background-color: var(--white-alpha); // don't use shorthand property
-    }
+//   @media (max-width: $medium) {
+//     &.is-visible {
+//       position: fixed;
+//       top: 0;
+//       left: 0;
+//       display: block;
+//       width: 100%;
+//       height: 100%;
+//       padding: calc(var(--gutter) / 2);
+//       background-color: var(--white-alpha); // don't use shorthand property
+//     }
 
-    @media (min-width: $medium) {
-      padding: var(--gutter);
-    }
-  }
+//     @media (min-width: $medium) {
+//       padding: var(--gutter);
+//     }
+//   }
 
-  @media (min-width: $medium) {
-    display: block;
-  }
-}
+//   @media (min-width: $medium) {
+//     display: block;
+//   }
+// }
 
-.delete {
-  // @extend %ff-sans;
-  // @extend %fs-overlay;
-  // @extend %button-reset;
+// .delete {
+//   // @extend %ff-sans;
+//   // @extend %fs-overlay;
+//   // @extend %button-reset;
 
-  display: block;
-  margin-top: var(--blank-line);
+//   display: block;
+//   margin-top: var(--blank-line);
 
-  &::before {
-    // @extend %ff-symbols;
+//   &::before {
+//     // @extend %ff-symbols;
 
-    margin-right: var(--spacing-xsmall);
-    content: '\2573';
-  }
-}
+//     margin-right: var(--spacing-xsmall);
+//     content: '\2573';
+//   }
+// }
 
-.toggle {
-  position: relative;
-  left: 50%;
-  padding: calc(var(--gutter) / 2) var(--gutter);
-  color: var(--grey);
-  background: var(--white);
-  // border: 1px solid var(--black);
-  border-radius: calc(var(--gutter) / 2);
-  box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
-  transform: translateX(-50%);
+// .toggle {
+//   position: relative;
+//   left: 50%;
+//   padding: calc(var(--gutter) / 2) var(--gutter);
+//   color: var(--grey);
+//   background: var(--white);
+//   // border: 1px solid var(--black);
+//   border-radius: calc(var(--gutter) / 2);
+//   box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
+//   transform: translateX(-50%);
 
-  &:focus {
-    background-color: var(--white);
-  }
+//   &:focus {
+//     background-color: var(--white);
+//   }
 
-  &.is-active {
-    color: var(--black);
-  }
+//   &.is-active {
+//     color: var(--black);
+//   }
 
-  @media (min-width: $medium) {
-    display: none;
-  }
-}
+//   @media (min-width: $medium) {
+//     display: none;
+//   }
+// }
 </style>
