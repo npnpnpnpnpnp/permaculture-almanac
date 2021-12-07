@@ -1,16 +1,18 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
     <h2 :class="$style.title" v-html="page.fields.title" />
-    <filter-component
-      :default-categories="defaultFilters.categories"
+    <resource-filter
+      :default-filters="defaultFilters"
       @update-filter="handleFilter"
     />
+    <!-- :default-categories="defaultFilters.categories" -->
     <div>
       <search-input @change-value="handleSearchQuery" :value="query" />
       <repeater-matrix
         :items="page.children"
         :query="query"
         :selected-categories="filter.selectedCategories"
+        :selected-tags="filter.selectedTags"
       />
     </div>
   </main>
@@ -20,13 +22,13 @@
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
-import FilterComponent from '@/components/filter-component.vue'
+import ResourceFilter from '@/components/resource-filter.vue'
 import SearchInput from '@/components/search-input'
 
 export default {
   components: {
     RepeaterMatrix,
-    FilterComponent,
+    ResourceFilter,
     SearchInput
   },
   mixins: [metaInfo],

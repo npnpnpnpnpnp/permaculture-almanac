@@ -3,8 +3,12 @@
     Filter
     <div :class="classes.content">
       <category-filter
-        :default-categories="defaultCategories"
-        @update-filter="updateCategoryFilter"
+        :default-categories="defaultFilters.categories"
+        @update-categories="updateCategoryFilter"
+      />
+      <tag-filter
+        :default-tags="defaultFilters.tags"
+        @update-tags="updateTagFilter"
       />
     </div>
     <!-- <button type="button" @click="toggleFilter" :class="classes.toggle">
@@ -15,14 +19,16 @@
 
 <script>
 import CategoryFilter from '@/components/category-filter'
+import TagFilter from '@/components/tag-filter'
 
 export default {
   components: {
-    CategoryFilter
+    CategoryFilter,
+    TagFilter
   },
   props: {
-    defaultCategories: {
-      type: Array,
+    defaultFilters: {
+      type: Object,
       required: true
     }
   },
@@ -33,7 +39,8 @@ export default {
         closeFilter: 'Delete filter'
       },
       filter: {
-        selectedCategories: []
+        selectedCategories: [],
+        selectedTags: []
       }
     }
   },
@@ -51,6 +58,9 @@ export default {
   methods: {
     updateCategoryFilter(selectedCategories) {
       this.filter.selectedCategories = selectedCategories
+    },
+    updateTagFilter(selectedTags) {
+      this.filter.selectedTags = selectedTags
     }
   },
   watch: {

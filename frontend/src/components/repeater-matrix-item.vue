@@ -32,6 +32,10 @@ export default {
     selectedCategories: {
       type: Array,
       required: true
+    },
+    selectedTags: {
+      type: Array,
+      default: () => []
     }
     // id: {
     //   type: String,
@@ -42,30 +46,63 @@ export default {
     //   required: true
     // }
   },
+  data() {
+    return {
+      filterResults: []
+    }
+  },
   computed: {
     classes() {
       return {
         component: [this.$style.component, this.type]
       }
     },
+    type() {
+      return `repeater-matrix-type-${this.item.meta.template}`
+    },
     category() {
       return this.item.meta.template
+    },
+    hasMatchingTags() {
+      let results = []
+      let result = false
+      this.item.fields.tags.forEach(tag => {
+        result = this.selectedTags.includes(tag)
+        results.push(result)
+      })
+      return results
+    },
+    // hasMatchingCategory() {
+    //   let results = []
+    //   this.selectedCategories.map(category => {
+    //     results.push(category === this.item.meta.template)
+    //   })
+    //   return results
+    // },
+    isFiltered() {
+      return this.hasMatchingTags.includes(true)
     },
     // isCurrent() {
     //   return `item-${this.currentIndex}` === this.id
     // },
-    type() {
-      return `repeater-matrix-type-${this.item.meta.template}`
-    },
-    isFiltered() {
-      let result = false
-      this.selectedCategories.forEach(category => {
-        result = category === this.item.meta.template
-      })
-      return result
-    },
+
+    // isFiltered() {
+    //   // let result = false
+    //   let results = []
+    //   // only return true if passed data matches all criteria
+    //   const hasTags = this.hasMatchingTags.includes(true)
+    //   console.log(hasTags)
+    //   const hasCategory = this.hasMatchingCategory.includes(true)
+    //   console.log(hasCategory)
+    //   results.push(this.hasMatchingTags.includes(true))
+    //   return results.every(item => item === true)
+    // },
     hasFilterApplied() {
-      return this.selectedCategories.length === 0 || this.isFiltered
+      // const hasCategoryFilterApplied =
+      //   this.selectedCategories.length === 0 || this.isFiltered
+      // const hasTagFilterApplied =
+      return this.selectedTags.length === 0 || this.isFiltered
+      // return hasCategoryFilterApplied || hasTagFilterApplied
     }
   }
   // methods: {},
