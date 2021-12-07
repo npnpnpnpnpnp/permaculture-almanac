@@ -70,10 +70,12 @@ export default {
 <style lang="scss" module>
 .component {
   border-bottom: 1px solid var(--black);
-  max-width: 50%;
 
   @media (min-width: $medium) {
+    margin-bottom: var(--filter-spacing-bottom);
+
     // min-width: 50vw;
+    // max-width: 50%;
   }
 }
 

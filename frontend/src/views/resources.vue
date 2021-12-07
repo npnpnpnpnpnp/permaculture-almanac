@@ -1,13 +1,22 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
-    <h2 :class="$style.title" v-html="page.fields.title" />
     <resource-filter
       :default-filters="defaultFilters"
+      :filter-visible="filterVisible"
       @update-filter="handleFilter"
+      @filter-visibility="handleFilterVisibility"
     />
-    <!-- :default-categories="defaultFilters.categories" -->
-    <div>
-      <search-input @change-value="handleSearchQuery" :value="query" />
+    <div :class="$style.content">
+      <div :class="$style.controls">
+        <search-input @change-value="handleSearchQuery" :value="query" />
+        <button
+          v-if="showButton"
+          type="button"
+          v-html="labels.openFilter"
+          :class="$style.button"
+          @click="openFilter"
+        />
+      </div>
       <repeater-matrix
         :items="page.children"
         :query="query"
@@ -24,6 +33,7 @@ import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
 import ResourceFilter from '@/components/resource-filter.vue'
 import SearchInput from '@/components/search-input'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -44,6 +54,10 @@ export default {
         authors: [],
         categories: [],
         tags: []
+      },
+      filterVisible: false,
+      labels: {
+        openFilter: 'Filter'
       }
     }
   },
@@ -51,7 +65,19 @@ export default {
     this.page = await PageService.get({ path: this.$route.path })
     this.loading = false
   },
+  computed: {
+    ...mapState(['isDesktop']),
+    showButton() {
+      return this.isDesktop ? false : true
+    }
+  },
   methods: {
+    openFilter() {
+      this.filterVisible = true
+    },
+    handleFilterVisibility(visibility) {
+      this.filterVisible = visibility
+    },
     // get all filter updates from filter component
     handleFilter(value) {
       this.filter = value
@@ -97,7 +123,37 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .view {}
+.view {
+  @media (min-width: $medium) {
+    display: grid;
+    grid-template-columns: 33.333% auto;
+    grid-gap: var(--gutter);
+  }
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gutter);
+  margin-bottom: var(--filter-spacing-bottom);
+
+  @media (min-width: $medium) {
+    margin-bottom: unset;
+  }
+}
+
+.button {
+  max-width: 50%;
+
+  @media (min-width: $medium) {
+    max-width: unset;
+  }
+}
+
+// .content {
+//   @media (min-width: $medium) {
+//   }
+// }
 // .title {}
 // .body {}
 </style>

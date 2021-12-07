@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.component">
-    <label v-html="labels.name" />
+    <div v-html="labels.title" :class="$style.title" />
     <div :class="classes.content">
       <tag-filter-item
         v-for="(item, index) in defaultTags"
@@ -40,7 +40,7 @@ export default {
     return {
       selectedTags: [],
       labels: {
-        name: 'Tags',
+        title: 'Tags',
         openFilter: 'Filter',
         deleteFilter: 'Filter löschen'
       }
@@ -121,25 +121,11 @@ export default {
 
 <style lang="scss" module>
 .component {
-  // position: sticky;
-  // z-index: 2;
-  // left: 0;
-  // height: 100%;
-  // top: calc(100vh - var(--gutter) * 5);
+  margin-bottom: var(--filter-spacing-bottom);
+}
 
-  // @media (min-width: $medium) {
-  //   width: 33.333%;
-  //   padding-left: var(--gutter);
-  //   top: calc(var(--gutter) * 9);
-  // }
-
-  // @media (min-width: $xlarge) {
-  //   top: calc(var(--gutter) * 10);
-  // }
-
-  // @media (min-width: $xxxlarge) {
-  //   width: 28%;
-  // }
+.title {
+  margin-bottom: var(--blank-line);
 }
 
 // .content {

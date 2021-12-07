@@ -88,4 +88,7 @@ export default {
 
 <style lang="scss" module>
 // .item {}
+.table {
+  width: 100%;
+}
 </style>

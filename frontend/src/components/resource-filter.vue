@@ -1,7 +1,15 @@
 <template>
-  <div :class="$style.component">
-    Filter
-    <div :class="classes.content">
+  <div v-if="showFilter" :class="$style.component">
+    <button
+      v-if="showButton"
+      type="button"
+      @click="closeFilter"
+      :class="$style.button"
+    >
+      <span :class="$style.close" />
+    </button>
+    <div v-html="labels.title" :class="$style.title" />
+    <div :class="$style.content">
       <category-filter
         :default-categories="defaultFilters.categories"
         @update-categories="updateCategoryFilter"
@@ -20,6 +28,7 @@
 <script>
 import CategoryFilter from '@/components/category-filter'
 import TagFilter from '@/components/tag-filter'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -30,11 +39,16 @@ export default {
     defaultFilters: {
       type: Object,
       required: true
+    },
+    filterVisible: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
     return {
       labels: {
+        title: 'Filter',
         openFilter: 'Filter',
         closeFilter: 'Delete filter'
       },
@@ -45,14 +59,20 @@ export default {
     }
   },
   computed: {
+    ...mapState(['isDesktop']),
     classes() {
       return {
-        component: [this.$style.component],
-        content: [
-          this.$style.content,
-          this.filterVisible ? this.$style['is-visible'] : ''
+        component: [
+          this.$style.component,
+          this.filterVisible ? this.$style.filterVisible : ''
         ]
       }
+    },
+    showFilter() {
+      return this.isDesktop ? true : this.filterVisible
+    },
+    showButton() {
+      return this.isDesktop ? false : this.filterVisible
     }
   },
   methods: {
@@ -61,6 +81,9 @@ export default {
     },
     updateTagFilter(selectedTags) {
       this.filter.selectedTags = selectedTags
+    },
+    closeFilter() {
+      this.$emit('filter-visibility', false)
     }
   },
   watch: {
@@ -76,49 +99,72 @@ export default {
 
 <style lang="scss" module>
 .component {
-  // position: sticky;
-  // z-index: 2;
-  // left: 0;
-  // height: 100%;
-  // top: calc(100vh - var(--gutter) * 5);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--white);
+
+  @media (min-width: $medium) {
+    position: sticky;
+  }
+}
+
+.title {
+  .filterVisible & {
+    margin-bottom: var(--filter-spacing-bottom);
+  }
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.close {
+  &:after {
+    content: '\00d7';
+  }
+  // position: relative;
+  // left: 50%;
+  // padding: calc(var(--gutter) / 2) var(--gutter);
+  // color: var(--grey);
+  // background: var(--white);
+  // // border: 1px solid var(--black);
+  // border-radius: calc(var(--gutter) / 2);
+  // box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
+  // transform: translateX(-50%);
+
+  // &:focus {
+  //   background-color: var(--white);
+  // }
+
+  // &.is-active {
+  //   color: var(--black);
+  // }
 
   // @media (min-width: $medium) {
-  //   width: 33.333%;
-  //   padding-left: var(--gutter);
-  //   top: calc(var(--gutter) * 9);
-  // }
-
-  // @media (min-width: $xlarge) {
-  //   top: calc(var(--gutter) * 10);
-  // }
-
-  // @media (min-width: $xxxlarge) {
-  //   width: 28%;
+  //   display: none;
   // }
 }
 
-// .content {
-//   display: none;
+// .delete {
+//   // @extend %ff-sans;
+//   // @extend %fs-overlay;
+//   // @extend %button-reset;
 
-//   @media (max-width: $medium) {
-//     &.is-visible {
-//       position: fixed;
-//       top: 0;
-//       left: 0;
-//       display: block;
-//       width: 100%;
-//       height: 100%;
-//       padding: calc(var(--gutter) / 2);
-//       // background-color: var(--white-alpha); // don't use shorthand property
-//     }
+//   display: block;
+//   margin-top: var(--blank-line);
 
-//     @media (min-width: $medium) {
-//       padding: var(--gutter);
-//     }
-//   }
+//   &::before {
+//     // @extend %ff-symbols;
 
-//   @media (min-width: $medium) {
-//     display: block;
+//     margin-right: var(--spacing-xsmall);
+//     content: '\2573';
 //   }
 // }
 </style>

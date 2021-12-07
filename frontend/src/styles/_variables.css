@@ -12,6 +12,7 @@
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
   --list-indent: 1.15em;
+  --filter-spacing-bottom: calc(var(--blank-line) * 2);
 
   /* Grids */
   --resource-header-columns: auto calc(var(--gutter) * 10)
