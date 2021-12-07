@@ -2,7 +2,7 @@
   <main :class="$style.view" v-if="page.fields">
     <h2 :class="$style.title" v-html="page.fields.title" />
     <filter-component
-      :default-categories="defaultCategories"
+      :default-categories="defaultFilters.categories"
       @update-filter="handleFilter"
     />
     <div>
@@ -20,7 +20,6 @@
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
-import EventBus from '@/event-bus'
 import FilterComponent from '@/components/filter-component.vue'
 import SearchInput from '@/components/search-input'
 
@@ -34,13 +33,21 @@ export default {
   data() {
     return {
       page: {},
+      loading: true,
       defaultCategories: [],
+      defaultTags: [],
       query: '',
-      filter: {}
+      filter: {},
+      defaultFilters: {
+        authors: [],
+        categories: [],
+        tags: []
+      }
     }
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
+    this.loading = false
   },
   methods: {
     // get all filter updates from filter component
@@ -51,18 +58,38 @@ export default {
     handleSearchQuery(query) {
       this.query = query
     },
-    // push categories from repeater-matrix-item in collective array
-    handleCategory(category) {
-      const categoryExists = this.defaultCategories.includes(category)
-      if (categoryExists) return
-      this.defaultCategories.push(category)
+    getItemData() {
+      this.page.children.map(child => {
+        // generally check if current item of loop already exists within defaultFilters
+        // push category of items into collective defaultFilters.categories
+        const category = child.meta.template
+        const categoryExists = this.defaultFilters.categories.includes(category)
+        if (categoryExists) return
+        this.defaultFilters.categories.push(category)
+
+        // push tags of each item into collective defaultFilters.tags
+
+        child.fields.tags.map(tag => {
+          const tagExists = this.defaultFilters.tags.includes(tag)
+          if (tagExists) return
+          this.defaultFilters.tags.push(tag)
+        })
+
+        // push authors of each item into collective defaultFilters.authors
+        child.fields.author.map(author => {
+          const authorExists = this.defaultFilters.authors.includes(author)
+          if (authorExists) return
+          this.defaultFilters.authors.push(author)
+        })
+      })
     }
   },
-  mounted() {
-    // get emitted categories from repeater-matrix-item
-    EventBus.$on('item-category', payload => {
-      this.handleCategory(payload)
-    })
+  // mounted() {},
+  watch: {
+    loading() {
+      // as soon as page was loaded, fetch and flatten item data used for default filter values
+      this.getItemData()
+    }
   }
 }
 </script>

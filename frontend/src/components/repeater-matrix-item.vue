@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import EventBus from '@/event-bus'
-
 export default {
   components: {
     RepeaterMatrixTypeInstitution: () =>
@@ -69,15 +67,9 @@ export default {
     hasFilterApplied() {
       return this.selectedCategories.length === 0 || this.isFiltered
     }
-  },
-  methods: {
-    emitCategory() {
-      EventBus.$emit('item-category', this.category)
-    }
-  },
-  mounted() {
-    this.emitCategory()
   }
+  // methods: {},
+  // mounted() {}
 }
 </script>
 
