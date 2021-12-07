@@ -133,9 +133,13 @@ export default {
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 2fr 1fr;
   grid-gap: var(--gutter);
   margin-bottom: var(--filter-spacing-bottom);
+
+  @media (min-width: $xsmall) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (min-width: $medium) {
     margin-bottom: unset;
@@ -143,7 +147,9 @@ export default {
 }
 
 .button {
-  max-width: 50%;
+  @media (min-width: $small) {
+    max-width: 50%;
+  }
 
   @media (min-width: $medium) {
     max-width: unset;
