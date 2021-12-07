@@ -51,6 +51,9 @@ export default {
     }
   },
   created() {
+    // Set up handlers for all defined breakpoints
+    this.$store.dispatch('initBreakpoints')
+
     EventBus.$on('set-language', () => {
       const route = this.routes.find(route => route.name === this.$route.name)
       this.$router.push(route.meta.url)

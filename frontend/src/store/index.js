@@ -14,7 +14,13 @@ export default new Vuex.Store({
     initialized: false,
     metaDescription: undefined,
     routes: [],
-    siteTitle: undefined
+    siteTitle: undefined,
+    breakpoints: {
+      medium: window.matchMedia('(min-width: 48em)'),
+      large: window.matchMedia('(min-width: 64em)')
+    },
+    isDesktop: false,
+    isLarge: false
   },
 
   mutations: {
@@ -27,6 +33,11 @@ export default new Vuex.Store({
       state.currentLanguage = payload
       // localStorage.lang = payload
       // i18n.locale = payload
+    },
+    updateBreakpoints(state) {
+      // Use this function to test if a certain breakpoint matches and to define what should happen next
+      state.isDesktop = state.breakpoints.medium.matches
+      state.isLarge = state.breakpoints.large.matches
     }
   },
 
@@ -40,6 +51,18 @@ export default new Vuex.Store({
       commit('setLanguage', payload)
       await dispatch('getDefaults')
       EventBus.$emit('set-language')
+    },
+    // Set up handlers for all defined breakpoints
+    initBreakpoints({ commit, state }) {
+      Object.keys(state.breakpoints).forEach(key => {
+        // Check breakpoint initially
+        // commit('updateBreakpoints', state.breakpoints[key])
+        commit('updateBreakpoints')
+        // Add event listener to breakpoint
+        state.breakpoints[key].addListener(() => {
+          commit('updateBreakpoints')
+        })
+      })
     }
   }
 })
