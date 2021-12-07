@@ -1,18 +1,16 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
     <h2 :class="$style.title" v-html="page.fields.title" />
-    <category-filter
-      :original-categories="categories"
-      @update-filter="updateCategoryFilter"
+    <filter-component
+      :default-categories="defaultCategories"
+      @update-filter="handleFilter"
     />
     <div>
       <search-input @change-value="handleSearchQuery" :value="query" />
-
-      <!-- :original-tags="page.tags" -->
       <repeater-matrix
         :items="page.children"
-        :selected-categories="selectedCategories"
         :query="query"
+        :selected-categories="filter.selectedCategories"
       />
     </div>
   </main>
@@ -22,43 +20,46 @@
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
-import CategoryFilter from '@/components/category-filter'
 import EventBus from '@/event-bus'
+import FilterComponent from '@/components/filter-component.vue'
 import SearchInput from '@/components/search-input'
 
 export default {
   components: {
     RepeaterMatrix,
-    CategoryFilter,
+    FilterComponent,
     SearchInput
   },
   mixins: [metaInfo],
   data() {
     return {
       page: {},
-      categories: [],
-      selectedCategories: [],
-      query: ''
+      defaultCategories: [],
+      query: '',
+      filter: {}
     }
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
   },
   methods: {
+    // get all filter updates from filter component
+    handleFilter(value) {
+      this.filter = value
+    },
     // get current search value from search-input
     handleSearchQuery(query) {
       this.query = query
     },
+    // push categories from repeater-matrix-item in collective array
     handleCategory(category) {
-      const categoryExists = this.categories.includes(category)
+      const categoryExists = this.defaultCategories.includes(category)
       if (categoryExists) return
-      this.categories.push(category)
-    },
-    updateCategoryFilter(categories) {
-      this.selectedCategories = categories
+      this.defaultCategories.push(category)
     }
   },
   mounted() {
+    // get emitted categories from repeater-matrix-item
     EventBus.$on('item-category', payload => {
       this.handleCategory(payload)
     })

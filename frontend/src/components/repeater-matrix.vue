@@ -40,7 +40,7 @@ export default {
     },
     selectedCategories: {
       type: Array,
-      required: true
+      default: () => []
     }
   },
   data() {

@@ -2,24 +2,21 @@
   <div :class="$style.component">
     <div :class="classes.content">
       <category-filter-item
-        v-for="(item, index) in originalCategories"
+        v-for="(item, index) in defaultCategories"
         :key="`item-${index}`"
         :item="item"
-        :selected-categories="categories"
+        :selected-categories="selectedCategories"
         @select-category="applyFilter"
       />
-      <button
+      <!-- <button
         v-if="hasFilterApplied"
         type="button"
         :class="$style.delete"
         @click="resetFilter"
       >
         {{ labels.deleteFilter }}
-      </button>
+      </button> -->
     </div>
-    <button type="button" @click="toggleFilter" :class="classes.toggle">
-      {{ labels.openFilter }}
-    </button>
   </div>
 </template>
 
@@ -33,18 +30,14 @@ export default {
     CategoryFilterItem
   },
   props: {
-    originalCategories: {
+    defaultCategories: {
       type: Array,
       required: true
     }
-    // originalTags: {
-    //   type: Array,
-    //   required: true
-    // }
   },
   data() {
     return {
-      categories: [],
+      selectedCategories: [],
       labels: {
         openFilter: 'Filter',
         deleteFilter: 'Filter löschen'
@@ -66,7 +59,7 @@ export default {
       }
     },
     hasFilterApplied() {
-      return this.categories.length > 0
+      return this.selectedCategories.length > 0
     }
     // findIndices() {
     //   let indices = []
@@ -91,33 +84,34 @@ export default {
     // }
   },
   methods: {
+    // get category from child and push it into collective array of selected category filter
     applyFilter(category) {
-      const categoryExists = this.categories.includes(category)
+      const categoryExists = this.selectedCategories.includes(category)
 
       // removes filter when it exists on click in child
       if (categoryExists) {
         // delete the currently clicked element from array which leads to deselection of filter
-        const index = this.categories.indexOf(category)
-        this.categories.splice(index, 1)
+        const index = this.selectedCategories.indexOf(category)
+        this.selectedCategories.splice(index, 1)
       }
 
       // add filter if it’s not already selected
       if (!categoryExists) {
-        this.categories.push(category)
+        this.selectedCategories.push(category)
       }
     },
     // reset locally, watcher emits to parent
     resetFilter() {
-      this.categories = []
+      this.selectedCategories = []
     },
     toggleFilter() {
       this.$store.dispatch('setFilterVisibility')
     }
   },
   watch: {
-    categories() {
-      // whenever this.categories is updated, emit to parent
-      this.$emit('update-filter', this.categories)
+    selectedCategories() {
+      // whenever this.selectedCategories is updated, emit to parent, pass down via prop to child to handle selected category design
+      this.$emit('update-filter', this.selectedCategories)
     }
   }
 }
