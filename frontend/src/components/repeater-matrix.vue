@@ -1,7 +1,5 @@
 <template>
   <div :class="$style.component" v-if="items.length">
-    <label>Filter:</label>
-    <search-input @change-value="handleValue" :value="filters.filter.value" />
     <v-table
       :data="items"
       :filters="filters"
@@ -27,15 +25,18 @@
 <script>
 import RepeaterMatrixItem from '@/components/repeater-matrix-item'
 import ResourceHeader from '@/components/resource-header'
-import SearchInput from '@/components/search-input'
 
 export default {
-  components: { RepeaterMatrixItem, ResourceHeader, SearchInput },
+  components: { RepeaterMatrixItem, ResourceHeader },
   props: {
     items: {
       type: Array,
       // required: true,
       default: () => []
+    },
+    query: {
+      type: String,
+      default: () => ''
     },
     selectedCategories: {
       type: Array,
@@ -46,14 +47,10 @@ export default {
     return {
       filters: {
         filter: { value: '', custom: this.fieldFilter }
-      },
-      query: ''
+      }
     }
   },
   methods: {
-    handleValue(value) {
-      this.filters.filter.value = value
-    },
     authorFilter(filterValue, row) {
       let filter = null
       row.fields.author.map(author => {
@@ -73,6 +70,12 @@ export default {
       // (
       //   this.authorFilter(filterValue, row) || this.tagFilter(filterValue, row)
       // )
+    }
+  },
+  // use passed query from sibling search input for filtering whenever it changes
+  watch: {
+    query() {
+      this.filters.filter.value = this.query
     }
   }
 }

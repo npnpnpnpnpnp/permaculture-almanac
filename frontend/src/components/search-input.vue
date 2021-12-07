@@ -1,16 +1,19 @@
 <template>
   <div :class="classes.component">
-    <input
-      id="search"
-      :placeholder="labels.placeholder"
-      autocomplete="off"
-      :class="$style.input"
-      @input="debounceInput($event.target.value)"
-    />
-    <!-- :name="name" -->
-    <!-- :value="value" -->
-    <!-- @input="debounceInput" -->
-    <button type="reset" :class="$style.reset" @click="clear" />
+    <!-- <label>Search:</label> -->
+    <form :class="$style.form">
+      <input
+        id="search"
+        :placeholder="labels.placeholder"
+        autocomplete="off"
+        :class="$style.input"
+        @input="debounceInput($event.target.value)"
+      />
+      <!-- :name="name" -->
+      <!-- :value="value" -->
+      <!-- @input="debounceInput" -->
+      <button type="reset" :class="$style.reset" @click="clear" />
+    </form>
   </div>
 </template>
 
@@ -66,10 +69,16 @@ export default {
 
 <style lang="scss" module>
 .component {
-  display: flex;
-  min-width: 50vw;
-  max-width: 50vw;
   border-bottom: 1px solid var(--black);
+  max-width: 50%;
+
+  @media (min-width: $medium) {
+    // min-width: 50vw;
+  }
+}
+
+.form {
+  display: flex;
 }
 
 .input {

@@ -5,11 +5,16 @@
       :original-categories="categories"
       @update-filter="updateCategoryFilter"
     />
-    <!-- :original-tags="page.tags" -->
-    <repeater-matrix
-      :items="page.children"
-      :selected-categories="selectedCategories"
-    />
+    <div>
+      <search-input @change-value="handleSearchQuery" :value="query" />
+
+      <!-- :original-tags="page.tags" -->
+      <repeater-matrix
+        :items="page.children"
+        :selected-categories="selectedCategories"
+        :query="query"
+      />
+    </div>
   </main>
 </template>
 
@@ -19,24 +24,31 @@ import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
 import CategoryFilter from '@/components/category-filter'
 import EventBus from '@/event-bus'
+import SearchInput from '@/components/search-input'
 
 export default {
   components: {
     RepeaterMatrix,
-    CategoryFilter
+    CategoryFilter,
+    SearchInput
   },
   mixins: [metaInfo],
   data() {
     return {
       page: {},
       categories: [],
-      selectedCategories: []
+      selectedCategories: [],
+      query: ''
     }
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
   },
   methods: {
+    // get current search value from search-input
+    handleSearchQuery(query) {
+      this.query = query
+    },
     handleCategory(category) {
       const categoryExists = this.categories.includes(category)
       if (categoryExists) return
