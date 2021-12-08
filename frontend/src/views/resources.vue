@@ -92,22 +92,18 @@ export default {
         // push category of items into collective defaultFilters.categories
         const category = child.meta.template
         const categoryExists = this.defaultFilters.categories.includes(category)
-        if (categoryExists) return
-        this.defaultFilters.categories.push(category)
+        categoryExists ? false : this.defaultFilters.categories.push(category)
 
         // push tags of each item into collective defaultFilters.tags
-
         child.fields.tags.map(tag => {
           const tagExists = this.defaultFilters.tags.includes(tag)
-          if (tagExists) return
-          this.defaultFilters.tags.push(tag)
+          tagExists ? false : this.defaultFilters.tags.push(tag)
         })
 
         // push authors of each item into collective defaultFilters.authors
         child.fields.author.map(author => {
           const authorExists = this.defaultFilters.authors.includes(author)
-          if (authorExists) return
-          this.defaultFilters.authors.push(author)
+          authorExists ? false : this.defaultFilters.authors.push(author)
         })
       })
     }
