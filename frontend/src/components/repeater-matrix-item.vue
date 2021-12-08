@@ -1,6 +1,6 @@
 <template>
   <component
-    v-show="hasFilterApplied"
+    v-show="showItem"
     :is="type"
     :item="item"
     :class="classes.component"
@@ -46,11 +46,9 @@ export default {
     //   required: true
     // }
   },
-  data() {
-    return {
-      filterResults: []
-    }
-  },
+  // data() {
+  //   return {}
+  // },
   computed: {
     classes() {
       return {
@@ -63,50 +61,68 @@ export default {
     category() {
       return this.item.meta.template
     },
-    hasMatchingTags() {
+    matches() {
+      // NOTE: with the uncommented code, we only show explicit matches
+      // authors,
+      let matches = false
       let results = []
-      let result = false
-      this.item.fields.tags.forEach(tag => {
-        result = this.selectedTags.includes(tag)
-        results.push(result)
+      // filter should work as follows:
+      // for every section: show every item that includes art least one of the selected criteria
+      // across sections: show all items that match the combined criterias, e.g. all categories PLUS 1 specific tag
+
+      // only show items that match all selected categories
+      // problem: only one selectable -> either: change radios to only one selectable option or show all items which include of of the selected categories
+      // problem: conflicts with tags where every tag has to match.
+
+      // this.selectedCategories.forEach(selectedCategory => {
+      //   categoryMatches = selectedCategory === this.category ? true : false
+      //   results.push(categoryMatches)
+      // })
+
+      let categoryMatches = false
+      this.selectedCategories.forEach(selectedCategory => {
+        categoryMatches = selectedCategory === this.category ? true : false
+        if (categoryMatches) {
+          results.push(categoryMatches)
+        } else return
       })
-      return results
-    },
-    // hasMatchingCategory() {
-    //   let results = []
-    //   this.selectedCategories.map(category => {
-    //     results.push(category === this.item.meta.template)
-    //   })
-    //   return results
-    // },
-    isFiltered() {
-      return this.hasMatchingTags.includes(true)
+
+      // only show items with all tags matched with selected category
+      // let tagMatches = false
+      // this.selectedTags.forEach(selectedTag => {
+      //   tagMatches = this.item.fields.tags.includes(selectedTag)
+      //   results.push(tagMatches)
+      // })
+
+      let tagMatches = false
+      this.selectedTags.forEach(selectedTag => {
+        tagMatches = this.item.fields.tags.includes(selectedTag)
+        if (tagMatches) {
+          results.push(tagMatches)
+        } else return false
+      })
+
+      matches = results.includes(true)
+
+      //  matches = results.every(item => item === true)
+      return matches
     },
     // isCurrent() {
-    //   return `item-${this.currentIndex}` === this.id
+    //   return this.item.fields. this.id
     // },
-
-    // isFiltered() {
-    //   // let result = false
-    //   let results = []
-    //   // only return true if passed data matches all criteria
-    //   const hasTags = this.hasMatchingTags.includes(true)
-    //   console.log(hasTags)
-    //   const hasCategory = this.hasMatchingCategory.includes(true)
-    //   console.log(hasCategory)
-    //   results.push(this.hasMatchingTags.includes(true))
-    //   return results.every(item => item === true)
-    // },
-    hasFilterApplied() {
-      // const hasCategoryFilterApplied =
-      //   this.selectedCategories.length === 0 || this.isFiltered
-      // const hasTagFilterApplied =
-      return this.selectedTags.length === 0 || this.isFiltered
-      // return hasCategoryFilterApplied || hasTagFilterApplied
+    isFiltered() {
+      return this.selectedCategories.length > 0 || this.selectedTags.length > 0
+    },
+    showItem() {
+      let isVisible = true
+      if (this.isFiltered) {
+        isVisible = this.matches
+      } else isVisible = true
+      return isVisible
     }
   }
   // methods: {},
-  // mounted() {}
+  // watch: {}
 }
 </script>
 
