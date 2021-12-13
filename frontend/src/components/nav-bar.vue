@@ -19,14 +19,7 @@ export default {
   computed: {
     ...mapState(['routes']),
     visibleRoutes() {
-      return this.routes.filter(
-        route =>
-          route.meta.template !== 'home' &&
-          route.meta.template !== 'media_types' &&
-          route.meta.template !== 'authors' &&
-          route.meta.template !== 'tags' &&
-          route.meta.template !== 'categories'
-      )
+      return this.routes.filter(route => route.meta.template !== 'home')
     }
   }
 }
