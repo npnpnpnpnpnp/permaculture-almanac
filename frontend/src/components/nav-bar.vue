@@ -28,6 +28,10 @@ export default {
 <style lang="scss" module>
 .component {
   display: flex;
+
+  @media (min-width: $medium) {
+    grid-column: 3;
+  }
 }
 // .is-active {}
 </style>

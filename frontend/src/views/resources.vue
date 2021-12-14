@@ -125,6 +125,10 @@ export default {
     grid-template-columns: 33.333% auto;
     grid-gap: var(--gutter);
   }
+
+  @media (min-width: $large) {
+    grid-template-columns: 25% auto;
+  }
 }
 
 .controls {

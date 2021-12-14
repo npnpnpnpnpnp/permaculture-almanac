@@ -31,14 +31,18 @@ export default {
   }
 
   @media (min-width: $medium) {
-    grid-template-columns: 33.333% 15em auto;
+    grid-template-columns: 33.333% max-content auto;
+  }
+
+  @media (min-width: $large) {
+    grid-template-columns: 25% max-content auto;
   }
 }
 
 .title {
   // grid-column: 1;
 
-  @media (min-width) {
+  @media (min-width: $medium) {
     grid-column: 2;
   }
 }
