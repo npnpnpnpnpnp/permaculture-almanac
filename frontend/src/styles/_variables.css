@@ -15,8 +15,8 @@
   --filter-spacing-bottom: calc(var(--blank-line) * 2);
 
   /* Grids */
-  --resource-header-columns: auto calc(var(--gutter) * 10)
-    calc(var(--gutter) * 10) calc(var(--gutter) * 10);
+  --resource-grid: calc(var(--gutter) * 14) calc(var(--gutter) * 10)
+    calc(var(--gutter) * 9) calc(var(--gutter) * 5) auto;
 
   /* Easing */
   --swift-out: cubic-bezier(0.55, 0, 0.1, 1);

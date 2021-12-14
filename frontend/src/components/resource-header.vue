@@ -6,6 +6,7 @@
     <v-th :sortKey="authorSort">{{ labels.author }}</v-th>
     <v-th :sortKey="tagSort">{{ labels.tags }}</v-th>
     <v-th sortKey="meta.template">{{ labels.type }}</v-th>
+    <th>{{ labels.description }}</th>
   </tr>
 </template>
 
@@ -18,7 +19,8 @@ export default {
         title: 'Title',
         author: 'Author',
         tags: 'Tags',
-        type: 'Type'
+        type: 'Type',
+        description: 'Description'
       }
     }
   },
@@ -40,11 +42,12 @@ export default {
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
   // grid-template-rows: minmax(0, 1fr) auto;
-  grid-template-columns: var(--resource-header-columns);
+  grid-template-columns: var(--resource-grid);
   // only works without overflow when using fr units
   // see: https://css-tricks.com/introduction-fr-css-unit/
-  // grid-gap: var(--item-image-margin);
+  grid-gap: var(--gutter);
   width: 100%;
+  text-align: left;
   // height: 100vh;
 }
 </style>

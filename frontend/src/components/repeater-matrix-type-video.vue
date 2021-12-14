@@ -4,7 +4,7 @@
     <div
       v-if="item.fields.title"
       v-html="item.fields.title"
-      :class="$style.video"
+      :class="$style.title"
     />
     <ul v-if="item.fields.author">
       <author-item
@@ -160,6 +160,20 @@ export default {
 .link {
   // display: inline-block;
   // width: 100%;
+  display: grid;
+  // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
+  // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
+  // grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: var(--resource-grid);
+  // only works without overflow when using fr units
+  // see: https://css-tricks.com/introduction-fr-css-unit/
+  grid-gap: var(--gutter);
+  width: 100%;
+  // height: 100vh;
+}
+
+.title {
+  hyphens: auto;
 }
 
 .wrapper {
