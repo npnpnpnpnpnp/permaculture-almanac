@@ -57,4 +57,10 @@ export default {
 .body {
   grid-column: 4 / 5;
 }
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
 </style>

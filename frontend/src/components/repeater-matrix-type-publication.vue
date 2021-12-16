@@ -25,11 +25,11 @@
       />
     </ul>
     <div :class="$style.description">
-      <base-bodytext :text="truncatedText" />
+      <base-bodytext v-if="item.fields.body" :text="truncatedText" />
       <div v-html="item.fields.publisher" />
       <div v-html="item.fields.isbn" />
     </div>
-    <div v-html="item.meta.template" />
+    <div v-html="item.meta.template" :class="$style.category" />
   </li>
 </template>
 
@@ -80,6 +80,12 @@ export default {
 .title,
 .subtitle {
   hyphens: auto;
+}
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 // .component {

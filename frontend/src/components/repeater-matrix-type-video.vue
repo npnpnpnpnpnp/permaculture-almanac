@@ -28,7 +28,7 @@
       />
     </ul>
     <base-bodytext :text="truncatedText" :class="$style.body" />
-    <div v-html="item.meta.template" />
+    <div v-html="item.meta.template" :class="$style.category" />
   </li>
 </template>
 
@@ -168,6 +168,12 @@ export default {
 
 .title {
   hyphens: auto;
+}
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .wrapper {
