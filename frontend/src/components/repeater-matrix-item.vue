@@ -36,6 +36,10 @@ export default {
     selectedTags: {
       type: Array,
       default: () => []
+    },
+    selectedAuthors: {
+      type: Array,
+      default: () => []
     }
     // id: {
     //   type: String,
@@ -66,6 +70,9 @@ export default {
     },
     isFilteredByTag() {
       return this.selectedTags.length > 0
+    },
+    isFilteredByAuthor() {
+      return this.selectedAuthors.length > 0
     },
     // matches() {
     //   // NOTE: with the uncommented code, we only show explicit matches
@@ -146,9 +153,11 @@ export default {
     // },
     itemMatches() {
       let matches = false
+      // make sure that selected authors are also considered in here
       if (this.isFilteredByCategory && this.isFilteredByTag) {
-        matches = this.categoryMatches & this.tagMatches
-      } else matches = this.tagMatches || this.categoryMatches
+        matches = this.categoryMatches && this.tagMatches
+      } else
+        matches = this.tagMatches || this.categoryMatches || this.authorMatches
       return matches
     },
     categoryMatches() {
@@ -156,7 +165,8 @@ export default {
       return this.selectedCategories.includes(this.category)
     },
     tagMatches() {
-      if (!this.isFilteredByTag) return false
+      // do not execute for items without tags
+      if (!this.isFilteredByTag || !this.item.fields.tags) return false
       let tagMatches = false
       let tags = []
       this.selectedTags.forEach(selectedTag => {
@@ -167,12 +177,32 @@ export default {
       })
       return tags.includes(true)
     },
+    // TODO: use id here for unique identification
+    authorMatches() {
+      // do not execute for items without authors
+      if (!this.isFilteredByAuthor || !this.item.fields.author) return false
+      let authorMatches = false
+      let authors = []
+
+      this.selectedAuthors.forEach(selectedAuthor => {
+        authorMatches = this.item.fields.author.includes(selectedAuthor)
+
+        if (authorMatches) {
+          authors.push(authorMatches)
+        } else return false
+      })
+      return authors.includes(true)
+    },
 
     // isCurrent() {
     //   return this.item.fields. this.id
     // },
     isFiltered() {
-      return this.selectedTags.length > 0 || this.selectedCategories.length > 0
+      return (
+        this.isFilteredByCategory ||
+        this.isFilteredByTag ||
+        this.isFilteredByAuthor
+      )
     },
     showItem() {
       let isVisible = true
