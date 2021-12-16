@@ -25,6 +25,7 @@
       />
     </ul>
     <div :class="$style.description">
+      <base-bodytext :text="truncatedText" />
       <div v-html="item.fields.publisher" />
       <div v-html="item.fields.isbn" />
     </div>
@@ -35,11 +36,15 @@
 <script>
 import AuthorItem from '@/components/author-item'
 import TagItem from '@/components/tag-item'
+import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
 
 export default {
+  mixins: [truncateText],
   components: {
     AuthorItem,
-    TagItem
+    TagItem,
+    BaseBodytext
   },
   props: {
     item: {
@@ -47,6 +52,9 @@ export default {
       required: true,
       default: () => {}
     }
+  },
+  mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
   }
 }
 </script>

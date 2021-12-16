@@ -9,14 +9,17 @@
       <div v-html="item.fields.title" :class="$style.title" />
       <div v-html="item.fields.subtitle" :class="$style.subtitle" />
     </a>
-    <base-bodytext :text="item.fields.body" :class="$style.body" />
+    <base-bodytext :text="truncatedText" :class="$style.body" />
     <div v-html="item.meta.template" :class="$style.category" />
   </div>
 </template>
 
 <script>
 import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
+
 export default {
+  mixins: [truncateText],
   components: {
     BaseBodytext
   },
@@ -25,6 +28,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
   }
 }
 </script>

@@ -27,7 +27,7 @@
         :key="`tag-${index}`"
       />
     </ul>
-    <base-bodytext :text="item.fields.body" :class="$style.body" />
+    <base-bodytext :text="truncatedText" :class="$style.body" />
     <div v-html="item.meta.template" />
   </li>
 </template>
@@ -37,8 +37,10 @@
 import AuthorItem from '@/components/author-item'
 import TagItem from '@/components/tag-item'
 import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
 
 export default {
+  mixins: [truncateText],
   components: {
     AuthorItem,
     TagItem,
@@ -124,6 +126,8 @@ export default {
     // }
   },
   mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
+
     // if (this.isScaling) {
     //   EventBus.$on('video-ready', () => {
     //     this.contain()
