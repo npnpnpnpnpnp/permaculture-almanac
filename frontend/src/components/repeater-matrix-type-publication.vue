@@ -1,9 +1,15 @@
 <template>
-  <a :href="item.meta.url" rel="noopener" :class="$style.link">
-    <div :class="$style.titles">
+  <li :class="$style.component">
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
       <div v-html="item.fields.title" :class="$style.title" />
       <div v-html="item.fields.subtitle" :class="$style.subtitle" />
-    </div>
+    </a>
+
     <ul v-if="item.fields.author">
       <author-item
         v-for="(author, index) in item.fields.author"
@@ -18,15 +24,12 @@
         :key="`tag-${index}`"
       />
     </ul>
-    <div v-html="item.meta.template" />
     <div :class="$style.description">
       <div v-html="item.fields.publisher" />
-      <a :href="item.fields.external_url"
-        ><span v-html="item.fields.external_url_title"
-      /></a>
       <div v-html="item.fields.isbn" />
     </div>
-  </a>
+    <div v-html="item.meta.template" />
+  </li>
 </template>
 
 <script>
@@ -49,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.link {
+.component {
   display: grid;
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
@@ -60,6 +63,10 @@ export default {
   grid-gap: var(--gutter);
   width: 100%;
   // height: 100vh;
+}
+
+.link {
+  display: inline-block;
 }
 
 .title,

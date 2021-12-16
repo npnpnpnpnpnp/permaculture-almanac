@@ -1,11 +1,18 @@
 <template>
-  <!-- <li :class="$style.component"> -->
-  <a :href="item.meta.url" rel="noopener" :class="$style.link">
-    <div
-      v-if="item.fields.title"
-      v-html="item.fields.title"
-      :class="$style.title"
-    />
+  <li :class="$style.component">
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
+      <span
+        v-if="item.fields.title"
+        v-html="item.fields.title"
+        :class="$style.title"
+      />
+    </a>
+
     <ul v-if="item.fields.author">
       <author-item
         v-for="(author, index) in item.fields.author"
@@ -20,20 +27,22 @@
         :key="`tag-${index}`"
       />
     </ul>
+    <base-bodytext :text="item.fields.body" :class="$style.body" />
     <div v-html="item.meta.template" />
-  </a>
-  <!-- </li> -->
+  </li>
 </template>
 
 <script>
 // import EventBus from '@/event-bus'
 import AuthorItem from '@/components/author-item'
 import TagItem from '@/components/tag-item'
+import BaseBodytext from '@/components/base-bodytext'
 
 export default {
   components: {
     AuthorItem,
-    TagItem
+    TagItem,
+    BaseBodytext
   },
   props: {
     item: {
@@ -135,29 +144,6 @@ export default {
 
 <style lang="scss" module>
 .component {
-  // height: 100vh;
-  // @media (min-width: $medium) {
-  //   margin-right: var(--indent-vertical);
-  //   margin-left: var(--indent-vertical);
-  // }
-
-  // @media (min-width: $large) {
-  //   // padding: 0 calc(var(--gutter) * 2);
-  //   margin-right: var(--text-indent-vertical);
-  //   margin-left: var(--text-indent-vertical);
-  // }
-
-  // @media (min-width: $xxlarge) {
-  //   margin-right: var(--text-indent-large);
-  //   margin-left: var(--text-indent-large);
-  // }
-
-  // @media print {
-  //   display: none;
-  // }
-}
-
-.link {
   // display: inline-block;
   // width: 100%;
   display: grid;
@@ -170,6 +156,10 @@ export default {
   grid-gap: var(--gutter);
   width: 100%;
   // height: 100vh;
+}
+
+.link {
+  display: inline-block;
 }
 
 .title {

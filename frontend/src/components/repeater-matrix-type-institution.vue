@@ -1,12 +1,25 @@
 <template>
   <div :class="$style.component">
-    <div v-html="item.fields.title" :class="$style.title" />
-    <div v-html="item.meta.template" />
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
+      <div v-html="item.fields.title" :class="$style.title" />
+      <div v-html="item.fields.subtitle" :class="$style.subtitle" />
+    </a>
+    <base-bodytext :text="item.fields.body" :class="$style.body" />
+    <div v-html="item.meta.template" :class="$style.category" />
   </div>
 </template>
 
 <script>
+import BaseBodytext from '@/components/base-bodytext'
 export default {
+  components: {
+    BaseBodytext
+  },
   props: {
     item: {
       type: Object,
@@ -17,34 +30,25 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .component {
-//   position: relative;
-// }
+.component {
+  display: grid;
+  // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
+  // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
+  // grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: var(--resource-grid);
 
-// .text {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 100%;
-//   height: 100%;
-//   padding: calc(var(--gutter) * 4) var(--gutter);
-//   transform: translate(-50%, -50%);
+  // only works without overflow when using fr units
+  // see: https://css-tricks.com/introduction-fr-css-unit/
+  grid-gap: var(--gutter);
+  width: 100%;
+  // height: 100vh;
+}
 
-//   @media (min-width: $medium) {
-//     padding: var(--slide-padding);
-//   }
-// }
+.link {
+  display: inline-block;
+}
 
-// .title {
-//   @extend %fs-large;
-
-//   display: flex; // to center content due to inheriting height
-//   align-items: center;
-//   justify-content: center;
-//   height: inherit;
-//   overflow: hidden;
-//   text-align: center;
-//   text-transform: uppercase;
-//   word-break: break-word;
-// }
+.body {
+  grid-column: 4 / 5;
+}
 </style>
