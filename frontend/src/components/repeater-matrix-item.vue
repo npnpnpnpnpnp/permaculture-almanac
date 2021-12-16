@@ -170,10 +170,9 @@ export default {
       let tagMatches = false
       let tags = []
       this.selectedTags.forEach(selectedTag => {
+        // necessary to collect all matching items to account for multiple selection
         tagMatches = this.item.fields.tags.includes(selectedTag)
-        if (tagMatches) {
-          tags.push(tagMatches)
-        } else return false
+        tagMatches ? tags.push(tagMatches) : false
       })
       return tags.includes(true)
     },
@@ -183,13 +182,10 @@ export default {
       if (!this.isFilteredByAuthor || !this.item.fields.author) return false
       let authorMatches = false
       let authors = []
-
       this.selectedAuthors.forEach(selectedAuthor => {
+        // necessary to collect all matching items to account for multiple selection
         authorMatches = this.item.fields.author.includes(selectedAuthor)
-
-        if (authorMatches) {
-          authors.push(authorMatches)
-        } else return false
+        authorMatches ? authors.push(authorMatches) : false
       })
       return authors.includes(true)
     },
