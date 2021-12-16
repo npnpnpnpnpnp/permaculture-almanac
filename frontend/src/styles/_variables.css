@@ -11,6 +11,12 @@
   /* Spacing */
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
+  --list-indent: 1.15em;
+  --filter-spacing-bottom: calc(var(--blank-line) * 2);
+
+  /* Grids */
+  --resource-grid: calc(var(--gutter) * 14) calc(var(--gutter) * 10)
+    calc(var(--gutter) * 9) calc(var(--gutter) * 5) auto;
 
   /* Easing */
   --swift-out: cubic-bezier(0.55, 0, 0.1, 1);

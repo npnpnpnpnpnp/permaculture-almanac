@@ -1,27 +1,37 @@
 <template>
   <ul :class="$style.component">
-    <li v-for="route in routes" :key="route.id">
-      <router-link
-        :to="route.meta.url"
-        :exact-active-class="$style['is-active']"
-      >
-        {{ route.meta.title }}
-      </router-link>
-    </li>
+    <nav-bar-item
+      v-for="route in visibleRoutes"
+      :key="route.id"
+      :route="route"
+    />
   </ul>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import NavBarItem from '@/components/nav-bar-item'
 
 export default {
+  components: {
+    NavBarItem
+  },
   computed: {
-    ...mapState(['routes'])
+    ...mapState(['routes']),
+    visibleRoutes() {
+      return this.routes.filter(route => route.meta.template !== 'home')
+    }
   }
 }
 </script>
 
 <style lang="scss" module>
-// .component {}
+.component {
+  display: flex;
+
+  @media (min-width: $medium) {
+    grid-column: 3;
+  }
+}
 // .is-active {}
 </style>

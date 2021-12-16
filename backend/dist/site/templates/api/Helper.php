@@ -38,7 +38,7 @@ class Helper {
     $response = new \StdClass();
     $response->id = $page->id;
     $response->url = $page->url;
-    // $response->template = $page->template->name;
+    $response->template = $page->template->name;
     return $response;
   }
 
