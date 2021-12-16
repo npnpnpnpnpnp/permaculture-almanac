@@ -17,6 +17,7 @@
           :class="$style.item"
           :selected-categories="selectedCategories"
           :selected-tags="selectedTags"
+          :selected-authors="selectedAuthors"
         />
       </tbody>
     </v-table>
@@ -44,6 +45,10 @@ export default {
       default: () => []
     },
     selectedTags: {
+      type: Array,
+      default: () => []
+    },
+    selectedAuthors: {
       type: Array,
       default: () => []
     }

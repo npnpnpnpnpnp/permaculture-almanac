@@ -1,6 +1,8 @@
 <template>
   <li :class="$style.component">
-    <div v-html="author.fields.title" />
+    <router-link :to="author.meta.url">
+      <div v-html="author.fields.title" />
+    </router-link>
   </li>
 </template>
 

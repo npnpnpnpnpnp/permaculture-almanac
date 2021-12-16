@@ -22,6 +22,7 @@
         :query="query"
         :selected-categories="filter.selectedCategories"
         :selected-tags="filter.selectedTags"
+        :selected-authors="filter.selectedAuthors"
       />
     </div>
   </main>
@@ -46,8 +47,6 @@ export default {
     return {
       page: {},
       loading: true,
-      defaultCategories: [],
-      defaultTags: [],
       query: '',
       filter: {},
       defaultFilters: {
@@ -80,6 +79,7 @@ export default {
     },
     // get all filter updates from filter component
     handleFilter(value) {
+      // store the updated filter value locally to be able to pass it down to repeater components
       this.filter = value
     },
     // get current search value from search-input
@@ -95,6 +95,8 @@ export default {
         categoryExists ? false : this.defaultFilters.categories.push(category)
 
         // push tags of each item into collective defaultFilters.tags
+        // use tags from tags page instead of filtering them here. but: make sure that tags do not create separate instances on every item (same tag creates another id when selected)
+        if (!child.fields.tags) return
         child.fields.tags.map(tag => {
           const tagExists = this.defaultFilters.tags.includes(tag)
           tagExists ? false : this.defaultFilters.tags.push(tag)

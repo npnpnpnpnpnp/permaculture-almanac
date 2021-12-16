@@ -18,6 +18,10 @@
         :default-tags="defaultFilters.tags"
         @update-tags="updateTagFilter"
       />
+      <author-filter
+        :default-authors="defaultFilters.authors"
+        @update-authors="updateAuthorFilter"
+      />
     </div>
     <!-- <button type="button" @click="toggleFilter" :class="classes.toggle">
       {{ labels.openFilter }}
@@ -28,12 +32,14 @@
 <script>
 import CategoryFilter from '@/components/category-filter'
 import TagFilter from '@/components/tag-filter'
+import AuthorFilter from '@/components/author-filter'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     CategoryFilter,
-    TagFilter
+    TagFilter,
+    AuthorFilter
   },
   props: {
     defaultFilters: {
@@ -54,7 +60,8 @@ export default {
       },
       filter: {
         selectedCategories: [],
-        selectedTags: []
+        selectedTags: [],
+        selectedAuthors: []
       }
     }
   },
@@ -82,11 +89,15 @@ export default {
     updateTagFilter(selectedTags) {
       this.filter.selectedTags = selectedTags
     },
+    updateAuthorFilter(selectedAuthors) {
+      this.filter.selectedAuthors = selectedAuthors
+    },
     closeFilter() {
       this.$emit('filter-visibility', false)
     }
   },
   watch: {
+    // emit collective filter object to parent whenever any of the arrays gets updated for their children
     filter: {
       deep: true,
       handler() {
