@@ -39,3 +39,48 @@
   color: inherit;
   text-decoration: none;
 }
+
+%grid-columns {
+  .link {
+    grid-template-column: 1 / 2;
+  }
+
+  .authors {
+    grid-template-column: 2 / 3;
+  }
+
+  .tags {
+    display: none;
+
+    @media (min-width: $large) {
+      display: inline-block;
+      grid-template-column: 3 / 4;
+    }
+  }
+
+  .description {
+    display: none;
+
+    @media (min-width: $xlarge) {
+      display: inline-block;
+      grid-template-column: 4 / 5;
+    }
+  }
+
+  .category {
+    display: none;
+
+    @media (min-width: $xsmall) {
+      display: inline-block;
+      grid-template-column: 3 / 4;
+    }
+
+    @media (min-width: $large) {
+      grid-template-column: 4 / 5;
+    }
+
+    @media (min-width: $xlarge) {
+      grid-template-column: 5 / 6;
+    }
+  }
+}

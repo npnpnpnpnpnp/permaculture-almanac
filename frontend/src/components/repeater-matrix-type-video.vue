@@ -13,21 +13,21 @@
       />
     </a>
 
-    <ul v-if="item.fields.author">
+    <ul v-if="item.fields.author" :class="$style.authors">
       <author-item
         v-for="(author, index) in item.fields.author"
         :author="author"
         :key="`author-${index}`"
       />
     </ul>
-    <ul v-if="item.fields.tags">
+    <ul v-if="item.fields.tags" :class="$style.tags">
       <tag-item
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
       />
     </ul>
-    <base-bodytext :text="truncatedText" :class="$style.body" />
+    <base-bodytext :text="truncatedText" :class="$style.description" />
     <div v-html="item.meta.template" :class="$style.category" />
   </li>
 </template>
@@ -148,6 +148,7 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @extend %grid-columns;
   // display: inline-block;
   // width: 100%;
   display: grid;

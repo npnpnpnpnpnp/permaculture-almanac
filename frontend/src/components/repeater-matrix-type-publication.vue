@@ -10,14 +10,14 @@
       <div v-html="item.fields.subtitle" :class="$style.subtitle" />
     </a>
 
-    <ul v-if="item.fields.author">
+    <ul v-if="item.fields.author" :class="$style.authors">
       <author-item
         v-for="(author, index) in item.fields.author"
         :author="author"
         :key="`author-${index}`"
       />
     </ul>
-    <ul v-if="item.fields.tags">
+    <ul v-if="item.fields.tags" :class="$style.tags">
       <tag-item
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
@@ -61,6 +61,8 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @extend %grid-columns;
+
   display: grid;
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
@@ -78,7 +80,8 @@ export default {
 }
 
 .title,
-.subtitle {
+.subtitle,
+.description {
   hyphens: auto;
 }
 

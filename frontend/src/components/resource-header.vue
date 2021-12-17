@@ -1,12 +1,16 @@
 <template>
   <tr :class="$style.component">
     <!-- NOTE: the actual data does not have to be passed into header. "fields.title" only serves as a reference for the structure within the actual item -->
-    <v-th sortKey="fields.title">{{ labels.title }}</v-th>
+    <v-th sortKey="fields.title" :class="$style.title">{{ labels.title }}</v-th>
     <!-- TODO: how to deal with multiple values like in author or tags? -->
-    <v-th :sortKey="authorSort">{{ labels.author }}</v-th>
-    <v-th :sortKey="tagSort">{{ labels.tags }}</v-th>
-    <th>{{ labels.description }}</th>
-    <v-th sortKey="meta.template">{{ labels.type }}</v-th>
+    <v-th :sortKey="authorSort" :class="$style.author">{{
+      labels.author
+    }}</v-th>
+    <v-th :sortKey="tagSort" :class="$style.tags">{{ labels.tags }}</v-th>
+    <th :class="$style.description">{{ labels.description }}</th>
+    <v-th sortKey="meta.template" :class="$style.category">{{
+      labels.type
+    }}</v-th>
   </tr>
 </template>
 
@@ -38,6 +42,8 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @extend %grid-columns;
+
   display: grid;
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt

@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.component">
+  <li :class="$style.component">
     <a
       :href="item.fields.external_url"
       target="_blank"
@@ -9,9 +9,9 @@
       <div v-html="item.fields.title" :class="$style.title" />
       <div v-html="item.fields.subtitle" :class="$style.subtitle" />
     </a>
-    <base-bodytext :text="truncatedText" :class="$style.body" />
+    <base-bodytext :text="truncatedText" :class="$style.description" />
     <div v-html="item.meta.template" :class="$style.category" />
-  </div>
+  </li>
 </template>
 
 <script>
@@ -37,6 +37,8 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @extend %grid-columns;
+
   display: grid;
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
@@ -52,10 +54,6 @@ export default {
 
 .link {
   display: inline-block;
-}
-
-.body {
-  grid-column: 4 / 5;
 }
 
 .category {
