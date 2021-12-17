@@ -19,6 +19,11 @@
           @click="openFilter"
         />
       </div>
+      <filter-indicator
+        :filter="filter"
+        :filter-visible="filterVisible"
+        @filter-visibility="handleFilterVisibility"
+      />
       <repeater-matrix
         :items="page.children"
         :query="query"
@@ -36,13 +41,15 @@ import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
 import ResourceFilter from '@/components/resource-filter.vue'
 import SearchInput from '@/components/search-input'
+import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     RepeaterMatrix,
     ResourceFilter,
-    SearchInput
+    SearchInput,
+    FilterIndicator
   },
   mixins: [metaInfo],
   data() {
