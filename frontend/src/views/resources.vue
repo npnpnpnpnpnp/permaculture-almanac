@@ -1,7 +1,7 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
     <resource-filter
-      :default-filters="defaultFilters"
+      :default-categories="defaultCategories"
       :default-tags="page.tags"
       :default-authors="page.authors"
       :filter-visible="filterVisible"
@@ -51,11 +51,6 @@ export default {
       loading: true,
       query: '',
       filter: {},
-      defaultFilters: {
-        authors: [],
-        categories: []
-        // tags: []
-      },
       filterVisible: false,
       labels: {
         openFilter: 'Filter'
@@ -70,6 +65,14 @@ export default {
     ...mapState(['isDesktop']),
     showButton() {
       return this.isDesktop ? false : true
+    },
+    defaultCategories() {
+      let categories = []
+      this.page.children.map(child => {
+        const categoryExists = categories.includes(child.meta.template)
+        if (!categoryExists) categories.push(child.meta.template)
+      })
+      return categories
     }
   },
   methods: {
@@ -87,37 +90,6 @@ export default {
     // get current search value from search-input
     handleSearchQuery(query) {
       this.query = query
-    },
-    getItemData() {
-      this.page.children.map(child => {
-        // generally check if current item of loop already exists within defaultFilters
-        // push category of items into collective defaultFilters.categories
-        const category = child.meta.template
-        const categoryExists = this.defaultFilters.categories.includes(category)
-        categoryExists ? false : this.defaultFilters.categories.push(category)
-
-        // push tags of each item into collective defaultFilters.tags
-        // use tags from tags page instead of filtering them here. but: make sure that tags do not create separate instances on every item (same tag creates another id when selected)
-        // if (!child.fields.tags) return
-        // child.fields.tags.map(tag => {
-        //   const tagExists = this.defaultFilters.tags.includes(tag)
-        //   tagExists ? false : this.defaultFilters.tags.push(tag)
-        // })
-
-        // push authors of each item into collective defaultFilters.authors
-        // if (!child.fields.author) return
-        // child.fields.author.map(author => {
-        //   const authorExists = this.defaultFilters.authors.includes(author)
-        //   authorExists ? false : this.defaultFilters.authors.push(author)
-        // })
-      })
-    }
-  },
-  // mounted() {},
-  watch: {
-    loading() {
-      // as soon as page was loaded, fetch and flatten item data used for default filter values
-      this.getItemData()
     }
   }
 }

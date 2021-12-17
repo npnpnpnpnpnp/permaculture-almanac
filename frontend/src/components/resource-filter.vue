@@ -11,7 +11,7 @@
     <div v-html="labels.title" :class="$style.title" />
     <div :class="$style.content">
       <category-filter
-        :default-categories="defaultFilters.categories"
+        :default-categories="defaultCategories"
         @update-categories="updateCategoryFilter"
       />
       <tag-filter :default-tags="defaultTags" @update-tags="updateTagFilter" />
@@ -39,8 +39,8 @@ export default {
     AuthorFilter
   },
   props: {
-    defaultFilters: {
-      type: Object,
+    defaultCategories: {
+      type: Array,
       required: true
     },
     defaultTags: {
