@@ -69,8 +69,17 @@ export default {
     defaultCategories() {
       let categories = []
       this.page.children.map(child => {
-        const categoryExists = categories.includes(child.meta.template)
-        if (!categoryExists) categories.push(child.meta.template)
+        // create object for category to make further usage easier
+        let categoryObject = {
+          fields: {
+            title: child.meta.template
+          }
+        }
+        // use find with explicit condition to indentify only one match
+        const categoryExists = categories.find(
+          category => category.fields.title === child.meta.template
+        )
+        if (!categoryExists) categories.push(categoryObject)
       })
       return categories
     }

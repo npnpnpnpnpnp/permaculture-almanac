@@ -88,9 +88,16 @@ export default {
       return matches
     },
     categoryMatches() {
-      return this.isFilteredByCategory
-        ? this.selectedCategories.includes(this.category)
-        : false
+      // TODO: why is filter not working?
+      if (!this.isFilteredByCategory) return false
+      let categoryMatches = false
+      let categories = []
+      this.selectedCategories.map(selectedCategory => {
+        // necessary to collect all matching items to account for multiple selection
+        categoryMatches = selectedCategory.fields.title === this.category // if yes, push them into tags array, if not return false
+        categoryMatches ? categories.push(categoryMatches) : false
+      })
+      return categories.includes(true)
     },
     tagMatches() {
       // TODO: why is filter not working?

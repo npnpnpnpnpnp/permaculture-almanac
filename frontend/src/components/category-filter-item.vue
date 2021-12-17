@@ -1,7 +1,6 @@
 <template>
-  <button
-    type="button"
-    v-html="item"
+  <div
+    v-html="item.fields.title"
     :class="classes.component"
     @click="selectCategory"
   />
@@ -11,7 +10,7 @@
 export default {
   props: {
     item: {
-      type: String,
+      type: Object,
       required: true
     },
     selectedCategories: {
@@ -50,6 +49,11 @@ export default {
   display: block;
   text-align: start;
   margin-left: var(--list-indent);
+  cursor: pointer;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 
   &:not(:last-of-type) {
     margin-right: var(--gutter);

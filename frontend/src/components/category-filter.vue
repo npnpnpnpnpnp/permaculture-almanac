@@ -3,9 +3,9 @@
     <div v-html="labels.title" :class="$style.title" />
     <div :class="classes.content">
       <category-filter-item
-        v-for="(item, index) in defaultCategories"
-        :key="`item-${index}`"
-        :item="item"
+        v-for="(category, index) in defaultCategories"
+        :key="`category-${index}`"
+        :item="category"
         :selected-categories="selectedCategories"
         @select-category="applyFilter"
       />
