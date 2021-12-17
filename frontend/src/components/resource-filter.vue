@@ -16,7 +16,7 @@
       />
       <tag-filter :default-tags="defaultTags" @update-tags="updateTagFilter" />
       <author-filter
-        :default-authors="defaultFilters.authors"
+        :default-authors="defaultAuthors"
         @update-authors="updateAuthorFilter"
       />
     </div>
@@ -44,6 +44,10 @@ export default {
       required: true
     },
     defaultTags: {
+      type: Array,
+      required: true
+    },
+    defaultAuthors: {
       type: Array,
       required: true
     },

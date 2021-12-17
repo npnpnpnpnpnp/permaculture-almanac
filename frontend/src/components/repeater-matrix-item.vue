@@ -188,10 +188,14 @@ export default {
       if (!this.isFilteredByAuthor || !this.item.fields.author) return false
       let authorMatches = false
       let authors = []
-      this.selectedAuthors.forEach(selectedAuthor => {
+      this.selectedAuthors.map(selectedAuthor => {
         // necessary to collect all matching items to account for multiple selection
-        authorMatches = this.item.fields.author.includes(selectedAuthor)
-        authorMatches ? authors.push(authorMatches) : false
+        this.item.fields.author.map(author => {
+          // check based on id, if author matches
+          authorMatches = author.meta.id === selectedAuthor.meta.id
+          // if yes, push them into author array, if not return false
+          authorMatches ? authors.push(authorMatches) : false
+        })
       })
       return authors.includes(true)
     },

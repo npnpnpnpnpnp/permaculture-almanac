@@ -3,6 +3,7 @@
     <resource-filter
       :default-filters="defaultFilters"
       :default-tags="page.tags"
+      :default-authors="page.authors"
       :filter-visible="filterVisible"
       @update-filter="handleFilter"
       @filter-visibility="handleFilterVisibility"
@@ -104,11 +105,11 @@ export default {
         // })
 
         // push authors of each item into collective defaultFilters.authors
-        if (!child.fields.author) return
-        child.fields.author.map(author => {
-          const authorExists = this.defaultFilters.authors.includes(author)
-          authorExists ? false : this.defaultFilters.authors.push(author)
-        })
+        // if (!child.fields.author) return
+        // child.fields.author.map(author => {
+        //   const authorExists = this.defaultFilters.authors.includes(author)
+        //   authorExists ? false : this.defaultFilters.authors.push(author)
+        // })
       })
     }
   },
