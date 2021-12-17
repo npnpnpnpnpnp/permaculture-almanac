@@ -182,49 +182,9 @@ export default {
 
 .reset {
   grid-column: 1;
-  // &:after {
-  //   content: '\00d7';
-  // }
 }
 
 .apply {
   grid-column: 2;
 }
-// position: relative;
-// left: 50%;
-// padding: calc(var(--gutter) / 2) var(--gutter);
-// color: var(--grey);
-// background: var(--white);
-// // border: 1px solid var(--black);
-// border-radius: calc(var(--gutter) / 2);
-// box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
-// transform: translateX(-50%);
-
-// &:focus {
-//   background-color: var(--white);
-// }
-
-// &.is-active {
-//   color: var(--black);
-// }
-
-// @media (min-width: $medium) {
-//   display: none;
-// }
-
-// .delete {
-//   // @extend %ff-sans;
-//   // @extend %fs-overlay;
-//   // @extend %button-reset;
-
-//   display: block;
-//   margin-top: var(--blank-line);
-
-//   &::before {
-//     // @extend %ff-symbols;
-
-//     margin-right: var(--spacing-xsmall);
-//     content: '\2573';
-//   }
-// }
 </style>

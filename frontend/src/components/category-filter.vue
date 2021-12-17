@@ -16,7 +16,6 @@
 <script>
 import CategoryFilterItem from '@/components/category-filter-item'
 import { mapState } from 'vuex'
-// import EventBus from '@/event-bus'
 
 export default {
   components: {
@@ -58,27 +57,6 @@ export default {
     hasFilterApplied() {
       return this.selectedCategories.length > 0
     }
-    // findIndices() {
-    //   let indices = []
-    //   this.filter.forEach(filterItem => {
-    //     this.originalTags.forEach(originalTag => {
-    //       const tagExists = originalTag.fields.title.includes(filterItem.title)
-
-    //       if (tagExists) {
-    //         const index = this.originalTags.indexOf(originalTag)
-    //         indices.push({ index: index, filter: filterItem })
-    //       } else return
-    //     })
-    //   })
-    //   return indices
-    // },
-    // sortTags() {
-    //   let sorted = this.findIndices
-    //   sorted.sort(function(a, b) {
-    //     return parseFloat(a.index) - parseFloat(b.index)
-    //   })
-    //   return sorted
-    // }
   },
   methods: {
     // get category from child and push it into collective array of selected category filter
@@ -96,13 +74,6 @@ export default {
       if (!categoryExists) {
         this.selectedCategories.push(category)
       }
-    },
-    // reset locally, watcher emits to parent
-    resetFilter() {
-      this.selectedCategories = []
-    },
-    toggleFilter() {
-      this.$store.dispatch('setFilterVisibility')
     }
   },
   watch: {
