@@ -25,6 +25,23 @@ class DefaultPage {
       $response->children = Helper::getPages($page->children);
     }
 
+    // if we are on template resource..
+    if ($page->template->name == 'resources') {
+    // get all tags from template tags..
+      $tags = wire('pages')->get('template=tags')->children;
+      //and check if they are used somewhere in the app as a reference
+      $usedTags = new PageArray();
+       foreach($tags as $tag) {
+        $references = $tag->references();
+        // if there are no tags, continue
+        if (!$references->count) continue;
+        //if not, push them to usedTags-array. has to be page array to have other meothds available
+        $usedTags->add($tag);
+      }
+      // then, add them to the tags field of the response when fetching resources page
+      $response->tags = Helper::getPageReferences($usedTags);
+    }
+
     Helper::unsetLanguage();
     return $response;
   }
