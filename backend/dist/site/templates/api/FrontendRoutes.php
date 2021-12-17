@@ -17,7 +17,7 @@ class FrontendRoutes {
     }
 
     // Add dynamic routes
-    // array_push($routes, self::createDynamicRoute(wire('pages')->get('template=parentTemplate'), 'childTemplate', ':name'));
+    array_push($routes, self::createDynamicRoute(wire('pages')->get('template=authors'), 'author', ':name'));
 
     return $routes;
   }
