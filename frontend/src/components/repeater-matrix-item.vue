@@ -171,8 +171,10 @@ export default {
       let tags = []
       this.selectedTags.forEach(selectedTag => {
         // necessary to collect all matching items to account for multiple selection
-        tagMatches = this.item.fields.tags.includes(selectedTag)
-        tagMatches ? tags.push(tagMatches) : false
+        this.item.fields.tags.forEach(tag => {
+          tagMatches = tag.meta.id === selectedTag.meta.id
+          tagMatches ? tags.push(tagMatches) : false
+        })
       })
       return tags.includes(true)
     },
@@ -209,7 +211,6 @@ export default {
     }
   }
   // methods: {},
-  // watch: {}
 }
 </script>
 

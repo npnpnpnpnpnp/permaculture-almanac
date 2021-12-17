@@ -14,10 +14,7 @@
         :default-categories="defaultFilters.categories"
         @update-categories="updateCategoryFilter"
       />
-      <tag-filter
-        :default-tags="defaultFilters.tags"
-        @update-tags="updateTagFilter"
-      />
+      <tag-filter :default-tags="defaultTags" @update-tags="updateTagFilter" />
       <author-filter
         :default-authors="defaultFilters.authors"
         @update-authors="updateAuthorFilter"
@@ -44,6 +41,10 @@ export default {
   props: {
     defaultFilters: {
       type: Object,
+      required: true
+    },
+    defaultTags: {
+      type: Array,
       required: true
     },
     filterVisible: {

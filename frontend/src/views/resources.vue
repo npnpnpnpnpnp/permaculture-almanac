@@ -2,6 +2,7 @@
   <main :class="$style.view" v-if="page.fields">
     <resource-filter
       :default-filters="defaultFilters"
+      :default-tags="page.tags"
       :filter-visible="filterVisible"
       @update-filter="handleFilter"
       @filter-visibility="handleFilterVisibility"
@@ -51,8 +52,8 @@ export default {
       filter: {},
       defaultFilters: {
         authors: [],
-        categories: [],
-        tags: []
+        categories: []
+        // tags: []
       },
       filterVisible: false,
       labels: {
@@ -96,13 +97,14 @@ export default {
 
         // push tags of each item into collective defaultFilters.tags
         // use tags from tags page instead of filtering them here. but: make sure that tags do not create separate instances on every item (same tag creates another id when selected)
-        if (!child.fields.tags) return
-        child.fields.tags.map(tag => {
-          const tagExists = this.defaultFilters.tags.includes(tag)
-          tagExists ? false : this.defaultFilters.tags.push(tag)
-        })
+        // if (!child.fields.tags) return
+        // child.fields.tags.map(tag => {
+        //   const tagExists = this.defaultFilters.tags.includes(tag)
+        //   tagExists ? false : this.defaultFilters.tags.push(tag)
+        // })
 
         // push authors of each item into collective defaultFilters.authors
+        if (!child.fields.author) return
         child.fields.author.map(author => {
           const authorExists = this.defaultFilters.authors.includes(author)
           authorExists ? false : this.defaultFilters.authors.push(author)
