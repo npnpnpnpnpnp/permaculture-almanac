@@ -79,9 +79,6 @@ export default {
     //   // authors,
     //   let matches = false
     //   // let results = []
-    //   // filter should work as follows:
-    //   // for every section: show every item that includes art least one of the selected criteria
-    //   // across sections: show all items that use those filters altogether.  match the combined criterias, e.g. all categories PLUS 1 specific tag should only show items that match the categories and, additionally, are tagged with selected tag
 
     //   // only show items that match all selected categories
     //   // problem: only one selectable -> either: change radios to only one selectable option or show all items which include of of the selected categories
@@ -148,16 +145,25 @@ export default {
 
     //   // console.log('cat', categoryMatches + 'tag', tagMatches)
     //   matches = this.tagMatches && this.categoryMatches
-    //   //  matches = results.every(item => item === true)
+    //   //
     //   return matches
     // },
     itemMatches() {
+      // filter should work as follows:
+      // for every section, show every item that includes art least one of the selected criteria
+      // across sections show all items that use those filters altogether.  match the combined criterias, e.g. all categories PLUS 1 specific tag should only show items that match the categories and, additionally, are tagged with selected tag
+      let results = []
       let matches = false
-      // make sure that selected authors are also considered in here
-      if (this.isFilteredByCategory && this.isFilteredByTag) {
-        matches = this.categoryMatches && this.tagMatches
-      } else
-        matches = this.tagMatches || this.categoryMatches || this.authorMatches
+      // if (this.isFilteredByCategory && this.isFilteredByTag) {
+      //   matches = this.categoryMatches && this.tagMatches
+      // } else
+      //   matches = this.tagMatches || this.categoryMatches || this.authorMatches
+      // return matches
+
+      if (this.isFilteredByCategory) results.push(this.categoryMatches === true)
+      if (this.isFilteredByTag) results.push(this.tagMatches === true)
+      if (this.isFilteredByAuthor) results.push(this.authorMatches === true)
+      matches = results.every(item => item === true)
       return matches
     },
     categoryMatches() {
