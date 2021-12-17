@@ -88,8 +88,9 @@ export default {
       return matches
     },
     categoryMatches() {
-      if (!this.isFilteredByCategory) return false
-      return this.selectedCategories.includes(this.category)
+      return this.isFilteredByCategory
+        ? this.selectedCategories.includes(this.category)
+        : false
     },
     tagMatches() {
       // TODO: why is filter not working?
@@ -134,11 +135,7 @@ export default {
       )
     },
     showItem() {
-      let isVisible = true
-      if (this.isFiltered) {
-        isVisible = this.itemMatches
-      } else isVisible = true
-      return isVisible
+      return this.isFiltered ? this.itemMatches : true
     }
   }
 }
