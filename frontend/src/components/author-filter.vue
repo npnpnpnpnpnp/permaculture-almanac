@@ -9,14 +9,6 @@
         :selected-authors="selectedAuthors"
         @select-author="applyFilter"
       />
-      <!-- <button
-        v-if="hasFilterApplied"
-        type="button"
-        :class="$style.delete"
-        @click="resetFilter"
-      >
-        {{ labels.deleteFilter }}
-      </button> -->
     </div>
   </div>
 </template>
@@ -34,11 +26,14 @@ export default {
     defaultAuthors: {
       type: Array,
       required: true
+    },
+    selectedAuthors: {
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
-      selectedAuthors: [],
       labels: {
         title: 'Authors',
         openFilter: 'Filter',

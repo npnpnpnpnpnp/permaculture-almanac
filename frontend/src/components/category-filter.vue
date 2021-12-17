@@ -26,11 +26,14 @@ export default {
     defaultCategories: {
       type: Array,
       required: true
+    },
+    selectedCategories: {
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
-      selectedCategories: [],
       labels: {
         title: 'Categories',
         openFilter: 'Filter',

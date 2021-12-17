@@ -3,7 +3,7 @@
     <button
       v-if="showButton"
       type="button"
-      @click="closeFilter"
+      @click="close"
       :class="$style.button"
     >
       <span :class="$style.close" />
@@ -12,17 +12,33 @@
     <div :class="$style.content">
       <category-filter
         :default-categories="defaultCategories"
+        :selected-categories="filter.selectedCategories"
         @update-categories="updateCategoryFilter"
       />
-      <tag-filter :default-tags="defaultTags" @update-tags="updateTagFilter" />
+      <tag-filter
+        :default-tags="defaultTags"
+        :selected-tags="filter.selectedTags"
+        @update-tags="updateTagFilter"
+      />
       <author-filter
         :default-authors="defaultAuthors"
+        :selected-authors="filter.selectedAuthors"
         @update-authors="updateAuthorFilter"
       />
     </div>
-    <!-- <button type="button" @click="toggleFilter" :class="classes.toggle">
-      {{ labels.openFilter }}
-    </button> -->
+    <div :class="$style.controls">
+      <button
+        v-show="hasFilterApplied"
+        type="button"
+        :class="$style.reset"
+        @click="reset"
+      >
+        {{ labels.reset }}
+      </button>
+      <button type="button" @click="apply" :class="$style.apply">
+        {{ labels.apply }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -60,8 +76,9 @@ export default {
     return {
       labels: {
         title: 'Filter',
-        openFilter: 'Filter',
-        closeFilter: 'Delete filter'
+        open: 'Filter',
+        apply: 'Apply',
+        reset: 'Reset'
       },
       filter: {
         selectedCategories: [],
@@ -85,9 +102,30 @@ export default {
     },
     showButton() {
       return this.isDesktop ? false : this.filterVisible
+    },
+    hasFilterApplied() {
+      return (
+        this.filter.selectedCategories.length > 0 ||
+        this.filter.selectedTags.length > 0 ||
+        this.filter.selectedAuthors.length > 0
+      )
     }
   },
   methods: {
+    // reset locally, watcher emits to parent
+    reset() {
+      // this.filter.map(item => delete this.filter(item))
+      this.filter.selectedCategories = []
+      this.filter.selectedTags = []
+      this.filter.selectedAuthors = []
+    },
+    apply() {
+      this.$emit('filter-visibility', false)
+    },
+    close() {
+      this.$emit('filter-visibility', false)
+      this.reset()
+    },
     updateCategoryFilter(selectedCategories) {
       this.filter.selectedCategories = selectedCategories
     },
@@ -96,9 +134,6 @@ export default {
     },
     updateAuthorFilter(selectedAuthors) {
       this.filter.selectedAuthors = selectedAuthors
-    },
-    closeFilter() {
-      this.$emit('filter-visibility', false)
     }
   },
   watch: {
@@ -135,38 +170,47 @@ export default {
   }
 }
 
-.button {
-  position: absolute;
-  top: 0;
-  right: 0;
+.controls {
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  bottom: 0;
+  padding: calc(var(--blank-line) / 2) var(--gutter);
+  background-color: var(--white-alpha);
 }
 
-.close {
-  &:after {
-    content: '\00d7';
-  }
-  // position: relative;
-  // left: 50%;
-  // padding: calc(var(--gutter) / 2) var(--gutter);
-  // color: var(--grey);
-  // background: var(--white);
-  // // border: 1px solid var(--black);
-  // border-radius: calc(var(--gutter) / 2);
-  // box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
-  // transform: translateX(-50%);
-
-  // &:focus {
-  //   background-color: var(--white);
-  // }
-
-  // &.is-active {
-  //   color: var(--black);
-  // }
-
-  // @media (min-width: $medium) {
-  //   display: none;
+.reset {
+  grid-column: 1;
+  // &:after {
+  //   content: '\00d7';
   // }
 }
+
+.apply {
+  grid-column: 2;
+}
+// position: relative;
+// left: 50%;
+// padding: calc(var(--gutter) / 2) var(--gutter);
+// color: var(--grey);
+// background: var(--white);
+// // border: 1px solid var(--black);
+// border-radius: calc(var(--gutter) / 2);
+// box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
+// transform: translateX(-50%);
+
+// &:focus {
+//   background-color: var(--white);
+// }
+
+// &.is-active {
+//   color: var(--black);
+// }
+
+// @media (min-width: $medium) {
+//   display: none;
+// }
 
 // .delete {
 //   // @extend %ff-sans;

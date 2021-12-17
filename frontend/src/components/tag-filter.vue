@@ -9,14 +9,6 @@
         :selected-tags="selectedTags"
         @select-tag="applyFilter"
       />
-      <!-- <button
-        v-if="hasFilterApplied"
-        type="button"
-        :class="$style.delete"
-        @click="resetFilter"
-      >
-        {{ labels.deleteFilter }}
-      </button> -->
     </div>
   </div>
 </template>
@@ -34,11 +26,14 @@ export default {
     defaultTags: {
       type: Array,
       required: true
+    },
+    selectedTags: {
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
-      selectedTags: [],
       labels: {
         title: 'Tags',
         openFilter: 'Filter',
@@ -59,9 +54,6 @@ export default {
           this.hasFilterApplied ? this.$style['is-active'] : ''
         ]
       }
-    },
-    hasFilterApplied() {
-      return this.selectedTags.length > 0
     }
     // findIndices() {
     //   let indices = []
@@ -101,10 +93,6 @@ export default {
       if (!tagExists) {
         this.selectedTags.push(tag)
       }
-    },
-    // reset locally, watcher emits to parent
-    resetFilter() {
-      this.selectedTags = []
     },
     toggleFilter() {
       this.$store.dispatch('setFilterVisibility')
