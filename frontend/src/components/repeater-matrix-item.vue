@@ -165,14 +165,18 @@ export default {
       return this.selectedCategories.includes(this.category)
     },
     tagMatches() {
+      // TODO: why is filter not working?
       // do not execute for items without tags
       if (!this.isFilteredByTag || !this.item.fields.tags) return false
       let tagMatches = false
       let tags = []
-      this.selectedTags.forEach(selectedTag => {
+      // for each selected tag..
+      this.selectedTags.map(selectedTag => {
         // necessary to collect all matching items to account for multiple selection
-        this.item.fields.tags.forEach(tag => {
+        // .. check if one of the tags of the item matches
+        this.item.fields.tags.map(tag => {
           tagMatches = tag.meta.id === selectedTag.meta.id
+          // if yes, push them into tags array, if not return false
           tagMatches ? tags.push(tagMatches) : false
         })
       })
