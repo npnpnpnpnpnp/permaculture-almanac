@@ -14,6 +14,8 @@
   --gutter: 1em;
   --list-indent: 1.15em;
   --filter-spacing-bottom: calc(var(--blank-line) * 2);
+  --spacing-xsmall: calc(var(--gutter) / 2);
+  --list-indent: var(--gutter);
 
   /* Grids */
   --resource-grid: repeat(2, 1fr);
