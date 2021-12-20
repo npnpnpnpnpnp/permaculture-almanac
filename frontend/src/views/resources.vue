@@ -113,10 +113,12 @@ export default {
 
 <style lang="scss" module>
 .view {
+  padding: var(--gutter);
+
   @media (min-width: $medium) {
     display: grid;
     grid-template-columns: 33.333% auto;
-    grid-gap: var(--gutter);
+    grid-gap: calc(var(--gutter) * 1.5);
   }
 
   @media (min-width: $large) {

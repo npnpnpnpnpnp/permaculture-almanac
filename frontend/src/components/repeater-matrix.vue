@@ -92,8 +92,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .item {}
 .table {
   width: 100%;
+}
+
+.item {
+  border-top: 1px solid var(--green-light);
+  padding-top: var(--spacing-h-small);
+
+  &:not(:last-of-type) {
+    padding-bottom: var(--blank-line);
+  }
+
+  &:hover {
+    background-color: var(--green-light-alpha);
+  }
 }
 </style>

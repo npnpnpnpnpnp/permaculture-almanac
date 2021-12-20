@@ -1,14 +1,6 @@
 <template>
   <div v-if="showFilter" :class="$style.component">
-    <button
-      v-if="showButton"
-      type="button"
-      @click="close"
-      :class="$style.button"
-    >
-      <span :class="$style.close" />
-    </button>
-    <div v-html="labels.title" :class="$style.title" />
+    <!-- <div v-html="labels.title" :class="$style.title" /> -->
     <div :class="$style.content">
       <category-filter
         :default-categories="defaultCategories"
@@ -165,9 +157,7 @@ export default {
 }
 
 .title {
-  .filterVisible & {
-    margin-bottom: var(--filter-spacing-bottom);
-  }
+  margin-bottom: var(--filter-spacing-bottom);
 }
 
 .controls {

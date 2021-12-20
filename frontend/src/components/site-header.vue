@@ -23,6 +23,7 @@ export default {
 <style lang="scss" module>
 .component {
   margin-bottom: calc(var(--blank-line) * 2);
+  padding: var(--gutter);
 
   @media (min-width: $xsmall) {
     display: grid;

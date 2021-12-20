@@ -4,6 +4,9 @@
   --white: rgb(255, 255, 255);
   --white-alpha: rgba(255, 255, 255, 0.9);
   --color-focus-default: rgba(0, 0, 0, 0.075);
+  --green-light: rgb(161, 243, 172);
+  --green-light-alpha: rgb(197, 255, 205, 0.5);
+  --green-dark: rgb(124, 163, 129);
 
   /* Typography */
   --fs-base: 0.625em;
@@ -13,9 +16,12 @@
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
   --list-indent: 1.15em;
-  --filter-spacing-bottom: calc(var(--blank-line) * 2);
   --spacing-xsmall: calc(var(--gutter) / 2);
   --list-indent: var(--gutter);
+
+  /* horizontal */
+  --filter-spacing-bottom: calc(var(--blank-line) * 2);
+  --spacing-h-small: calc(var(--blank-line) / 4);
 
   /* Grids */
   --resource-grid: repeat(2, 1fr);
