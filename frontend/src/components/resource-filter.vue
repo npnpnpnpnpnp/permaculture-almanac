@@ -26,7 +26,7 @@
         @update-authors="updateAuthorFilter"
       />
     </div>
-    <div :class="$style.controls">
+    <div v-if="!isDesktop" :class="$style.controls">
       <button
         v-show="hasFilterApplied"
         type="button"
