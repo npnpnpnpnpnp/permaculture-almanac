@@ -1,9 +1,7 @@
 <template>
-  <div
-    v-html="item.fields.title"
-    :class="classes.component"
-    @click="selectCategory"
-  />
+  <div :class="classes.component" @click="selectCategory">
+    <div v-html="item.fields.title" :class="$style.category" />
+  </div>
 </template>
 
 <script>
@@ -46,14 +44,9 @@ export default {
   // @extend %button-reset;
 
   position: relative;
-  display: block;
-  text-align: start;
+  display: inline-block;
   margin-left: var(--list-indent);
   cursor: pointer;
-
-  &::first-letter {
-    text-transform: uppercase;
-  }
 
   &:not(:last-of-type) {
     margin-right: var(--gutter);
@@ -74,9 +67,11 @@ export default {
       content: '\25CF ';
     }
   }
+}
 
-  @media (min-width: $medium) {
-    display: inline;
+.category {
+  &::first-letter {
+    text-transform: uppercase;
   }
 }
 </style>
