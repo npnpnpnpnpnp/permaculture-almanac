@@ -91,6 +91,7 @@ export default {
   width: 100%;
   padding: calc(var(--gutter) / 2) var(--gutter) calc(var(--gutter) / 4) 0;
   color: var(--black);
+  overflow: hidden;
   text-overflow: ellipsis;
 
   // &:focus {
