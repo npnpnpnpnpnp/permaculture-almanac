@@ -76,6 +76,8 @@ export default {
 }
 
 .link {
+  @extend %link-reset;
+
   display: inline-block;
 }
 
