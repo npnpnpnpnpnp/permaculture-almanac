@@ -1,5 +1,5 @@
 <template>
-  <li :class="$style.component">
+  <tr :class="$style.component">
     <a
       :href="item.fields.external_url"
       target="_blank"
@@ -30,7 +30,7 @@
       <div v-html="item.fields.isbn" />
     </div>
     <div v-html="item.meta.template" :class="$style.category" />
-  </li>
+  </tr>
 </template>
 
 <script>

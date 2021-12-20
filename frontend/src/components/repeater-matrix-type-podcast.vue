@@ -1,11 +1,11 @@
 <template>
-  <div :class="$style.component">
+  <tr :class="$style.component">
     <div v-html="item.fields.title" />
     <div :class="$style.body">
       <base-bodytext :class="$style.text" :text="item.body" />
     </div>
     <div v-html="item.meta.template" />
-  </div>
+  </tr>
 </template>
 
 <script>

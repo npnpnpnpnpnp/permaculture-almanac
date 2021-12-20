@@ -1,5 +1,5 @@
 <template>
-  <li :class="$style.component">
+  <tr :class="$style.component">
     <a
       :href="item.fields.external_url"
       target="_blank"
@@ -29,7 +29,7 @@
     </ul>
     <base-bodytext :text="truncatedText" :class="$style.description" />
     <div v-html="item.meta.template" :class="$style.category" />
-  </li>
+  </tr>
 </template>
 
 <script>
