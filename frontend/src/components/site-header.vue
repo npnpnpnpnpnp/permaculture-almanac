@@ -40,7 +40,7 @@ export default {
 }
 
 .title {
-  // grid-column: 1;
+  @extend %fw-bold;
 
   @media (min-width: $medium) {
     grid-column: 2;
