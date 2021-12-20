@@ -10,7 +10,6 @@
     />
     <div :class="$style.content">
       <div :class="$style.controls">
-        <search-input @change-value="handleSearchQuery" :value="query" />
         <button
           v-if="showButton"
           type="button"
@@ -18,6 +17,7 @@
           :class="$style.button"
           @click="openFilter"
         />
+        <search-input @change-value="handleSearchQuery" :value="query" />
       </div>
       <filter-indicator
         :filter="filter"
@@ -126,12 +126,12 @@ export default {
 
 .controls {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gutter);
   margin-bottom: var(--filter-spacing-bottom);
 
   @media (min-width: $xsmall) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2fr;
   }
 
   @media (min-width: $medium) {
