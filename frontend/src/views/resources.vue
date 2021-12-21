@@ -133,7 +133,16 @@ export default {
   }
 
   @media (min-width: $medium) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: $large) {
     margin-bottom: unset;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $xxlarge) {
+    grid-template-columns: 1fr 2fr;
   }
 }
 

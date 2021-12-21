@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       labels: {
-        placeholder: 'Ich suche...'
+        placeholder: 'Search ...'
       },
       query: ''
     }
@@ -74,9 +74,6 @@ export default {
 
   @media (min-width: $medium) {
     margin-bottom: var(--filter-spacing-bottom);
-
-    // min-width: 50vw;
-    // max-width: 50%;
   }
 }
 
@@ -87,10 +84,9 @@ export default {
 .input {
   @extend %input-reset;
   // @include focus-default;
-  // @extend %ff-sans;
 
   width: 100%;
-  padding: 0 var(--gutter) calc(var(--gutter) / 4) 0;
+  padding: calc(var(--gutter) / 4);
   color: var(--black);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -102,25 +98,18 @@ export default {
   &::placeholder {
     color: var(--black);
   }
-
-  @media (min-width: $small) {
-    padding: 0 var(--gutter) calc(var(--gutter) / 4) 0;
-  }
 }
 
 .reset {
-  // @extend %fs-large;
-  // @extend %ff-symbols;
-
   display: inline-block;
   opacity: 0.3;
   pointer-events: none;
-  transition: opacity var(--xshort) ease;
+  font-size: 1.2;
+  padding-right: calc(var(--gutter) / 4);
 
-  &::before {
+  &::after {
     display: block;
-    content: '\2573';
-    // margin-top: -0.1em;
+    content: '\2717';
   }
 
   .hasValue & {
