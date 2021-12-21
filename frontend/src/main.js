@@ -4,7 +4,9 @@ import router from '@/router'
 import store from '@/store'
 import ApiService from '@/services/api'
 import SmartTable from 'vuejs-smart-table'
+import PortalVue from 'portal-vue'
 
+Vue.use(PortalVue)
 Vue.use(SmartTable)
 
 Vue.config.productionTip = false
