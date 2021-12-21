@@ -57,6 +57,7 @@ export default {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   max-height: calc(var(--blank-line) * 3);
+  margin-left: calc(var(--gutter) * -1);
 
   // &::after {
   //   content: '';
