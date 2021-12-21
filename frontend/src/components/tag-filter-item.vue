@@ -40,10 +40,6 @@ export default {
 
 <style lang="scss" module>
 .component {
-  // @extend %ff-sans;
-  // @extend %fs-overlay;
-  // @extend %button-reset;
-
   position: relative;
   display: block;
   text-align: start;
@@ -54,13 +50,11 @@ export default {
   }
 
   &::before {
-    // @extend %ff-symbols;
-
     position: absolute;
     margin-right: var(--spacing-xsmall);
     margin-left: calc(var(--list-indent) * -1);
-    margin-top: -0.08em;
-    content: '\25CC ';
+    color: var(--green-light);
+    content: '\25CB ';
   }
 
   &.is-current {

@@ -15,9 +15,8 @@
   /* Spacing */
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
-  --list-indent: 1.15em;
+  --list-indent: 1.25em;
   --spacing-xsmall: calc(var(--gutter) / 2);
-  --list-indent: var(--gutter);
 
   /* horizontal */
   --filter-spacing-bottom: calc(var(--blank-line) * 2);

@@ -54,13 +54,11 @@ export default {
   }
 
   &::before {
-    // @extend %ff-symbols;
-
     position: absolute;
     margin-right: var(--spacing-xsmall);
     margin-left: calc(var(--list-indent) * -1);
-    margin-top: -0.08em;
-    content: '\25CC ';
+    color: var(--green-light);
+    content: '\25CB ';
   }
 
   &.is-current {
