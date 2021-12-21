@@ -1,25 +1,33 @@
 <template>
   <div :class="$style.component">
     <div v-html="labels.title" :class="$style.title" />
-    <div :class="classes.content">
-      <category-filter-item
-        v-for="(category, index) in defaultCategories"
+    <category-filter-item
+      v-for="(category, index) in defaultCategories"
+      :key="`category-${index}`"
+      :item="category"
+      :selected-categories="selectedCategories"
+      @select-category="applyFilter"
+    />
+    <portal to="category-portal" v-if="!filterVisible">
+      <indicator-item
+        v-for="(category, index) in selectedCategories"
         :key="`category-${index}`"
+        type="category"
         :item="category"
-        :selected-categories="selectedCategories"
         @select-category="applyFilter"
       />
-    </div>
+    </portal>
   </div>
 </template>
 
 <script>
 import CategoryFilterItem from '@/components/category-filter-item'
-import { mapState } from 'vuex'
+import IndicatorItem from '@/components/indicator-item'
 
 export default {
   components: {
-    CategoryFilterItem
+    CategoryFilterItem,
+    IndicatorItem
   },
   props: {
     defaultCategories: {
@@ -28,6 +36,10 @@ export default {
     },
     selectedCategories: {
       type: Array,
+      required: true
+    },
+    filterVisible: {
+      type: Boolean,
       required: true
     }
   },
@@ -41,13 +53,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['filterVisible']),
     classes() {
       return {
-        content: [
-          this.$style.content,
-          this.filterVisible ? this.$style['is-visible'] : ''
-        ],
         toggle: [
           this.$style.toggle,
           this.hasFilterApplied ? this.$style['is-active'] : ''
@@ -62,14 +69,12 @@ export default {
     // get category from child and push it into collective array of selected category filter
     applyFilter(category) {
       const categoryExists = this.selectedCategories.includes(category)
-
       // removes filter when it exists on click in child
       if (categoryExists) {
         // delete the currently clicked element from array which leads to deselection of filter
         const index = this.selectedCategories.indexOf(category)
         this.selectedCategories.splice(index, 1)
       }
-
       // add filter if it’s not already selected
       if (!categoryExists) {
         this.selectedCategories.push(category)
@@ -91,6 +96,6 @@ export default {
 }
 
 .title {
-  margin-bottom: var(--blank-line);
+  // margin-bottom: var(--spacing-h-small);
 }
 </style>

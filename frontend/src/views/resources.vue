@@ -19,11 +19,7 @@
         />
         <search-input @change-value="handleSearchQuery" :value="query" />
       </div>
-      <filter-indicator
-        :filter="filter"
-        :filter-visible="filterVisible"
-        @filter-visibility="handleFilterVisibility"
-      />
+      <filter-indicator :filter="filter" />
       <repeater-matrix
         :items="page.children"
         :query="query"
