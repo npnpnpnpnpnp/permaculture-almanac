@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.component" @click="selectCategory">
+  <div :class="$style.component" @click="selectItem">
     <div v-html="item.fields.title" :class="$style.title" />
   </div>
 </template>
@@ -17,8 +17,10 @@ export default {
     }
   },
   methods: {
-    selectCategory() {
-      this.$emit('select-category', this.item)
+    selectItem() {
+      if (this.type === 'category') this.$emit('select-category', this.item)
+      if (this.type === 'tag') this.$emit('select-tag', this.item)
+      if (this.type === 'author') this.$emit('select-author', this.item)
     }
   }
 }
@@ -29,6 +31,7 @@ export default {
   display: inline-flex;
   padding-left: var(--gutter);
   cursor: pointer;
+  margin-bottom: calc(var(--blank-line) / 5);
 }
 
 .title {

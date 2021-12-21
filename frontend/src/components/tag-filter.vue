@@ -1,25 +1,33 @@
 <template>
   <div :class="$style.component">
     <div v-html="labels.title" :class="$style.title" />
-    <div :class="classes.content">
-      <tag-filter-item
-        v-for="(item, index) in defaultTags"
-        :key="`item-${index}`"
-        :item="item"
-        :selected-tags="selectedTags"
+    <tag-filter-item
+      v-for="(item, index) in defaultTags"
+      :key="`item-${index}`"
+      :item="item"
+      :selected-tags="selectedTags"
+      @select-tag="applyFilter"
+    />
+    <portal to="tag-portal" v-if="!filterVisible">
+      <indicator-item
+        v-for="(tag, index) in selectedTags"
+        :key="`tag-${index}`"
+        type="tag"
+        :item="tag"
         @select-tag="applyFilter"
       />
-    </div>
+    </portal>
   </div>
 </template>
 
 <script>
 import TagFilterItem from '@/components/tag-filter-item'
-import { mapState } from 'vuex'
+import IndicatorItem from '@/components/indicator-item'
 
 export default {
   components: {
-    TagFilterItem
+    TagFilterItem,
+    IndicatorItem
   },
   props: {
     defaultTags: {
@@ -29,32 +37,20 @@ export default {
     selectedTags: {
       type: Array,
       required: true
+    },
+    filterVisible: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
     return {
       labels: {
-        title: 'Tags',
-        openFilter: 'Filter',
-        deleteFilter: 'Filter löschen'
+        title: 'Tags'
       }
     }
   },
-  computed: {
-    ...mapState(['filterVisible']),
-    classes() {
-      return {
-        content: [
-          this.$style.content,
-          this.filterVisible ? this.$style['is-visible'] : ''
-        ],
-        toggle: [
-          this.$style.toggle,
-          this.hasFilterApplied ? this.$style['is-active'] : ''
-        ]
-      }
-    }
-  },
+  // computed: {},
   methods: {
     // get category from child and push it into collective array of selected category filter
     applyFilter(tag) {
@@ -71,9 +67,6 @@ export default {
       if (!tagExists) {
         this.selectedTags.push(tag)
       }
-    },
-    toggleFilter() {
-      this.$store.dispatch('setFilterVisibility')
     }
   },
   watch: {
@@ -91,6 +84,6 @@ export default {
 }
 
 .title {
-  margin-bottom: var(--blank-line);
+  margin-bottom: var(--spacing-h-small);
 }
 </style>

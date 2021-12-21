@@ -1,25 +1,33 @@
 <template>
   <div :class="$style.component">
     <div v-html="labels.title" :class="$style.title" />
-    <div :class="classes.content">
-      <author-filter-item
-        v-for="(item, index) in defaultAuthors"
-        :key="`item-${index}`"
-        :item="item"
-        :selected-authors="selectedAuthors"
+    <author-filter-item
+      v-for="(item, index) in defaultAuthors"
+      :key="`item-${index}`"
+      :item="item"
+      :selected-authors="selectedAuthors"
+      @select-author="applyFilter"
+    />
+    <portal to="author-portal" v-if="!filterVisible">
+      <indicator-item
+        v-for="(author, index) in selectedAuthors"
+        :key="`author-${index}`"
+        type="author"
+        :item="author"
         @select-author="applyFilter"
       />
-    </div>
+    </portal>
   </div>
 </template>
 
 <script>
 import AuthorFilterItem from '@/components/author-filter-item'
-import { mapState } from 'vuex'
+import IndicatorItem from '@/components/indicator-item'
 
 export default {
   components: {
-    AuthorFilterItem
+    AuthorFilterItem,
+    IndicatorItem
   },
   props: {
     defaultAuthors: {
@@ -29,33 +37,17 @@ export default {
     selectedAuthors: {
       type: Array,
       required: true
+    },
+    filterVisible: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
     return {
       labels: {
-        title: 'Authors',
-        openFilter: 'Filter',
-        deleteFilter: 'Filter löschen'
+        title: 'Authors'
       }
-    }
-  },
-  computed: {
-    ...mapState(['filterVisible']),
-    classes() {
-      return {
-        content: [
-          this.$style.content,
-          this.filterVisible ? this.$style['is-visible'] : ''
-        ],
-        toggle: [
-          this.$style.toggle,
-          this.hasFilterApplied ? this.$style['is-active'] : ''
-        ]
-      }
-    },
-    hasFilterApplied() {
-      return this.selectedAuthors.length > 0
     }
   },
   methods: {
@@ -74,13 +66,6 @@ export default {
       if (!authorExists) {
         this.selectedAuthors.push(author)
       }
-    },
-    // reset locally, watcher emits to parent
-    resetFilter() {
-      this.selectedAuthors = []
-    },
-    toggleFilter() {
-      this.$store.dispatch('setFilterVisibility')
     }
   },
   watch: {
@@ -98,6 +83,6 @@ export default {
 }
 
 .title {
-  margin-bottom: var(--blank-line);
+  margin-bottom: var(--spacing-h-small);
 }
 </style>

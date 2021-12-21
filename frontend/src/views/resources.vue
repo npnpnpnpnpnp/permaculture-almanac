@@ -126,7 +126,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gutter);
-  margin-bottom: var(--filter-spacing-bottom);
+  margin-bottom: var(--blank-line);
 
   @media (min-width: $xsmall) {
     grid-template-columns: 1fr 2fr;

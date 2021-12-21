@@ -11,11 +11,13 @@
       <tag-filter
         :default-tags="defaultTags"
         :selected-tags="filter.selectedTags"
+        :filter-visible="filterVisible"
         @update-tags="updateTagFilter"
       />
       <author-filter
         :default-authors="defaultAuthors"
         :selected-authors="filter.selectedAuthors"
+        :filter-visible="filterVisible"
         @update-authors="updateAuthorFilter"
       />
     </div>

@@ -1,7 +1,9 @@
 <template>
   <div v-if="showItem" :class="$style.component">
     <ul :class="$style.list">
-      <portal-target name="category-portal" />
+      <portal-target name="category-portal" :class="$style.portal" />
+      <portal-target name="tag-portal" :class="$style.portal" />
+      <portal-target name="author-portal" :class="$style.portal" />
     </ul>
   </div>
 </template>
@@ -56,7 +58,7 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  max-height: calc(var(--blank-line) * 3);
+  max-height: calc(var(--blank-line) * 4.5);
   margin-left: calc(var(--gutter) * -1);
 
   // &::after {
@@ -87,4 +89,8 @@ export default {
 //   bottom: 0;
 //   z-index: 1;
 // }
+
+.portal {
+  display: inline-block;
+}
 </style>
