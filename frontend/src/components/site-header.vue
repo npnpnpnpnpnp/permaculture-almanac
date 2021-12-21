@@ -22,17 +22,17 @@ export default {
 
 <style lang="scss" module>
 .component {
-  margin-bottom: calc(var(--blank-line) * 2);
   padding: var(--gutter);
 
   @media (min-width: $xsmall) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: var(--gutter);
+    grid-gap: calc(var(--gutter) * 1.5);
   }
 
   @media (min-width: $medium) {
     grid-template-columns: 33.333% max-content auto;
+    margin-bottom: calc(var(--blank-line) * 2);
   }
 
   @media (min-width: $large) {
@@ -41,8 +41,6 @@ export default {
 }
 
 .title {
-  @extend %fw-bold;
-
   @media (min-width: $medium) {
     grid-column: 2;
   }

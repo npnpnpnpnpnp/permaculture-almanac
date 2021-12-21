@@ -69,7 +69,8 @@ export default {
 
 <style lang="scss" module>
 .component {
-  border-bottom: 1px solid var(--black);
+  // border-bottom: 1px solid var(--black);
+  background-color: var(--green-light-alpha);
 
   @media (min-width: $medium) {
     margin-bottom: var(--filter-spacing-bottom);
@@ -89,20 +90,21 @@ export default {
   // @extend %ff-sans;
 
   width: 100%;
-  padding: calc(var(--gutter) / 2) var(--gutter) calc(var(--gutter) / 4) 0;
+  padding: 0 var(--gutter) calc(var(--gutter) / 4) 0;
   color: var(--black);
   overflow: hidden;
   text-overflow: ellipsis;
 
-  // &:focus {
-  // }
+  &:focus {
+    border-color: var(--green-light);
+  }
 
   &::placeholder {
     color: var(--black);
   }
 
   @media (min-width: $small) {
-    padding: calc(var(--gutter) / 2) var(--gutter) calc(var(--gutter) / 4) 0;
+    padding: 0 var(--gutter) calc(var(--gutter) / 4) 0;
   }
 }
 
