@@ -46,23 +46,8 @@ export default {
   data() {
     return {
       labels: {
-        title: 'Categories',
-        openFilter: 'Filter',
-        deleteFilter: 'Filter löschen'
+        title: 'Categories'
       }
-    }
-  },
-  computed: {
-    classes() {
-      return {
-        toggle: [
-          this.$style.toggle,
-          this.hasFilterApplied ? this.$style['is-active'] : ''
-        ]
-      }
-    },
-    hasFilterApplied() {
-      return this.selectedCategories.length > 0
     }
   },
   methods: {
