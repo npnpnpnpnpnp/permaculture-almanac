@@ -28,5 +28,7 @@ export default {
 <style lang="scss" module>
 // .view {}
 // .title {}
-// .body {}
+.body {
+  @extend %base-bodytext;
+}
 </style>
