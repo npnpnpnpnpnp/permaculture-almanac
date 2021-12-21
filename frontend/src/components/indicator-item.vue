@@ -39,12 +39,13 @@ export default {
   border-radius: 0.8em;
 
   &:hover {
-    background-color: var(--green-light);
+    background-color: var(--green-light-alpha);
   }
 
-  // &::first-letter {
-  //   text-transform: uppercase;
-  // }
+  // NOTE: this inserts a space after pseudo element in FF
+  &::first-letter {
+    text-transform: uppercase;
+  }
 
   &::after {
     content: '\00d7';
