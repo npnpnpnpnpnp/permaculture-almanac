@@ -1,5 +1,5 @@
 <template>
-  <div v-show="filterVisible" :class="$style.component">
+  <div v-show="showFilter" :class="$style.component">
     <!-- <div v-html="labels.title" :class="$style.title" /> -->
     <div :class="$style.content">
       <category-filter
