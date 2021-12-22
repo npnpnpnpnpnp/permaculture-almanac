@@ -2,9 +2,9 @@ name: Frontend
 
 env:
   working-directory: ./frontend
-  server:
-  # port: 
-  username:
+  server: ftpes://gutenberg.metanet.ch:21
+  # port:
+  username: frontendpermaculture
   # remote-root:
 
 on:
