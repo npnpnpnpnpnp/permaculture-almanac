@@ -1,6 +1,10 @@
 <template>
   <li :class="$style.component">
-    <router-link :to="route.meta.url" :exact-active-class="$style['is-active']">
+    <router-link
+      :to="route.meta.url"
+      :class="$style.link"
+      :exact-active-class="$style['is-active']"
+    >
       {{ route.meta.title }}
     </router-link>
   </li>
@@ -23,5 +27,10 @@ export default {
     padding-right: var(--gutter);
   }
 }
+
+.link {
+  @extend %link-reset;
+}
+
 // .is-active {}
 </style>

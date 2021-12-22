@@ -1,42 +1,50 @@
 <template>
-  <a :href="item.meta.url" rel="noopener" :class="$style.link">
-    <div :class="$style.titles">
+  <tr :class="$style.component">
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
       <div v-html="item.fields.title" :class="$style.title" />
       <div v-html="item.fields.subtitle" :class="$style.subtitle" />
-    </div>
-    <ul v-if="item.fields.author">
+    </a>
+
+    <ul v-if="item.fields.author" :class="$style.authors">
       <author-item
         v-for="(author, index) in item.fields.author"
         :author="author"
         :key="`author-${index}`"
       />
     </ul>
-    <ul v-if="item.fields.tags">
+    <ul v-if="item.fields.tags" :class="$style.tags">
       <tag-item
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
       />
     </ul>
-    <div v-html="item.meta.template" />
     <div :class="$style.description">
+      <base-bodytext v-if="item.fields.body" :text="truncatedText" />
       <div v-html="item.fields.publisher" />
-      <a :href="item.fields.external_url"
-        ><span v-html="item.fields.external_url_title"
-      /></a>
       <div v-html="item.fields.isbn" />
     </div>
-  </a>
+    <div v-html="item.meta.template" :class="$style.category" />
+  </tr>
 </template>
 
 <script>
 import AuthorItem from '@/components/author-item'
 import TagItem from '@/components/tag-item'
+import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
 
 export default {
+  mixins: [truncateText],
   components: {
     AuthorItem,
-    TagItem
+    TagItem,
+    BaseBodytext
   },
   props: {
     item: {
@@ -44,12 +52,17 @@ export default {
       required: true,
       default: () => {}
     }
+  },
+  mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
   }
 }
 </script>
 
 <style lang="scss" module>
-.link {
+.component {
+  @extend %grid-columns;
+
   display: grid;
   // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
   // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
@@ -62,9 +75,22 @@ export default {
   // height: 100vh;
 }
 
+.link {
+  @extend %link-reset;
+
+  display: inline-block;
+}
+
 .title,
-.subtitle {
+.subtitle,
+.description {
   hyphens: auto;
+}
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 // .component {

@@ -1,43 +1,65 @@
 <template>
-  <div v-if="showFilter" :class="$style.component">
-    <button
-      v-if="showButton"
-      type="button"
-      @click="closeFilter"
-      :class="$style.button"
-    >
-      <span :class="$style.close" />
-    </button>
-    <div v-html="labels.title" :class="$style.title" />
+  <div v-show="showFilter" :class="$style.component">
+    <!-- <div v-html="labels.title" :class="$style.title" /> -->
     <div :class="$style.content">
       <category-filter
-        :default-categories="defaultFilters.categories"
+        :default-categories="defaultCategories"
+        :selected-categories="filter.selectedCategories"
+        :filter-visible="filterVisible"
         @update-categories="updateCategoryFilter"
       />
       <tag-filter
-        :default-tags="defaultFilters.tags"
+        :default-tags="defaultTags"
+        :selected-tags="filter.selectedTags"
+        :filter-visible="filterVisible"
         @update-tags="updateTagFilter"
       />
+      <author-filter
+        :default-authors="defaultAuthors"
+        :selected-authors="filter.selectedAuthors"
+        :filter-visible="filterVisible"
+        @update-authors="updateAuthorFilter"
+      />
     </div>
-    <!-- <button type="button" @click="toggleFilter" :class="classes.toggle">
-      {{ labels.openFilter }}
-    </button> -->
+    <div v-if="!isDesktop" :class="$style.controls">
+      <button
+        v-show="hasFilterApplied"
+        type="button"
+        :class="$style.reset"
+        @click="reset"
+      >
+        {{ labels.reset }}
+      </button>
+      <button type="button" @click="apply" :class="$style.apply">
+        {{ labels.apply }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import CategoryFilter from '@/components/category-filter'
 import TagFilter from '@/components/tag-filter'
+import AuthorFilter from '@/components/author-filter'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     CategoryFilter,
-    TagFilter
+    TagFilter,
+    AuthorFilter
   },
   props: {
-    defaultFilters: {
-      type: Object,
+    defaultCategories: {
+      type: Array,
+      required: true
+    },
+    defaultTags: {
+      type: Array,
+      required: true
+    },
+    defaultAuthors: {
+      type: Array,
       required: true
     },
     filterVisible: {
@@ -49,12 +71,14 @@ export default {
     return {
       labels: {
         title: 'Filter',
-        openFilter: 'Filter',
-        closeFilter: 'Delete filter'
+        open: 'Filter',
+        apply: 'Apply',
+        reset: 'Reset'
       },
       filter: {
         selectedCategories: [],
-        selectedTags: []
+        selectedTags: [],
+        selectedAuthors: []
       }
     }
   },
@@ -73,20 +97,42 @@ export default {
     },
     showButton() {
       return this.isDesktop ? false : this.filterVisible
+    },
+    hasFilterApplied() {
+      return (
+        this.filter.selectedCategories.length > 0 ||
+        this.filter.selectedTags.length > 0 ||
+        this.filter.selectedAuthors.length > 0
+      )
     }
   },
   methods: {
+    // reset locally, watcher emits to parent
+    reset() {
+      // this.filter.map(item => delete this.filter(item))
+      this.filter.selectedCategories = []
+      this.filter.selectedTags = []
+      this.filter.selectedAuthors = []
+    },
+    apply() {
+      this.$emit('filter-visibility', false)
+    },
+    close() {
+      this.$emit('filter-visibility', false)
+      this.reset()
+    },
     updateCategoryFilter(selectedCategories) {
       this.filter.selectedCategories = selectedCategories
     },
     updateTagFilter(selectedTags) {
       this.filter.selectedTags = selectedTags
     },
-    closeFilter() {
-      this.$emit('filter-visibility', false)
+    updateAuthorFilter(selectedAuthors) {
+      this.filter.selectedAuthors = selectedAuthors
     }
   },
   watch: {
+    // emit collective filter object to parent whenever any of the arrays gets updated for their children
     filter: {
       deep: true,
       handler() {
@@ -114,57 +160,24 @@ export default {
 }
 
 .title {
-  .filterVisible & {
-    margin-bottom: var(--filter-spacing-bottom);
-  }
+  margin-bottom: var(--filter-spacing-bottom);
 }
 
-.button {
-  position: absolute;
-  top: 0;
-  right: 0;
+.controls {
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  bottom: 0;
+  padding: calc(var(--blank-line) / 2) var(--gutter);
+  background-color: var(--white-alpha);
 }
 
-.close {
-  &:after {
-    content: '\00d7';
-  }
-  // position: relative;
-  // left: 50%;
-  // padding: calc(var(--gutter) / 2) var(--gutter);
-  // color: var(--grey);
-  // background: var(--white);
-  // // border: 1px solid var(--black);
-  // border-radius: calc(var(--gutter) / 2);
-  // box-shadow: 2px 2px calc(var(--gutter) / 4) var(--grey-alpha);
-  // transform: translateX(-50%);
-
-  // &:focus {
-  //   background-color: var(--white);
-  // }
-
-  // &.is-active {
-  //   color: var(--black);
-  // }
-
-  // @media (min-width: $medium) {
-  //   display: none;
-  // }
+.reset {
+  grid-column: 1;
 }
 
-// .delete {
-//   // @extend %ff-sans;
-//   // @extend %fs-overlay;
-//   // @extend %button-reset;
-
-//   display: block;
-//   margin-top: var(--blank-line);
-
-//   &::before {
-//     // @extend %ff-symbols;
-
-//     margin-right: var(--spacing-xsmall);
-//     content: '\2573';
-//   }
-// }
+.apply {
+  grid-column: 2;
+}
 </style>

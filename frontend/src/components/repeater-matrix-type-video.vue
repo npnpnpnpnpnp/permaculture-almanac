@@ -1,39 +1,50 @@
 <template>
-  <!-- <li :class="$style.component"> -->
-  <a :href="item.meta.url" rel="noopener" :class="$style.link">
-    <div
-      v-if="item.fields.title"
-      v-html="item.fields.title"
-      :class="$style.title"
-    />
-    <ul v-if="item.fields.author">
+  <tr :class="$style.component">
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
+      <span
+        v-if="item.fields.title"
+        v-html="item.fields.title"
+        :class="$style.title"
+      />
+    </a>
+
+    <ul v-if="item.fields.author" :class="$style.authors">
       <author-item
         v-for="(author, index) in item.fields.author"
         :author="author"
         :key="`author-${index}`"
       />
     </ul>
-    <ul v-if="item.fields.tags">
+    <ul v-if="item.fields.tags" :class="$style.tags">
       <tag-item
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
       />
     </ul>
-    <div v-html="item.meta.template" />
-  </a>
-  <!-- </li> -->
+    <base-bodytext :text="truncatedText" :class="$style.description" />
+    <div v-html="item.meta.template" :class="$style.category" />
+  </tr>
 </template>
 
 <script>
 // import EventBus from '@/event-bus'
 import AuthorItem from '@/components/author-item'
 import TagItem from '@/components/tag-item'
+import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
 
 export default {
+  mixins: [truncateText],
   components: {
     AuthorItem,
-    TagItem
+    TagItem,
+    BaseBodytext
   },
   props: {
     item: {
@@ -115,6 +126,8 @@ export default {
     // }
   },
   mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
+
     // if (this.isScaling) {
     //   EventBus.$on('video-ready', () => {
     //     this.contain()
@@ -135,29 +148,7 @@ export default {
 
 <style lang="scss" module>
 .component {
-  // height: 100vh;
-  // @media (min-width: $medium) {
-  //   margin-right: var(--indent-vertical);
-  //   margin-left: var(--indent-vertical);
-  // }
-
-  // @media (min-width: $large) {
-  //   // padding: 0 calc(var(--gutter) * 2);
-  //   margin-right: var(--text-indent-vertical);
-  //   margin-left: var(--text-indent-vertical);
-  // }
-
-  // @media (min-width: $xxlarge) {
-  //   margin-right: var(--text-indent-large);
-  //   margin-left: var(--text-indent-large);
-  // }
-
-  // @media print {
-  //   display: none;
-  // }
-}
-
-.link {
+  @extend %grid-columns;
   // display: inline-block;
   // width: 100%;
   display: grid;
@@ -172,8 +163,20 @@ export default {
   // height: 100vh;
 }
 
+.link {
+  @extend %link-reset;
+
+  display: inline-block;
+}
+
 .title {
   hyphens: auto;
+}
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .wrapper {

@@ -3,7 +3,7 @@
     <v-table
       :data="items"
       :filters="filters"
-      :hideSortIcons="false"
+      :hideSortIcons="true"
       :class="$style.table"
     >
       <thead slot="head" :class="$style.head">
@@ -17,6 +17,7 @@
           :class="$style.item"
           :selected-categories="selectedCategories"
           :selected-tags="selectedTags"
+          :selected-authors="selectedAuthors"
         />
       </tbody>
     </v-table>
@@ -44,6 +45,10 @@ export default {
       default: () => []
     },
     selectedTags: {
+      type: Array,
+      default: () => []
+    },
+    selectedAuthors: {
       type: Array,
       default: () => []
     }
@@ -87,8 +92,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .item {}
 .table {
   width: 100%;
+}
+
+.item {
+  border-top: 1px solid var(--green-light);
+  padding-top: var(--spacing-h-small);
+
+  &:not(:last-of-type) {
+    padding-bottom: var(--blank-line);
+  }
+
+  &:hover {
+    background-color: var(--green-light-alpha);
+  }
 }
 </style>

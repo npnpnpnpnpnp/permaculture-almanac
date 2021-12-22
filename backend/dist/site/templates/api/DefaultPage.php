@@ -25,6 +25,40 @@ class DefaultPage {
       $response->children = Helper::getPages($page->children);
     }
 
+    // if we are on template resource..
+    if ($page->template->name == 'resources') {
+    // get all tags from template tags..
+      $tags = wire('pages')->get('template=tags')->children;
+      //and check if they are used somewhere in the app as a reference
+      $usedTags = new PageArray();
+       foreach($tags as $tag) {
+        $references = $tag->references();
+        // if there are no tags, continue
+        if (!$references->count) continue;
+        //if not, push them to usedTags-array. has to be page array to have other meothds available
+        $usedTags->add($tag);
+      }
+      // then, add them to the tags field of the response when fetching resources page
+      $response->tags = Helper::getPageReferences($usedTags);
+    }
+
+    // if we are on template resource..
+    if ($page->template->name == 'resources') {
+    // get all author from template authors..
+      $authors = wire('pages')->get('template=authors')->children;
+      //and check if they are used somewhere in the app as a reference
+      $usedAuthors = new PageArray();
+       foreach($authors as $author) {
+        $references = $author->references();
+        // if there are no tags, continue
+        if (!$references->count) continue;
+        //if not, push them to usedAuthor-array. has to be page array to have other meothds available
+        $usedAuthors->add($author);
+      }
+      // then, add them to the tags field of the response when fetching resources page
+      $response->authors = Helper::getPageReferences($usedAuthors);
+    }
+
     Helper::unsetLanguage();
     return $response;
   }

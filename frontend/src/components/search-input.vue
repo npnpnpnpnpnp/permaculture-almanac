@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       labels: {
-        placeholder: 'Ich suche...'
+        placeholder: 'Search ...'
       },
       query: ''
     }
@@ -69,13 +69,13 @@ export default {
 
 <style lang="scss" module>
 .component {
-  border-bottom: 1px solid var(--black);
+  // border-bottom: 1px solid var(--black);
+  background-color: var(--green-light-alpha);
+  border: none;
+  border-radius: 0.8em;
 
   @media (min-width: $medium) {
     margin-bottom: var(--filter-spacing-bottom);
-
-    // min-width: 50vw;
-    // max-width: 50%;
   }
 }
 
@@ -86,38 +86,32 @@ export default {
 .input {
   @extend %input-reset;
   // @include focus-default;
-  // @extend %ff-sans;
 
   width: 100%;
-  padding: calc(var(--gutter) / 2) var(--gutter) calc(var(--gutter) / 4) 0;
+  padding: calc(var(--gutter) / 4) calc(var(--gutter) / 2);
   color: var(--black);
+  overflow: hidden;
   text-overflow: ellipsis;
 
-  // &:focus {
-  // }
+  &:focus {
+    border-color: var(--green-light);
+  }
 
   &::placeholder {
     color: var(--black);
   }
-
-  @media (min-width: $small) {
-    padding: calc(var(--gutter) / 2) var(--gutter) calc(var(--gutter) / 4) 0;
-  }
 }
 
 .reset {
-  // @extend %fs-large;
-  // @extend %ff-symbols;
-
   display: inline-block;
   opacity: 0.3;
   pointer-events: none;
-  transition: opacity var(--xshort) ease;
+  font-size: 1.2;
+  padding-right: calc(var(--gutter) / 2);
 
-  &::before {
+  &::after {
     display: block;
-    content: '\2573';
-    // margin-top: -0.1em;
+    content: '\2717';
   }
 
   .hasValue & {

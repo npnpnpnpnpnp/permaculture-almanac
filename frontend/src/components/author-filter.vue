@@ -1,40 +1,40 @@
 <template>
   <div :class="$style.component">
     <div v-html="labels.title" :class="$style.title" />
-    <tag-filter-item
-      v-for="(item, index) in defaultTags"
+    <author-filter-item
+      v-for="(item, index) in defaultAuthors"
       :key="`item-${index}`"
       :item="item"
-      :selected-tags="selectedTags"
-      @select-tag="applyFilter"
+      :selected-authors="selectedAuthors"
+      @select-author="applyFilter"
     />
-    <portal to="tag-portal" v-if="!filterVisible">
+    <portal to="author-portal" v-if="!filterVisible">
       <indicator-item
-        v-for="(tag, index) in selectedTags"
-        :key="`tag-${index}`"
-        type="tag"
-        :item="tag"
-        @select-tag="applyFilter"
+        v-for="(author, index) in selectedAuthors"
+        :key="`author-${index}`"
+        type="author"
+        :item="author"
+        @select-author="applyFilter"
       />
     </portal>
   </div>
 </template>
 
 <script>
-import TagFilterItem from '@/components/tag-filter-item'
+import AuthorFilterItem from '@/components/author-filter-item'
 import IndicatorItem from '@/components/indicator-item'
 
 export default {
   components: {
-    TagFilterItem,
+    AuthorFilterItem,
     IndicatorItem
   },
   props: {
-    defaultTags: {
+    defaultAuthors: {
       type: Array,
       required: true
     },
-    selectedTags: {
+    selectedAuthors: {
       type: Array,
       required: true
     },
@@ -46,33 +46,32 @@ export default {
   data() {
     return {
       labels: {
-        title: 'Tags'
+        title: 'Authors'
       }
     }
   },
-  // computed: {},
   methods: {
     // get category from child and push it into collective array of selected category filter
-    applyFilter(tag) {
-      const tagExists = this.selectedTags.includes(tag)
+    applyFilter(author) {
+      const authorExists = this.selectedAuthors.includes(author)
 
       // removes filter when it exists on click in child
-      if (tagExists) {
+      if (authorExists) {
         // delete the currently clicked element from array which leads to deselection of filter
-        const index = this.selectedTags.indexOf(tag)
-        this.selectedTags.splice(index, 1)
+        const index = this.selectedAuthors.indexOf(author)
+        this.selectedAuthors.splice(index, 1)
       }
 
       // add filter if it’s not already selected
-      if (!tagExists) {
-        this.selectedTags.push(tag)
+      if (!authorExists) {
+        this.selectedAuthors.push(author)
       }
     }
   },
   watch: {
-    selectedTags() {
+    selectedAuthors() {
       // whenever this.selectedTags is updated, emit to parent, pass down via prop to child to handle selected category design
-      this.$emit('update-tags', this.selectedTags)
+      this.$emit('update-authors', this.selectedAuthors)
     }
   }
 }

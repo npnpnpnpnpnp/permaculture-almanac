@@ -1,14 +1,15 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
     <resource-filter
-      :default-filters="defaultFilters"
+      :default-categories="defaultCategories"
+      :default-tags="page.tags"
+      :default-authors="page.authors"
       :filter-visible="filterVisible"
       @update-filter="handleFilter"
       @filter-visibility="handleFilterVisibility"
     />
     <div :class="$style.content">
       <div :class="$style.controls">
-        <search-input @change-value="handleSearchQuery" :value="query" />
         <button
           v-if="showButton"
           type="button"
@@ -16,12 +17,15 @@
           :class="$style.button"
           @click="openFilter"
         />
+        <search-input @change-value="handleSearchQuery" :value="query" />
       </div>
+      <filter-indicator :filter="filter" />
       <repeater-matrix
         :items="page.children"
         :query="query"
         :selected-categories="filter.selectedCategories"
         :selected-tags="filter.selectedTags"
+        :selected-authors="filter.selectedAuthors"
       />
     </div>
   </main>
@@ -33,28 +37,23 @@ import { metaInfo } from '@/mixins/meta-info'
 import RepeaterMatrix from '@/components/repeater-matrix'
 import ResourceFilter from '@/components/resource-filter.vue'
 import SearchInput from '@/components/search-input'
+import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     RepeaterMatrix,
     ResourceFilter,
-    SearchInput
+    SearchInput,
+    FilterIndicator
   },
   mixins: [metaInfo],
   data() {
     return {
       page: {},
       loading: true,
-      defaultCategories: [],
-      defaultTags: [],
       query: '',
       filter: {},
-      defaultFilters: {
-        authors: [],
-        categories: [],
-        tags: []
-      },
       filterVisible: false,
       labels: {
         openFilter: 'Filter'
@@ -69,6 +68,23 @@ export default {
     ...mapState(['isDesktop']),
     showButton() {
       return this.isDesktop ? false : true
+    },
+    defaultCategories() {
+      let categories = []
+      this.page.children.map(child => {
+        // create object for category to make further usage easier
+        let categoryObject = {
+          fields: {
+            title: child.meta.template
+          }
+        }
+        // use find with explicit condition to indentify only one match
+        const categoryExists = categories.find(
+          category => category.fields.title === child.meta.template
+        )
+        if (!categoryExists) categories.push(categoryObject)
+      })
+      return categories
     }
   },
   methods: {
@@ -80,39 +96,12 @@ export default {
     },
     // get all filter updates from filter component
     handleFilter(value) {
+      // store the updated filter value locally to be able to pass it down to repeater components
       this.filter = value
     },
     // get current search value from search-input
     handleSearchQuery(query) {
       this.query = query
-    },
-    getItemData() {
-      this.page.children.map(child => {
-        // generally check if current item of loop already exists within defaultFilters
-        // push category of items into collective defaultFilters.categories
-        const category = child.meta.template
-        const categoryExists = this.defaultFilters.categories.includes(category)
-        categoryExists ? false : this.defaultFilters.categories.push(category)
-
-        // push tags of each item into collective defaultFilters.tags
-        child.fields.tags.map(tag => {
-          const tagExists = this.defaultFilters.tags.includes(tag)
-          tagExists ? false : this.defaultFilters.tags.push(tag)
-        })
-
-        // push authors of each item into collective defaultFilters.authors
-        child.fields.author.map(author => {
-          const authorExists = this.defaultFilters.authors.includes(author)
-          authorExists ? false : this.defaultFilters.authors.push(author)
-        })
-      })
-    }
-  },
-  // mounted() {},
-  watch: {
-    loading() {
-      // as soon as page was loaded, fetch and flatten item data used for default filter values
-      this.getItemData()
     }
   }
 }
@@ -120,10 +109,12 @@ export default {
 
 <style lang="scss" module>
 .view {
+  padding: var(--gutter);
+
   @media (min-width: $medium) {
     display: grid;
     grid-template-columns: 33.333% auto;
-    grid-gap: var(--gutter);
+    grid-gap: calc(var(--gutter) * 1.5);
   }
 
   @media (min-width: $large) {
@@ -133,20 +124,37 @@ export default {
 
 .controls {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gutter);
-  margin-bottom: var(--filter-spacing-bottom);
+  margin-bottom: var(--blank-line);
 
   @media (min-width: $xsmall) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2fr;
   }
 
   @media (min-width: $medium) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: $large) {
     margin-bottom: unset;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $xxlarge) {
+    grid-template-columns: 1fr 2fr;
   }
 }
 
 .button {
+  padding: calc(var(--blank-line) / 8) calc(var(--gutter) / 2);
+  border: 1px solid var(--green-light);
+  border-radius: 0.8em;
+
+  &:hover {
+    background-color: var(--green-light-alpha);
+  }
+
   @media (min-width: $small) {
     max-width: 50%;
   }

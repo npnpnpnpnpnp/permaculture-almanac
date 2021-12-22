@@ -1,9 +1,9 @@
 name: Backend
 
 env:
-  server:
-  # port: 
-  username:
+  server: ftpes://gutenberg.metanet.ch:21
+  # port:
+  username: backendpermaculture
   # remote-root:
 
 on:

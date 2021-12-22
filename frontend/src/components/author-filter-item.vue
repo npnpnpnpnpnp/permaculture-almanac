@@ -1,7 +1,7 @@
 <template>
-  <div :class="classes.component" @click="selectCategory">
-    <div v-html="item.fields.title" :class="$style.category" />
-  </div>
+  <button type="button" :class="classes.component" @click="selectAuthor">
+    <span v-html="item.fields.title" />
+  </button>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
       type: Object,
       required: true
     },
-    selectedCategories: {
+    selectedAuthors: {
       type: Array,
       required: true
     }
@@ -26,12 +26,13 @@ export default {
       }
     },
     isCurrent() {
-      return this.selectedCategories.includes(this.item)
+      return this.selectedAuthors.includes(this.item)
     }
   },
   methods: {
-    selectCategory() {
-      this.$emit('select-category', this.item)
+    selectAuthor() {
+      // send to parent to evaluate duplicates of selected tags
+      this.$emit('select-author', this.item)
     }
   }
 }
@@ -39,10 +40,14 @@ export default {
 
 <style lang="scss" module>
 .component {
+  // @extend %ff-sans;
+  // @extend %fs-overlay;
+  // @extend %button-reset;
+
   position: relative;
-  display: inline-block;
+  display: block;
+  text-align: start;
   margin-left: var(--list-indent);
-  cursor: pointer;
 
   &:not(:last-of-type) {
     margin-right: var(--gutter);
@@ -61,11 +66,9 @@ export default {
       content: '\25CF ';
     }
   }
-}
 
-.category {
-  &::first-letter {
-    text-transform: uppercase;
+  @media (min-width: $medium) {
+    display: inline;
   }
 }
 </style>

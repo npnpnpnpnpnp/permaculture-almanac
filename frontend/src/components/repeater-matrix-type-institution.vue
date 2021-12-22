@@ -1,50 +1,66 @@
 <template>
-  <div :class="$style.component">
-    <div v-html="item.fields.title" :class="$style.title" />
-    <div v-html="item.meta.template" />
-  </div>
+  <tr :class="$style.component">
+    <a
+      :href="item.fields.external_url"
+      target="_blank"
+      rel="noopener"
+      :class="$style.link"
+    >
+      <div v-html="item.fields.title" :class="$style.title" />
+      <div v-html="item.fields.subtitle" :class="$style.subtitle" />
+    </a>
+    <base-bodytext :text="truncatedText" :class="$style.description" />
+    <div v-html="item.meta.template" :class="$style.category" />
+  </tr>
 </template>
 
 <script>
+import BaseBodytext from '@/components/base-bodytext'
+import { truncateText } from '@/mixins/truncate-text'
+
 export default {
+  mixins: [truncateText],
+  components: {
+    BaseBodytext
+  },
   props: {
     item: {
       type: Object,
       required: true
     }
+  },
+  mounted() {
+    this.getCharacters(this.item.fields.body) // method defined in mixin
   }
 }
 </script>
 
 <style lang="scss" module>
-// .component {
-//   position: relative;
-// }
+.component {
+  @extend %grid-columns;
 
-// .text {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 100%;
-//   height: 100%;
-//   padding: calc(var(--gutter) * 4) var(--gutter);
-//   transform: translate(-50%, -50%);
+  display: grid;
+  // based on: https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items
+  // and: https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt
+  // grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: var(--resource-grid);
 
-//   @media (min-width: $medium) {
-//     padding: var(--slide-padding);
-//   }
-// }
+  // only works without overflow when using fr units
+  // see: https://css-tricks.com/introduction-fr-css-unit/
+  grid-gap: var(--gutter);
+  width: 100%;
+  // height: 100vh;
+}
 
-// .title {
-//   @extend %fs-large;
+.link {
+  @extend %link-reset;
 
-//   display: flex; // to center content due to inheriting height
-//   align-items: center;
-//   justify-content: center;
-//   height: inherit;
-//   overflow: hidden;
-//   text-align: center;
-//   text-transform: uppercase;
-//   word-break: break-word;
-// }
+  display: inline-block;
+}
+
+.category {
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
 </style>

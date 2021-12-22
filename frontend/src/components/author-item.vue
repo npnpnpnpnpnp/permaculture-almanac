@@ -1,6 +1,8 @@
 <template>
   <li :class="$style.component">
-    <div v-html="author.fields.title" />
+    <router-link :to="author.meta.url" :class="$style.link">
+      <div v-html="author.fields.title" />
+    </router-link>
   </li>
 </template>
 
@@ -19,6 +21,10 @@ export default {
 // .component {
 //   // width: 100%;
 // }
+
+.link {
+  @extend %link-reset;
+}
 
 // .body {
 //   display: flex;

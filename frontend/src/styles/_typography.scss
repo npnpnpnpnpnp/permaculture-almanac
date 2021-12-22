@@ -1,5 +1,10 @@
 %ff-regular {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.019em;
+}
+
+%fw-bold {
+  font-weight: 700;
 }
 
 %fs-base {
@@ -9,4 +14,8 @@
 
 %fs-body {
   font-size: 1.6em;
+}
+
+%fs-medium {
+  font-size: 1.5em;
 }
