@@ -71,6 +71,8 @@ export default {
 .component {
   // border-bottom: 1px solid var(--black);
   background-color: var(--green-light-alpha);
+  border: none;
+  border-radius: 0.8em;
 
   @media (min-width: $medium) {
     margin-bottom: var(--filter-spacing-bottom);
@@ -86,7 +88,7 @@ export default {
   // @include focus-default;
 
   width: 100%;
-  padding: calc(var(--gutter) / 4);
+  padding: calc(var(--gutter) / 4) calc(var(--gutter) / 2);
   color: var(--black);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -105,7 +107,7 @@ export default {
   opacity: 0.3;
   pointer-events: none;
   font-size: 1.2;
-  padding-right: calc(var(--gutter) / 4);
+  padding-right: calc(var(--gutter) / 2);
 
   &::after {
     display: block;

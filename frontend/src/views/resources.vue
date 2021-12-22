@@ -147,6 +147,14 @@ export default {
 }
 
 .button {
+  padding: calc(var(--blank-line) / 8) calc(var(--gutter) / 2);
+  border: 1px solid var(--green-light);
+  border-radius: 0.8em;
+
+  &:hover {
+    background-color: var(--green-light-alpha);
+  }
+
   @media (min-width: $small) {
     max-width: 50%;
   }

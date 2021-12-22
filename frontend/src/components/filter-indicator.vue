@@ -91,6 +91,6 @@ export default {
 // }
 
 .portal {
-  display: inline-block;
+  display: inline;
 }
 </style>
