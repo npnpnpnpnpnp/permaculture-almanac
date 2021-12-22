@@ -1,8 +1,6 @@
 <template>
   <main :class="$style.view" v-if="page.fields">
-    <div :class="$style.text">
-      <base-bodytext :text="page.fields.body" :class="$style.body" />
-    </div>
+    <base-bodytext :text="page.fields.body" :class="$style.body" />
   </main>
 </template>
 
@@ -48,14 +46,10 @@ export default {
   }
 }
 
-.text {
-  @media (min-width: $small) {
-    order: 1;
-  }
-}
-
 .body {
   @extend %base-bodytext;
+
+  grid-column: 2;
   max-width: 25em;
 
   @media (min-width: $medium) {
