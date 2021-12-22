@@ -57,11 +57,13 @@ export default {
   width: 100%;
   text-align: left;
   padding-bottom: var(--spacing-h-small);
+  color: var(--green-light);
   // height: 100vh;
 
   :global(.vt-sort::before) {
     display: inline-block;
     margin-right: calc(var(--gutter) / 6);
+    color: var(--green-light);
     content: '';
   }
 
