@@ -72,6 +72,7 @@
     @media (min-width: $xlarge) {
       display: inline-block;
       grid-column: 4 / 5;
+      max-width: 40em;
     }
   }
 
