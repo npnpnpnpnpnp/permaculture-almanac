@@ -3,7 +3,7 @@
     <v-table
       :data="items"
       :filters="filters"
-      :hideSortIcons="false"
+      :hideSortIcons="true"
       :class="$style.table"
     >
       <thead slot="head" :class="$style.head">

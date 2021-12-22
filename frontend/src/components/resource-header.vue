@@ -31,9 +31,11 @@ export default {
   methods: {
     // NOTE: for now, only use first letter of first author / tags for sorting, refined function tbd
     authorSort(row) {
+      if (!row.fields.author) return
       return `${row.fields.author[0].fields.title}`
     },
     tagSort(row) {
+      if (!row.fields.tags) return
       return `${row.fields.tags[0].fields.title}`
     }
   }
@@ -54,6 +56,25 @@ export default {
   grid-gap: var(--gutter);
   width: 100%;
   text-align: left;
+  padding-bottom: var(--spacing-h-small);
   // height: 100vh;
+
+  :global(.vt-sort::before) {
+    display: inline-block;
+    margin-right: calc(var(--gutter) / 6);
+    content: '';
+  }
+
+  :global(.vt-sortable::before) {
+    content: '\2195';
+  }
+
+  :global(.vt-asc::before) {
+    content: '\2191';
+  }
+
+  :global(.vt-desc::before) {
+    content: '\2193';
+  }
 }
 </style>
