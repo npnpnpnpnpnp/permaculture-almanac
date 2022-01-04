@@ -58,6 +58,8 @@ export default {
   text-align: left;
   padding-bottom: var(--spacing-h-small);
   color: var(--green-light);
+  border-bottom: 1px solid var(--green-light);
+
   // height: 100vh;
 
   :global(.vt-sort::before) {

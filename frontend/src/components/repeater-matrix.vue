@@ -6,7 +6,7 @@
       :hideSortIcons="true"
       :class="$style.table"
     >
-      <thead slot="head" :class="$style.head">
+      <thead slot="head" :class="$style.head" :style="headStyle">
         <resource-header />
       </thead>
       <tbody slot="body" slot-scope="{ displayData }">
@@ -27,6 +27,7 @@
 <script>
 import RepeaterMatrixItem from '@/components/repeater-matrix-item'
 import ResourceHeader from '@/components/resource-header'
+import { mapState } from 'vuex'
 
 export default {
   components: { RepeaterMatrixItem, ResourceHeader },
@@ -51,12 +52,24 @@ export default {
     selectedAuthors: {
       type: Array,
       default: () => []
+    },
+    controlsHeight: {
+      type: Number,
+      required: true
     }
   },
   data() {
     return {
       filters: {
         filter: { value: '', custom: this.fieldFilter }
+      }
+    }
+  },
+  computed: {
+    ...mapState(['headerHeight']),
+    headStyle() {
+      return {
+        top: this.headerHeight + this.controlsHeight + 'px'
       }
     }
   },
@@ -96,9 +109,17 @@ export default {
   width: 100%;
 }
 
+.head {
+  position: sticky;
+  background-color: var(--white);
+}
+
 .item {
-  border-top: 1px solid var(--green-light);
   padding-top: var(--spacing-h-small);
+
+  &:not(:first-of-type) {
+    border-top: 1px solid var(--green-light);
+  }
 
   &:not(:last-of-type) {
     padding-bottom: var(--blank-line);

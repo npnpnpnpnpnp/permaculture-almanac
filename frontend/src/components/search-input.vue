@@ -73,10 +73,6 @@ export default {
   background-color: var(--green-light-alpha);
   border: none;
   border-radius: 0.8em;
-
-  @media (min-width: $medium) {
-    margin-bottom: var(--filter-spacing-bottom);
-  }
 }
 
 .form {

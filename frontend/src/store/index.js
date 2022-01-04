@@ -20,10 +20,14 @@ export default new Vuex.Store({
       large: window.matchMedia('(min-width: 64em)')
     },
     isDesktop: false,
-    isLarge: false
+    isLarge: false,
+    headerHeight: 0
   },
 
   mutations: {
+    setHeaderHeight(state, payload) {
+      state.headerHeight = payload.headerHeight
+    },
     set(state, data) {
       Object.entries(data).forEach(([key, value]) => {
         state[key] = value
