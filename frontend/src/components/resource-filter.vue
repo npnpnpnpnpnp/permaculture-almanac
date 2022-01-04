@@ -1,38 +1,40 @@
 <template>
   <div v-show="showFilter" :class="$style.component">
-    <!-- <div v-html="labels.title" :class="$style.title" /> -->
-    <div :class="$style.content">
-      <category-filter
-        :default-categories="defaultCategories"
-        :selected-categories="filter.selectedCategories"
-        :filter-visible="filterVisible"
-        @update-categories="updateCategoryFilter"
-      />
-      <tag-filter
-        :default-tags="defaultTags"
-        :selected-tags="filter.selectedTags"
-        :filter-visible="filterVisible"
-        @update-tags="updateTagFilter"
-      />
-      <author-filter
-        :default-authors="defaultAuthors"
-        :selected-authors="filter.selectedAuthors"
-        :filter-visible="filterVisible"
-        @update-authors="updateAuthorFilter"
-      />
-    </div>
-    <div v-if="!isDesktop" :class="$style.controls">
-      <button
-        v-show="hasFilterApplied"
-        type="button"
-        :class="$style.reset"
-        @click="reset"
-      >
-        {{ labels.reset }}
-      </button>
-      <button type="button" @click="apply" :class="$style.apply">
-        {{ labels.apply }}
-      </button>
+    <div :class="$style.wrapper" :style="filterStyle">
+      <!-- <div v-html="labels.title" :class="$style.title" /> -->
+      <div :class="$style.content">
+        <category-filter
+          :default-categories="defaultCategories"
+          :selected-categories="filter.selectedCategories"
+          :filter-visible="filterVisible"
+          @update-categories="updateCategoryFilter"
+        />
+        <tag-filter
+          :default-tags="defaultTags"
+          :selected-tags="filter.selectedTags"
+          :filter-visible="filterVisible"
+          @update-tags="updateTagFilter"
+        />
+        <author-filter
+          :default-authors="defaultAuthors"
+          :selected-authors="filter.selectedAuthors"
+          :filter-visible="filterVisible"
+          @update-authors="updateAuthorFilter"
+        />
+      </div>
+      <div v-if="!isDesktop" :class="$style.controls">
+        <button
+          v-show="hasFilterApplied"
+          type="button"
+          :class="$style.reset"
+          @click="reset"
+        >
+          {{ labels.reset }}
+        </button>
+        <button type="button" @click="apply" :class="$style.apply">
+          {{ labels.apply }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -83,13 +85,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isDesktop']),
+    ...mapState(['isDesktop', 'headerHeight']),
     classes() {
       return {
         component: [
           this.$style.component,
           this.filterVisible ? this.$style.filterVisible : ''
         ]
+      }
+    },
+    filterStyle() {
+      if (!this.isDesktop) return
+      return {
+        top: this.headerHeight + 'px'
       }
     },
     showFilter() {
@@ -138,6 +146,11 @@ export default {
       handler() {
         this.$emit('update-filter', this.filter)
       }
+    },
+    filterVisible() {
+      this.filterVisible
+        ? (document.body.style.overflow = 'hidden')
+        : (document.body.style.overflow = 'auto')
     }
   }
 }
@@ -145,17 +158,28 @@ export default {
 
 <style lang="scss" module>
 .component {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
+  width: 100%;
   background-color: var(--white);
+  height: 100%;
+  overflow: auto;
 
   @media (min-width: $medium) {
+    position: relative;
+    left: unset;
+    top: unset;
+    height: unset;
+    overflow: unset;
+  }
+}
+
+.wrapper {
+  @media (min-width: $medium) {
     position: sticky;
+    top: 0;
   }
 }
 

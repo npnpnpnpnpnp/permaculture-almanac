@@ -1,5 +1,5 @@
 <template>
-  <header :class="$style.component">
+  <header :class="$style.component" ref="header">
     <h1 :class="$style.title">{{ siteTitle }}</h1>
     <nav-bar />
     <!-- <language-switch class="language-switch" /> -->
@@ -10,19 +10,43 @@
 // import LanguageSwitch from '@/components/language-switch.vue'
 import NavBar from '@/components/nav-bar'
 import { mapState } from 'vuex'
+import { debounce } from 'lodash'
 
 export default {
   // components: { LanguageSwitch, NavBar },
   components: { NavBar },
   computed: {
     ...mapState(['currentLanguage', 'siteTitle'])
+  },
+  methods: {
+    getHeaderHeight() {
+      // send current header height to nav-item, intro slider home for scroll offset
+      // emitting value in intro-slider did not work, therfore usage of store
+      this.$store.commit('setHeaderHeight', {
+        headerHeight: this.$refs.header.offsetHeight
+      })
+    },
+    onResize: debounce(function() {
+      if (!this.$refs.header) return
+      this.getHeaderHeight()
+    }, 150)
+  },
+  mounted() {
+    this.getHeaderHeight()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
 
 <style lang="scss" module>
 .component {
-  padding: var(--gutter);
+  padding: var(--gutter) var(--gutter) calc(var(--gutter) * 2) var(--gutter);
+  position: sticky;
+  top: 0;
+  background-color: var(--white);
 
   @media (min-width: $xsmall) {
     display: grid;
@@ -32,7 +56,8 @@ export default {
 
   @media (min-width: $medium) {
     grid-template-columns: 33.333% max-content auto;
-    margin-bottom: calc(var(--blank-line) * 2);
+    padding: var(--gutter) var(--gutter) calc(var(--gutter) * 3) var(--gutter);
+    margin-bottom: var(--filter-spacing-bottom);
   }
 
   @media (min-width: $large) {

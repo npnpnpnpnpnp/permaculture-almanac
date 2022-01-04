@@ -9,7 +9,7 @@
       @filter-visibility="handleFilterVisibility"
     />
     <div :class="$style.content">
-      <div :class="$style.controls">
+      <div :class="$style.controls" :style="controlsStyle" ref="controls">
         <button
           v-if="showButton"
           type="button"
@@ -26,6 +26,7 @@
         :selected-categories="filter.selectedCategories"
         :selected-tags="filter.selectedTags"
         :selected-authors="filter.selectedAuthors"
+        :controls-height="controlsHeight"
       />
     </div>
   </main>
@@ -39,6 +40,7 @@ import ResourceFilter from '@/components/resource-filter.vue'
 import SearchInput from '@/components/search-input'
 import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
+import { debounce } from 'lodash'
 
 export default {
   components: {
@@ -57,7 +59,8 @@ export default {
       filterVisible: false,
       labels: {
         openFilter: 'Filter'
-      }
+      },
+      controlsHeight: 0
     }
   },
   async created() {
@@ -65,7 +68,12 @@ export default {
     this.loading = false
   },
   computed: {
-    ...mapState(['isDesktop']),
+    ...mapState(['isDesktop', 'headerHeight']),
+    controlsStyle() {
+      return {
+        top: this.headerHeight + 'px'
+      }
+    },
     showButton() {
       return this.isDesktop ? false : true
     },
@@ -102,6 +110,29 @@ export default {
     // get current search value from search-input
     handleSearchQuery(query) {
       this.query = query
+    },
+    getControlsHeight() {
+      // send current controls height to table head in repeater-matrix for stickiness of controls
+      this.controlsHeight = this.$refs.controls.offsetHeight
+    },
+    onResize: debounce(function() {
+      if (!this.$refs.controls) return
+      this.getControlsHeight()
+    }, 50)
+  },
+  mounted() {
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  watch: {
+    loading() {
+      if (!this.loading) {
+        this.$nextTick(() => {
+          this.getControlsHeight()
+        })
+      }
     }
   }
 }
@@ -109,7 +140,7 @@ export default {
 
 <style lang="scss" module>
 .view {
-  padding: var(--gutter);
+  padding: 0 var(--gutter) var(--gutter) var(--gutter);
 
   @media (min-width: $medium) {
     display: grid;
@@ -123,10 +154,12 @@ export default {
 }
 
 .controls {
+  position: sticky;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gutter);
-  margin-bottom: var(--blank-line);
+  padding-bottom: var(--blank-line);
+  background-color: var(--white);
 
   @media (min-width: $xsmall) {
     grid-template-columns: 1fr 2fr;
@@ -134,10 +167,11 @@ export default {
 
   @media (min-width: $medium) {
     grid-template-columns: 1fr;
+    margin-bottom: var(--blank-line);
   }
 
   @media (min-width: $large) {
-    margin-bottom: unset;
+    // padding-bottom: unset;
     grid-template-columns: repeat(2, 1fr);
   }
 
