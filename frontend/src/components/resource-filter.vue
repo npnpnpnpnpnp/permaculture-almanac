@@ -29,6 +29,7 @@
           :class="$style.reset"
           @click="reset"
         >
+          <!-- :disabled="isDisabled" -->
           {{ labels.reset }}
         </button>
         <button type="button" @click="apply" :class="$style.apply">
@@ -94,6 +95,9 @@ export default {
         ]
       }
     },
+    // isDisabled() {
+    //   return !this.hasFilterApplied
+    // },
     filterStyle() {
       if (!this.isDesktop) return
       return {
@@ -197,10 +201,19 @@ export default {
   position: fixed;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gutter);
   width: 100%;
   bottom: 0;
-  padding: calc(var(--blank-line) / 2) var(--gutter);
-  background-color: var(--white-alpha);
+  left: 0;
+  padding: var(--gutter) var(--gutter) calc(var(--blank-line) / 2) var(--gutter);
+  // background-color: var(--white-alpha);
+  background-image: linear-gradient(to top, white, rgba(255, 255, 255, 0) 100%);
+}
+
+.reset,
+.apply {
+  @extend %button-default;
+  background-color: var(--white);
 }
 
 .reset {
