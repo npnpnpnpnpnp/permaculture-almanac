@@ -22,6 +22,7 @@
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
+        :matching-tags="matchingTags"
       />
     </ul>
     <div :class="$style.description">
@@ -51,6 +52,10 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    matchingTags: {
+      type: Array,
+      default: () => []
     }
   },
   mounted() {
