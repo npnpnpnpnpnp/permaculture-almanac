@@ -174,7 +174,9 @@ export default {
   display: inline-block;
 }
 
-.title {
+.title,
+.subtitle,
+.description {
   hyphens: auto;
 }
 

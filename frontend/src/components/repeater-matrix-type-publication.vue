@@ -26,7 +26,11 @@
       />
     </ul>
     <div :class="$style.description">
-      <base-bodytext v-if="item.fields.body" :text="truncatedText" />
+      <base-bodytext
+        v-if="item.fields.body"
+        :text="truncatedText"
+        :class="$style.body"
+      />
       <div v-html="item.fields.publisher" />
       <div v-html="item.fields.isbn" />
     </div>
@@ -88,7 +92,7 @@ export default {
 
 .title,
 .subtitle,
-.description {
+.body {
   hyphens: auto;
 }
 
