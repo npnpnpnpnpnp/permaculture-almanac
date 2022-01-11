@@ -81,9 +81,10 @@ export default {
 <style lang="scss" module>
 .component {
   margin-bottom: var(--filter-spacing-bottom);
+  max-width: var(--max-filter-width);
 }
 
 .title {
-  margin-bottom: var(--spacing-h-small);
+  margin-bottom: var(--spacing-h-medium);
 }
 </style>

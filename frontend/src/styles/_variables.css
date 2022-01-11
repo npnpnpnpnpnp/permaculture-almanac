@@ -15,12 +15,16 @@
   /* Spacing */
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
-  --list-indent: 1.25em;
+  --list-indent: 1.125em;
   --spacing-xsmall: calc(var(--gutter) / 2);
 
   /* horizontal */
   --filter-spacing-bottom: calc(var(--blank-line) * 2);
   --spacing-h-small: calc(var(--blank-line) / 4);
+  --spacing-h-medium: calc(var(--blank-line) / 2);
+
+  /* vertical */
+  --max-filter-width: 23em;
 
   /* Grids */
   --resource-grid: repeat(2, 1fr);

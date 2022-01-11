@@ -166,6 +166,7 @@ export default {
   background-color: var(--white);
   height: 100%;
   overflow: auto;
+  padding: var(--gutter);
 
   @media (min-width: $medium) {
     position: relative;
@@ -173,6 +174,7 @@ export default {
     top: unset;
     height: unset;
     overflow: unset;
+    padding: unset;
   }
 }
 
@@ -181,6 +183,10 @@ export default {
     position: sticky;
     top: 0;
   }
+}
+
+.content {
+  margin-bottom: calc(var(--blank-line) * 3);
 }
 
 .title {
