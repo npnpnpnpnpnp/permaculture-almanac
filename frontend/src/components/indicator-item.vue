@@ -45,7 +45,8 @@ export default {
     background-color: var(--green-light-alpha);
   }
 
-  // NOTE: this inserts a space after pseudo element in FF
+  // NOTE: this inserts a space after pseudo element in FF.
+  // see issue: https://github.com/npnpnpnpnpnp/permaculture-almanac/issues/8
   &::first-letter {
     text-transform: uppercase;
   }
