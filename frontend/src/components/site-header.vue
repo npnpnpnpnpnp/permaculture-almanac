@@ -56,8 +56,7 @@ export default {
 
   @media (min-width: $medium) {
     grid-template-columns: 33.333% max-content auto;
-    padding: var(--gutter) var(--gutter) calc(var(--gutter) * 3) var(--gutter);
-    margin-bottom: var(--filter-spacing-bottom);
+    padding: var(--gutter) var(--gutter) calc(var(--gutter) * 5) var(--gutter);
   }
 
   @media (min-width: $large) {
@@ -66,6 +65,17 @@ export default {
 }
 
 .title {
+  @extend %fw-bold;
+
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: var(--letter-spacing-large);
+  color: var(--green-light);
+
+  @media (min-width: $xsmall) {
+    text-align: left;
+  }
+
   @media (min-width: $medium) {
     grid-column: 2;
   }

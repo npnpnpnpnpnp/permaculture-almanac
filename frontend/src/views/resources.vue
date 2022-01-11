@@ -167,7 +167,7 @@ export default {
 
   @media (min-width: $medium) {
     grid-template-columns: 1fr;
-    margin-bottom: var(--blank-line);
+    padding-bottom: calc(var(--blank-line) * 2);
   }
 
   @media (min-width: $large) {
@@ -181,13 +181,7 @@ export default {
 }
 
 .button {
-  padding: calc(var(--blank-line) / 8) calc(var(--gutter) / 2);
-  border: 1px solid var(--green-light);
-  border-radius: 0.8em;
-
-  &:hover {
-    background-color: var(--green-light-alpha);
-  }
+  @extend %button-default;
 
   @media (min-width: $small) {
     max-width: 50%;

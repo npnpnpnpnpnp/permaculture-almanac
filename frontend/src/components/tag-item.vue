@@ -1,5 +1,5 @@
 <template>
-  <li :class="$style.component">
+  <li :class="classes.component">
     <div v-html="tag.fields.title" />
   </li>
 </template>
@@ -10,15 +10,38 @@ export default {
     tag: {
       type: Object,
       required: true
+    },
+    matchingTags: {
+      type: Array,
+      default: () => []
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        component: [
+          this.$style.component,
+          this.isCurrent ? this.$style.isCurrent : ''
+        ]
+      }
+    },
+    isCurrent() {
+      return this.matchingTags.some(
+        matchingTag => this.tag.meta.id === matchingTag.meta.id
+      )
     }
   }
 }
 </script>
 
 <style lang="scss" module>
-// .component {
-//   // width: 100%;
-// }
+.component {
+  &.isCurrent {
+    @extend %fw-bold;
+
+    color: var(--green-light);
+  }
+}
 
 // .body {
 //   display: flex;

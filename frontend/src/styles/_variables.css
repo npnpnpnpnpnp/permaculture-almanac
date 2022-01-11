@@ -5,28 +5,42 @@
   --white-alpha: rgba(255, 255, 255, 0.9);
   --color-focus-default: rgba(0, 0, 0, 0.075);
   --green-light: rgb(161, 243, 172);
+  --green-medium: rgb(176, 247, 185);
   --green-light-alpha: rgb(197, 255, 205, 0.5);
   --green-dark: rgb(124, 163, 129);
 
   /* Typography */
   --fs-base: 0.625em;
   --lh-base: 1.25;
+  --letter-spacing-large: 0.17em;
 
   /* Spacing */
   --blank-line: calc(var(--lh-base) * 1em);
   --gutter: 1em;
-  --list-indent: 1.25em;
+  --list-indent: 1.125em;
   --spacing-xsmall: calc(var(--gutter) / 2);
 
   /* horizontal */
   --filter-spacing-bottom: calc(var(--blank-line) * 2);
   --spacing-h-small: calc(var(--blank-line) / 4);
+  --spacing-h-medium: calc(var(--blank-line) / 2);
+
+  /* vertical */
+  --max-filter-width: 23em;
 
   /* Grids */
   --resource-grid: repeat(2, 1fr);
 
   /* Easing */
   --swift-out: cubic-bezier(0.55, 0, 0.1, 1);
+
+  /* Durations */
+  --xshort: 100ms;
+  --short: 250ms;
+  --medium: 300ms;
+  --long: 350ms;
+  --xlong: 750ms;
+  --xxlong: 850ms;
 }
 
 @media (min-width: 30em) {

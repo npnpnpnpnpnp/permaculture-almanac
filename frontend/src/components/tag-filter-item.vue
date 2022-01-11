@@ -41,7 +41,7 @@ export default {
 <style lang="scss" module>
 .component {
   position: relative;
-  display: block;
+  display: inline;
   text-align: start;
   margin-left: var(--list-indent);
 
@@ -61,10 +61,6 @@ export default {
     &::before {
       content: '\25CF ';
     }
-  }
-
-  @media (min-width: $medium) {
-    display: inline;
   }
 }
 </style>

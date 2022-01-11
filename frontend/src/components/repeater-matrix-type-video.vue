@@ -25,6 +25,7 @@
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
+        :matching-tags="matchingTags"
       />
     </ul>
     <base-bodytext :text="truncatedText" :class="$style.description" />
@@ -51,6 +52,10 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    matchingTags: {
+      type: Array,
+      default: () => []
     }
     // active: {
     //   type: Boolean,
@@ -169,7 +174,9 @@ export default {
   display: inline-block;
 }
 
-.title {
+.title,
+.subtitle,
+.description {
   hyphens: auto;
 }
 

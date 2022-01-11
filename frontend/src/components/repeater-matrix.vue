@@ -107,6 +107,8 @@ export default {
 <style lang="scss" module>
 .table {
   width: 100%;
+  display: flex;
+  flex-direction: column; // used to align table head at the top by default
 }
 
 .head {
@@ -115,10 +117,11 @@ export default {
 }
 
 .item {
-  padding-top: var(--spacing-h-small);
+  padding: var(--spacing-h-small);
+  margin-top: -1px; // to move whole item 1px upwards to "merge" borders of item and table head
 
   &:not(:first-of-type) {
-    border-top: 1px solid var(--green-light);
+    border-top: 1px dashed var(--green-light);
   }
 
   &:not(:last-of-type) {

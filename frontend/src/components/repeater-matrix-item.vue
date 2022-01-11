@@ -4,8 +4,8 @@
     :is="type"
     :item="item"
     :class="classes.component"
+    :matching-tags="matchingTags"
   />
-  <!-- :is-current="isCurrent" -->
 </template>
 
 <script>
@@ -143,6 +143,10 @@ export default {
     },
     showItem() {
       return this.isFiltered ? this.itemMatches : true
+    },
+    matchingTags() {
+      if (!this.tagMatches) return
+      return this.selectedTags
     }
   }
 }

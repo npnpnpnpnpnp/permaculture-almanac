@@ -22,10 +22,15 @@
         v-for="(tag, index) in item.fields.tags"
         :tag="tag"
         :key="`tag-${index}`"
+        :matching-tags="matchingTags"
       />
     </ul>
     <div :class="$style.description">
-      <base-bodytext v-if="item.fields.body" :text="truncatedText" />
+      <base-bodytext
+        v-if="item.fields.body"
+        :text="truncatedText"
+        :class="$style.body"
+      />
       <div v-html="item.fields.publisher" />
       <div v-html="item.fields.isbn" />
     </div>
@@ -51,6 +56,10 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    matchingTags: {
+      type: Array,
+      default: () => []
     }
   },
   mounted() {
@@ -83,7 +92,7 @@ export default {
 
 .title,
 .subtitle,
-.description {
+.body {
   hyphens: auto;
 }
 

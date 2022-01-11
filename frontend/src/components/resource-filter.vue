@@ -1,7 +1,7 @@
 <template>
   <div v-show="showFilter" :class="$style.component">
     <div :class="$style.wrapper" :style="filterStyle">
-      <!-- <div v-html="labels.title" :class="$style.title" /> -->
+      <div v-if="!isDesktop" v-html="labels.title" :class="$style.title" />
       <div :class="$style.content">
         <category-filter
           :default-categories="defaultCategories"
@@ -22,16 +22,22 @@
           @update-authors="updateAuthorFilter"
         />
       </div>
-      <div v-if="!isDesktop" :class="$style.controls">
+      <div :class="$style.controls">
         <button
           v-show="hasFilterApplied"
           type="button"
           :class="$style.reset"
           @click="reset"
         >
+          <!-- :disabled="isDisabled" -->
           {{ labels.reset }}
         </button>
-        <button type="button" @click="apply" :class="$style.apply">
+        <button
+          v-if="!isDesktop"
+          type="button"
+          @click="apply"
+          :class="$style.apply"
+        >
           {{ labels.apply }}
         </button>
       </div>
@@ -94,6 +100,9 @@ export default {
         ]
       }
     },
+    // isDisabled() {
+    //   return !this.hasFilterApplied
+    // },
     filterStyle() {
       if (!this.isDesktop) return
       return {
@@ -166,6 +175,7 @@ export default {
   background-color: var(--white);
   height: 100%;
   overflow: auto;
+  padding: var(--gutter);
 
   @media (min-width: $medium) {
     position: relative;
@@ -173,6 +183,7 @@ export default {
     top: unset;
     height: unset;
     overflow: unset;
+    padding: unset;
   }
 }
 
@@ -183,18 +194,46 @@ export default {
   }
 }
 
+.content {
+  margin-bottom: calc(var(--blank-line) * 3);
+}
+
 .title {
+  @extend %fw-bold;
+
   margin-bottom: var(--filter-spacing-bottom);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-large);
+  color: var(--green-light);
 }
 
 .controls {
   position: fixed;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gutter);
   width: 100%;
   bottom: 0;
-  padding: calc(var(--blank-line) / 2) var(--gutter);
-  background-color: var(--white-alpha);
+  left: 0;
+  padding: var(--gutter) var(--gutter) calc(var(--blank-line) / 2) var(--gutter);
+  background-image: linear-gradient(to top, white, rgba(255, 255, 255, 0) 100%);
+
+  @media (min-width: $medium) {
+    position: static;
+    top: unset;
+    left: unset;
+    padding: unset;
+    background-image: unset;
+  }
+}
+
+.reset,
+.apply {
+  @extend %button-default;
+
+  background-color: var(--white);
+  max-width: 6em;
 }
 
 .reset {
