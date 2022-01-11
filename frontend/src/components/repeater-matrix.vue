@@ -117,7 +117,7 @@ export default {
 }
 
 .item {
-  padding-top: var(--spacing-h-small);
+  padding: var(--spacing-h-small);
   margin-top: -1px; // to move whole item 1px upwards to "merge" borders of item and table head
 
   &:not(:first-of-type) {
