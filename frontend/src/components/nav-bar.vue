@@ -28,6 +28,11 @@ export default {
 <style lang="scss" module>
 .component {
   display: flex;
+  justify-content: center;
+
+  @media (min-width: $xsmall) {
+    justify-content: flex-end;
+  }
 
   @media (min-width: $medium) {
     grid-column: 3;

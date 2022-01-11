@@ -1,7 +1,7 @@
 <template>
   <div v-show="showFilter" :class="$style.component">
     <div :class="$style.wrapper" :style="filterStyle">
-      <!-- <div v-html="labels.title" :class="$style.title" /> -->
+      <div v-if="!isDesktop" v-html="labels.title" :class="$style.title" />
       <div :class="$style.content">
         <category-filter
           :default-categories="defaultCategories"
@@ -194,7 +194,13 @@ export default {
 }
 
 .title {
+  @extend %fw-bold;
+
   margin-bottom: var(--filter-spacing-bottom);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-large);
+  color: var(--green-light);
 }
 
 .controls {

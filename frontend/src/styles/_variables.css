@@ -12,6 +12,7 @@
   /* Typography */
   --fs-base: 0.625em;
   --lh-base: 1.25;
+  --letter-spacing-large: 0.17em;
 
   /* Spacing */
   --blank-line: calc(var(--lh-base) * 1em);

@@ -23,6 +23,10 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @extend %fw-bold;
+
+  color: var(--green-light);
+
   &:not(:last-of-type) {
     padding-right: var(--gutter);
   }
@@ -32,5 +36,7 @@ export default {
   @extend %link-reset;
 }
 
-// .is-active {}
+.is-active {
+  border-bottom: 1px dashed var(--green-light);
+}
 </style>

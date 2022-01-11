@@ -65,6 +65,17 @@ export default {
 }
 
 .title {
+  @extend %fw-bold;
+
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: var(--letter-spacing-large);
+  color: var(--green-light);
+
+  @media (min-width: $xsmall) {
+    text-align: left;
+  }
+
   @media (min-width: $medium) {
     grid-column: 2;
   }
