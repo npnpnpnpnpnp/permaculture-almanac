@@ -167,7 +167,7 @@ export default {
 
   @media (min-width: $medium) {
     grid-template-columns: 1fr;
-    margin-bottom: var(--blank-line);
+    padding-bottom: calc(var(--blank-line) * 2);
   }
 
   @media (min-width: $large) {
