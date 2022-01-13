@@ -41,6 +41,7 @@ import SearchInput from '@/components/search-input'
 import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 import { debounce } from 'lodash'
+import EventBus from '@/event-bus'
 
 export default {
   components: {
@@ -129,6 +130,7 @@ export default {
   watch: {
     loading() {
       if (!this.loading) {
+        EventBus.$emit('page-loaded')
         this.$nextTick(() => {
           this.getControlsHeight()
         })

@@ -57,8 +57,10 @@ export default {
 <style lang="scss" module>
 .view {
   padding: var(--gutter);
-
+  position: absolute;
+  top: 0;
   height: 100%;
+  width: 100%;
 
   // @media (min-width: $medium) {
   //   display: grid;
