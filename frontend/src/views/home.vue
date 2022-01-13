@@ -34,7 +34,7 @@ export default {
       page: {},
       options: {
         preTypeDelay: 1000, // time before typing starts
-        typeDelay: 80,
+        typeDelay: 60,
         caretAnimation: 'blink',
         repeat: 0
       }
@@ -56,14 +56,14 @@ export default {
     navigate() {
       setTimeout(() => {
         this.$router.replace('/resources')
-      }, 5000)
+      }, 10000)
     }
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
   },
   mounted() {
-    // this.navigate()
+    this.navigate()
   }
 }
 </script>
