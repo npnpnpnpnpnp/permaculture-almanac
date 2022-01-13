@@ -75,6 +75,11 @@ export default {
   top: 0;
   height: 100%;
   width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    var(--green-light-alpha) 50%
+  );
 
   // @media (min-width: $medium) {
   //   display: grid;
@@ -97,11 +102,12 @@ export default {
 }
 
 .titles {
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    var(--green-light-alpha) 50%
-  );
+  // background: linear-gradient(
+  //   to left,
+  //   rgba(255, 255, 255, 0),
+  //   var(--green-light-alpha) 50%
+  // );
+  padding: var(--gutter);
   border-radius: 0.5rem;
 }
 
@@ -119,11 +125,11 @@ export default {
 .title2 {
   padding-left: var(--gutter);
   margin-left: var(--gutter);
-  background: linear-gradient(
-    to left,
-    rgba(255, 255, 255, 0),
-    var(--green-light-alpha) 50%
-  );
+  // background: linear-gradient(
+  //   to left,
+  //   rgba(255, 255, 255, 0),
+  //   var(--green-light-alpha) 50%
+  // );
   border-radius: 0.5rem;
 }
 
