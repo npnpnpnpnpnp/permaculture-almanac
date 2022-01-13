@@ -24,6 +24,7 @@ html {
   @extend %fs-base;
 
   box-sizing: border-box;
+  height: 100%;
 }
 
 *,
@@ -40,6 +41,7 @@ body {
   background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 a {

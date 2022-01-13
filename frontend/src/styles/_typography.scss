@@ -16,6 +16,23 @@
   font-size: 1.6em;
 }
 
+// %fs-small {
+//   font-size: 0.8em;
+// }
+
 %fs-medium {
   font-size: 1.5em;
+}
+
+%fs-xlarge {
+  font-size: 2em;
+  line-height: 1;
+
+  @media (min-width: $small) {
+    font-size: 5vw;
+  }
+
+  @media (min-width: $medium) {
+    font-size: 8vw;
+  }
 }

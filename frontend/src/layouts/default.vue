@@ -27,5 +27,7 @@ export default {
 </style>
 
 <style lang="scss" module>
-// .layout {}
+.layout {
+  height: 100%;
+}
 </style>

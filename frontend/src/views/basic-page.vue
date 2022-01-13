@@ -8,6 +8,7 @@
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import BaseBodytext from '@/components/base-bodytext'
+import EventBus from '@/event-bus'
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
+    EventBus.$emit('page-loaded')
   }
 }
 </script>
