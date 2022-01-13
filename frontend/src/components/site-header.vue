@@ -1,5 +1,5 @@
 <template>
-  <header :class="$style.component" ref="header">
+  <header v-if="!isHome" :class="$style.component" ref="header">
     <h1 :class="$style.title">{{ siteTitle }}</h1>
     <nav-bar />
     <!-- <language-switch class="language-switch" /> -->
@@ -16,10 +16,14 @@ export default {
   // components: { LanguageSwitch, NavBar },
   components: { NavBar },
   computed: {
-    ...mapState(['currentLanguage', 'siteTitle'])
+    ...mapState(['currentLanguage', 'siteTitle']),
+    isHome() {
+      return this.$route.meta.template === 'home'
+    }
   },
   methods: {
     getHeaderHeight() {
+      if (this.isHome) return
       // send current header height to nav-item, intro slider home for scroll offset
       // emitting value in intro-slider did not work, therfore usage of store
       this.$store.commit('setHeaderHeight', {
