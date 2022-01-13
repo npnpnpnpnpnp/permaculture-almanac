@@ -59,7 +59,7 @@ export default {
     this.page = await PageService.get({ path: this.$route.path })
   },
   mounted() {
-    // this.navigate()
+    this.navigate()
   }
 }
 </script>
