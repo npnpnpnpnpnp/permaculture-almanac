@@ -22,12 +22,8 @@
 <script>
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
-import { VueTyper } from 'vue-typer'
 
 export default {
-  components: {
-    VueTyper
-  },
   mixins: [metaInfo],
   data() {
     return {
@@ -144,7 +140,9 @@ export default {
   word-break: break-word;
 }
 
-:global(.custom.char) {
-  color: var(--green-light);
+:global(.vue-typer) {
+  :global(.custom.char) {
+    color: var(--green-light);
+  }
 }
 </style>
