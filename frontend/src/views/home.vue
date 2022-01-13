@@ -6,7 +6,15 @@
         <div v-html="truncateTitle.title2" :class="$style.title2" />
         <div v-html="truncateTitle.title3" :class="$style.title3" />
       </div>
-      <div v-html="page.fields.subtitle" :class="$style.subtitle" />
+      <vue-typer
+        :class="$style.subtitle"
+        :text="page.fields.subtitle"
+        :repeat="options.repeat"
+        :pre-type-delay="options.preTypeDelay"
+        :type-delay="options.typeDelay"
+        :caret-animation="options.caretAnimation"
+      ></vue-typer>
+      <!-- <div v-html="page.fields.subtitle" :class="$style.subtitle" /> -->
     </div>
   </main>
 </template>
@@ -14,16 +22,22 @@
 <script>
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
-// import BaseBodytext from '@/components/base-bodytext'
+import { VueTyper } from 'vue-typer'
 
 export default {
   components: {
-    // BaseBodytext
+    VueTyper
   },
   mixins: [metaInfo],
   data() {
     return {
-      page: {}
+      page: {},
+      options: {
+        preTypeDelay: 1000, // time before typing starts
+        typeDelay: 80,
+        caretAnimation: 'blink',
+        repeat: 0
+      }
     }
   },
   computed: {
@@ -49,7 +63,7 @@ export default {
     this.page = await PageService.get({ path: this.$route.path })
   },
   mounted() {
-    this.navigate()
+    // this.navigate()
   }
 }
 </script>
@@ -117,9 +131,14 @@ export default {
   @extend %base-bodytext;
   @extend %fw-bold;
 
-  max-width: 30em;
+  max-width: 29em;
   text-align: center;
   margin-top: calc(var(--blank-line) * 3);
+  min-height: calc(var(--blank-line) * 2);
+  word-break: break-word;
+}
+
+:global(.custom.char) {
   color: var(--green-light);
 }
 </style>
