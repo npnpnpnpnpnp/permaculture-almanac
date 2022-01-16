@@ -61,7 +61,7 @@ class DefaultPage {
 
     if ($page->template->name == 'author' || $page->template->name == 'tag') {
       $usedPages = new PageArray();
-      $references = $page->references(true);
+      $references = $page->references();
       // if (!$references->count) continue;
       //if not, push them to usedAuthor-array. has to be page array to have other meothds available
       $usedPages->add($references);

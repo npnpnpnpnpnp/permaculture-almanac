@@ -173,9 +173,14 @@ class Helper {
     // $p->of(true);
     $item = new \StdClass();
     $item->meta = self::getMetadata($page);
-    $item->fields = [
-      'title' => $page->title
-    ];
+    // fetch all fields of original item
+    $item->fields = self::getFields($page);
+    // define explicit fields to be fetched
+    // $item->fields = [
+    //   'title' => $page->title,
+    //   'title' => $page->title,
+    //   'body' => $page->body
+    // ];
     return $item;
   }
 
