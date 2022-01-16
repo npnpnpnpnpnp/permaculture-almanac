@@ -3,6 +3,7 @@
     <div :class="$style.text">
       <h2 :class="$style.title" v-html="page.fields.title" />
       <base-bodytext :text="page.fields.body" :class="$style.body" />
+      <div v-html="labels.referenceTitle" :class="$style.referenceTitle" />
       <ul :class="$style.references">
         <reference-item
           v-for="(reference, index) in page.references"
@@ -32,7 +33,10 @@ export default {
   mixins: [metaInfo],
   data() {
     return {
-      page: {}
+      page: {},
+      labels: {
+        referenceTitle: 'References'
+      }
     }
   },
   methods: {
@@ -77,7 +81,16 @@ export default {
   }
 }
 
+.referenceTitle {
+  @extend %fw-bold;
+
+  color: var(--green-light);
+  margin: calc(var(--blank-line) * 3) 0 var(--blank-line) 0;
+}
+
 .references {
+  margin-top: var(--blank-line);
+
   @media (min-width: $medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
