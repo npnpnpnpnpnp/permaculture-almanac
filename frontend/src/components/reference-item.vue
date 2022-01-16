@@ -13,6 +13,7 @@
           v-for="(tag, index) in reference.fields.tags"
           :key="`reference-tag-${index}`"
           :tag="tag"
+          :is-reference="true"
         />
       </ul>
     </router-link>
@@ -62,6 +63,10 @@ export default {
 .body,
 .tags {
   margin-top: calc(var(--blank-line) / 2);
+}
+
+.tags {
+  margin-left: calc(var(--gutter) * -1);
 }
 
 // .text {

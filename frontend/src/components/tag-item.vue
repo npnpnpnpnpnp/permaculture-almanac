@@ -13,6 +13,10 @@ export default {
       type: Object,
       required: true
     },
+    isReference: {
+      type: Boolean,
+      default: false
+    },
     matchingTags: {
       type: Array,
       default: () => []
@@ -23,7 +27,8 @@ export default {
       return {
         component: [
           this.$style.component,
-          this.isCurrent ? this.$style.isCurrent : ''
+          this.isCurrent ? this.$style.isCurrent : '',
+          this.isReference ? this.$style.isReference : ''
         ]
       }
     },
@@ -43,10 +48,21 @@ export default {
 
     color: var(--green-light);
   }
+
+  &.isReference {
+    // @extend %fs-small;
+
+    display: inline-block;
+    margin-left: var(--gutter);
+  }
 }
 
 .link {
   @extend %link-reset;
+
+  .isReference & {
+    display: inline-block;
+  }
 }
 
 // .body {
