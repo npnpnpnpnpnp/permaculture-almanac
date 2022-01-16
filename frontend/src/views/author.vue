@@ -3,6 +3,13 @@
     <div :class="$style.text">
       <h2 :class="$style.title" v-html="page.fields.title" />
       <base-bodytext :text="page.fields.body" :class="$style.body" />
+      <ul :class="$style.references">
+        <reference-item
+          v-for="(reference, index) in page.references"
+          :key="`reference-${index}`"
+          :reference="reference"
+        />
+      </ul>
     </div>
     <button type="button" :class="$style.button" @click="closeDetail" />
     <!-- <a :href="page.fields.external_url">
@@ -15,10 +22,12 @@
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import BaseBodytext from '@/components/base-bodytext'
+import ReferenceItem from '@/components/reference-item'
 
 export default {
   components: {
-    BaseBodytext
+    BaseBodytext,
+    ReferenceItem
   },
   mixins: [metaInfo],
   data() {
@@ -65,6 +74,14 @@ export default {
 .text {
   @media (min-width: $small) {
     order: 1;
+  }
+}
+
+.references {
+  @media (min-width: $medium) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--gutter);
   }
 }
 
