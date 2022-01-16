@@ -1,6 +1,8 @@
 <template>
   <li :class="classes.component">
-    <div v-html="tag.fields.title" />
+    <router-link :to="tag.meta.url" :class="$style.link">
+      <div v-html="tag.fields.title" />
+    </router-link>
   </li>
 </template>
 
@@ -10,6 +12,10 @@ export default {
     tag: {
       type: Object,
       required: true
+    },
+    isReference: {
+      type: Boolean,
+      default: false
     },
     matchingTags: {
       type: Array,
@@ -21,7 +27,8 @@ export default {
       return {
         component: [
           this.$style.component,
-          this.isCurrent ? this.$style.isCurrent : ''
+          this.isCurrent ? this.$style.isCurrent : '',
+          this.isReference ? this.$style.isReference : ''
         ]
       }
     },
@@ -40,6 +47,21 @@ export default {
     @extend %fw-bold;
 
     color: var(--green-light);
+  }
+
+  &.isReference {
+    // @extend %fs-small;
+
+    display: inline-block;
+    margin-left: var(--gutter);
+  }
+}
+
+.link {
+  @extend %link-reset;
+
+  .isReference & {
+    display: inline-block;
   }
 }
 

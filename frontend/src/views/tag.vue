@@ -2,7 +2,7 @@
   <main :class="$style.view" v-if="page.fields">
     <div :class="$style.text">
       <h2 :class="$style.title" v-html="page.fields.title" />
-      <base-bodytext :text="page.fields.body" :class="$style.body" />
+      <!-- <base-bodytext :text="page.fields.body" :class="$style.body" /> -->
       <div v-html="labels.referenceTitle" :class="$style.referenceTitle" />
       <ul :class="$style.references">
         <reference-item
@@ -22,12 +22,12 @@
 <script>
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
-import BaseBodytext from '@/components/base-bodytext'
+// import BaseBodytext from '@/components/base-bodytext'
 import ReferenceItem from '@/components/reference-item'
 
 export default {
   components: {
-    BaseBodytext,
+    // BaseBodytext,
     ReferenceItem
   },
   mixins: [metaInfo],
@@ -73,6 +73,8 @@ export default {
 
 .title {
   @extend %fs-medium;
+
+  margin-bottom: var(--blank-line);
 }
 
 .text {
@@ -89,8 +91,6 @@ export default {
 }
 
 .references {
-  margin-top: var(--blank-line);
-
   @media (min-width: $medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

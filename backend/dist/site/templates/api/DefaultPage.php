@@ -59,6 +59,16 @@ class DefaultPage {
       $response->authors = Helper::getPageReferences($usedAuthors);
     }
 
+    if ($page->template->name == 'author' || $page->template->name == 'tag') {
+      $usedPages = new PageArray();
+      $references = $page->references();
+      // if (!$references->count) continue;
+      //if not, push them to usedAuthor-array. has to be page array to have other meothds available
+      $usedPages->add($references);
+      // then, add them to the tags field of the response when fetching resources page
+      $response->references = Helper::getPageReferences($usedPages);
+    }
+
     Helper::unsetLanguage();
     return $response;
   }
