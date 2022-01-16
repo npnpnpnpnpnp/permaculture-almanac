@@ -1,6 +1,8 @@
 <template>
   <li :class="classes.component">
-    <div v-html="tag.fields.title" />
+    <router-link :to="tag.meta.url" :class="$style.link">
+      <div v-html="tag.fields.title" />
+    </router-link>
   </li>
 </template>
 
@@ -41,6 +43,10 @@ export default {
 
     color: var(--green-light);
   }
+}
+
+.link {
+  @extend %link-reset;
 }
 
 // .body {

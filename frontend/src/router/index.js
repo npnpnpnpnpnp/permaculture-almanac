@@ -7,6 +7,7 @@ import Home from '@/views/home.vue'
 import Resources from '@/views/resources.vue'
 import BasicPage from '@/views/basic-page.vue'
 import Author from '@/views/author.vue'
+import Tag from '@/views/tag.vue'
 
 Vue.use(Router)
 Vue.use(Meta)
@@ -62,6 +63,7 @@ const addRoutesFromApi = routes => {
     if (route.meta.template === 'basic-page') route.component = BasicPage
     if (route.meta.template === 'resources') route.component = Resources
     if (route.meta.template === 'author') route.component = Author
+    if (route.meta.template === 'tag') route.component = Tag
 
     router.addRoute(route)
   })
