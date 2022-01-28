@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.component" v-if="items.length">
+  <div :class="$style.component" v-if="items.length" :style="marginTop">
     <v-table
       :data="items"
       :filters="filters"
@@ -70,6 +70,11 @@ export default {
     headStyle() {
       return {
         top: this.headerHeight + this.controlsHeight + 'px'
+      }
+    },
+    marginTop() {
+      return {
+        marginTop: this.headerHeight + 'px'
       }
     }
   },
