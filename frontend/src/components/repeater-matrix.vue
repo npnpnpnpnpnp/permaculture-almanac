@@ -9,7 +9,7 @@
       <thead slot="head" :class="$style.head" :style="headStyle">
         <resource-header />
       </thead>
-      <tbody slot="body" slot-scope="{ displayData }" :style="marginTop">
+      <tbody slot="body" slot-scope="{ displayData }">
         <repeater-matrix-item
           v-for="(item, index) in displayData"
           :item="item"
@@ -52,6 +52,10 @@ export default {
     selectedAuthors: {
       type: Array,
       default: () => []
+    },
+    controlsHeight: {
+      type: Number,
+      required: true
     }
   },
   data() {
@@ -62,15 +66,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['headerHeight', 'controlsHeight']),
+    ...mapState(['headerHeight']),
     headStyle() {
       return {
         top: this.headerHeight + this.controlsHeight + 'px'
-      }
-    },
-    marginTop() {
-      return {
-        marginTop: this.headerHeight + this.controlsHeight + 'px'
       }
     }
   },
@@ -113,8 +112,7 @@ export default {
 }
 
 .head {
-  position: fixed;
-  width: 100%;
+  position: sticky;
   background-color: var(--white);
 }
 
