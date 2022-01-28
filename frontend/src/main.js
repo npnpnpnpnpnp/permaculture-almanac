@@ -5,9 +5,7 @@ import store from '@/store'
 import ApiService from '@/services/api'
 import SmartTable from 'vuejs-smart-table'
 import PortalVue from 'portal-vue'
-import VueTyperPlugin from 'vue-typer'
 
-Vue.use(VueTyperPlugin)
 Vue.use(PortalVue)
 Vue.use(SmartTable)
 
