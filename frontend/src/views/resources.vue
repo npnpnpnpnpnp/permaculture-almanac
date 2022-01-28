@@ -26,7 +26,6 @@
         :selected-categories="filter.selectedCategories"
         :selected-tags="filter.selectedTags"
         :selected-authors="filter.selectedAuthors"
-        :controls-height="controlsHeight"
       />
     </div>
     <!-- <button type="button" @click="openSubmission">open</button>
@@ -127,8 +126,10 @@ export default {
       this.query = query
     },
     getControlsHeight() {
-      // send current controls height to table head in repeater-matrix for stickiness of controls
-      this.controlsHeight = this.$refs.controls.offsetHeight
+      // send current controls height to store to make it availbale for table head in repeater-matrix for positioning of sticky controls + to calculate top spacing of list
+      this.controlsHeight = this.$store.commit('setControlsHeight', {
+        controlsHeight: this.$refs.controls.offsetHeight
+      })
     },
     onResize: debounce(function() {
       if (!this.$refs.controls) return
