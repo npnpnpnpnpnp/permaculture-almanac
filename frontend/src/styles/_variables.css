@@ -43,6 +43,9 @@
   --long: 350ms;
   --xlong: 750ms;
   --xxlong: 850ms;
+
+  /* Shadows */
+  --box-shadow: 0.2em 0.2em calc(var(--gutter) / 2) var(--green-light-alpha);
 }
 
 @media (min-width: 30em) {
