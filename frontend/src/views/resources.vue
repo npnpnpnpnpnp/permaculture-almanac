@@ -11,10 +11,10 @@
     <div :class="$style.content">
       <div :class="$style.controls" :style="controlsStyle" ref="controls">
         <button
-          v-if="showButton"
+          v-if="showOpen"
           type="button"
           v-html="labels.openFilter"
-          :class="$style.button"
+          :class="$style.open"
           @click="openFilter"
         />
         <search-input @change-value="handleSearchQuery" :value="query" />
@@ -29,11 +29,13 @@
         :controls-height="controlsHeight"
       />
     </div>
-    <!-- <button type="button" @click="openSubmission">open</button>
+    <button type="button" @click="openSubmission" :class="$style.submit">
+      open
+    </button>
     <submission-overlay
       :submission-visible="submissionVisible"
       @submission-visibility="handleSubmissionVisibility"
-    /> -->
+    />
   </main>
 </template>
 
@@ -47,15 +49,15 @@ import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 import { debounce } from 'lodash'
 import EventBus from '@/event-bus'
-// import SubmissionOverlay from '@/components/submission-overlay'
+import SubmissionOverlay from '@/components/submission-overlay'
 
 export default {
   components: {
     RepeaterMatrix,
     ResourceFilter,
     SearchInput,
-    FilterIndicator
-    // SubmissionOverlay
+    FilterIndicator,
+    SubmissionOverlay
   },
   mixins: [metaInfo],
   data() {
@@ -83,7 +85,7 @@ export default {
         top: this.headerHeight + 'px'
       }
     },
-    showButton() {
+    showOpen() {
       return this.isDesktop ? false : true
     },
     defaultCategories() {
@@ -196,7 +198,7 @@ export default {
   }
 }
 
-.button {
+.open {
   @extend %button-default;
 
   @media (min-width: $small) {
@@ -206,6 +208,17 @@ export default {
   @media (min-width: $medium) {
     max-width: unset;
   }
+}
+
+.submit {
+  @extend %button-default;
+
+  position: fixed;
+  background-color: var(--white);
+  bottom: calc(var(--blank-line) * 2);
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: var(--box-shadow);
 }
 
 // .content {
