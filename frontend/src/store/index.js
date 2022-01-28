@@ -21,14 +21,10 @@ export default new Vuex.Store({
     },
     isDesktop: false,
     isLarge: false,
-    headerHeight: 0,
-    controlsHeight: 0
+    headerHeight: 0
   },
 
   mutations: {
-    setControlsHeight(state, payload) {
-      state.controlsHeight = payload.controlsHeight
-    },
     setHeaderHeight(state, payload) {
       state.headerHeight = payload.headerHeight
     },
