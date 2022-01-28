@@ -74,7 +74,7 @@ export default {
 <style lang="scss" module>
 .component {
   padding: var(--gutter) var(--gutter) calc(var(--gutter) * 2) var(--gutter);
-  position: sticky;
+  position: fixed;
   top: 0;
   background-color: var(--white);
 

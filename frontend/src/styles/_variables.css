@@ -8,6 +8,8 @@
   --green-medium: rgb(176, 247, 185);
   --green-light-alpha: rgb(197, 255, 205, 0.5);
   --green-dark: rgb(124, 163, 129);
+  --grey-light: rgb(240, 240, 240);
+  --grey-dark: rgb(83, 83, 83);
 
   /* Typography */
   --fs-base: 0.625em;

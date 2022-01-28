@@ -21,18 +21,44 @@
 // }
 
 %fs-medium {
-  font-size: 1.5em;
+  @media (min-width: $medium) {
+    font-size: 1.1em;
+  }
 }
 
-%fs-xlarge {
-  font-size: 2em;
-  line-height: 1;
+%fs-mlarge {
+  font-size: 1.5em;
 
-  @media (min-width: $small) {
-    font-size: 5vw;
+  @media (min-width: $xsmall) {
+    font-size: 2.3em;
   }
 
   @media (min-width: $medium) {
+    font-size: 3.3em;
+  }
+}
+
+%fs-large {
+  font-size: 1.8em;
+
+  @media (min-width: $small) {
     font-size: 8vw;
+  }
+
+  @media (min-width: $medium) {
+    font-size: 12vw;
+  }
+}
+
+%fs-xlarge {
+  font-size: 3em;
+  line-height: 1;
+
+  @media (min-width: $small) {
+    font-size: 10vw;
+  }
+
+  @media (min-width: $medium) {
+    font-size: 15vw;
   }
 }

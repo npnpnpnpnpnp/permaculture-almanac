@@ -19,6 +19,8 @@ $routes = [
       ['OPTIONS', '', ['GET']],
       ['GET', '{path:.+}', DefaultPage::class, 'get'],
       ['GET', '', DefaultPage::class, 'get'],
+      // ['OPTIONS', 'resource/submit', RestApiHelper::class, 'preflight', ['auth' => false]], // this is needed for CORS Requests
+      // ['POST', 'resource/submit', DonationForm::class, 'submissionForm']
     ]
   ]
 ];
