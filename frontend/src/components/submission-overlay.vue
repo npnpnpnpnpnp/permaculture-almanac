@@ -60,7 +60,7 @@ export default {
     async submit(data) {
       try {
         this.response = await ApiService.post('resource/submit', data)
-        console.log(this.response)
+        // console.log(this.response)
         if (this.response.message === 'success') {
           // Form submitted successfully
           // this.$formulate.reset('donationForm')
