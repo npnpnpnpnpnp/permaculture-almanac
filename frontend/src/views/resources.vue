@@ -29,6 +29,11 @@
         :controls-height="controlsHeight"
       />
     </div>
+    <button type="button" @click="openSubmission">open</button>
+    <submission-overlay
+      :submission-visible="submissionVisible"
+      @submission-visibility="handleSubmissionVisibility"
+    />
   </main>
 </template>
 
@@ -42,13 +47,15 @@ import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 import { debounce } from 'lodash'
 import EventBus from '@/event-bus'
+import SubmissionOverlay from '@/components/submission-overlay'
 
 export default {
   components: {
     RepeaterMatrix,
     ResourceFilter,
     SearchInput,
-    FilterIndicator
+    FilterIndicator,
+    SubmissionOverlay
   },
   mixins: [metaInfo],
   data() {
@@ -58,6 +65,7 @@ export default {
       query: '',
       filter: {},
       filterVisible: false,
+      submissionVisible: false,
       labels: {
         openFilter: 'Filter'
       },
@@ -97,6 +105,12 @@ export default {
     }
   },
   methods: {
+    openSubmission() {
+      this.submissionVisible = true
+    },
+    handleSubmissionVisibility(visibility) {
+      this.submissionVisible = visibility
+    },
     openFilter() {
       this.filterVisible = true
     },
