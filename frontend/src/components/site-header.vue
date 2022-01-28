@@ -36,7 +36,7 @@ export default {
     getHeaderHeight() {
       if (this.isHome) return
       // send current header height to nav-item, intro slider home for scroll offset
-      // emitting value in intro-slider did not work, therfore usage of store
+      // emitting value in intro-slider did not work, therefore usage of store
       this.$store.commit('setHeaderHeight', {
         headerHeight: this.$refs.header.offsetHeight
       })
@@ -47,10 +47,13 @@ export default {
     }, 150)
   },
   mounted() {
-    this.getHeaderHeight()
     window.addEventListener('resize', this.onResize)
     EventBus.$on('page-loaded', () => {
       this.isVisible = true
+      // fetch header height as soon as header is visible
+      this.$nextTick(() => {
+        this.getHeaderHeight()
+      })
     })
   },
   beforeDestroy() {
@@ -74,9 +77,10 @@ export default {
 <style lang="scss" module>
 .component {
   padding: var(--gutter) var(--gutter) calc(var(--gutter) * 2) var(--gutter);
-  position: fixed;
+  position: sticky;
   top: 0;
   background-color: var(--white);
+  width: 100%;
 
   @media (min-width: $xsmall) {
     display: grid;
