@@ -215,10 +215,19 @@ export default {
 
   position: fixed;
   background-color: var(--white);
-  bottom: calc(var(--blank-line) * 2);
+  bottom: var(--blank-line);
   left: 50%;
   transform: translateX(-50%);
   box-shadow: var(--box-shadow);
+  padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
+
+  @media (min-width: $medium) {
+    left: 33.333%;
+    transform: unset;
+    margin-left: calc(
+      var(--gutter) * 2
+    ); // account for grid-gap and view gutter
+  }
 }
 
 // .content {
