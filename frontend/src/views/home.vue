@@ -121,6 +121,8 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.245em;
   max-width: 12em;
+  color: var(--green-light);
+
   // transition: opacity 1s, mix-blend-mode 1s;
 
   // &:hover {
@@ -165,7 +167,9 @@ export default {
 .subtitle {
   @extend %fs-medium;
   @extend %base-bodytext;
-  // @extend %fw-bold;
+  @extend %fw-bold;
+
+  color: var(--green-light);
 
   // font-family: 'Times', serif;
   max-width: 18em;

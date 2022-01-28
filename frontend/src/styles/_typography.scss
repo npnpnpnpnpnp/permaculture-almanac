@@ -21,18 +21,20 @@
 // }
 
 %fs-medium {
-  font-size: 1.1em;
-
   @media (min-width: $medium) {
-    // font-size: 1.25em;
+    font-size: 1.1em;
   }
 }
 
 %fs-mlarge {
   font-size: 1.5em;
 
+  @media (min-width: $xsmall) {
+    font-size: 2.3em;
+  }
+
   @media (min-width: $medium) {
-    font-size: 2.5em;
+    font-size: 3.3em;
   }
 }
 
