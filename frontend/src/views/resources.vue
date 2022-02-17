@@ -221,18 +221,22 @@ export default {
 }
 
 .submitWrapper {
+  position: fixed;
+  bottom: calc(var(--blank-line) * 2.5);
   pointer-events: none;
+  left: 50%;
+  transform: translateX(-50%);
 
   @media (min-width: $medium) {
-    position: fixed;
+    bottom: 0;
+    left: unset;
+    transform: unset;
     display: flex;
     align-items: center;
     height: calc(var(--blank-line) * 4);
-    bottom: 0;
     background-color: var(--white);
-    width: 100%;
-    padding: var(--blank-line) var(--gutter) var(--blank-line) 0;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 50%);
+    width: 100%;
   }
 }
 
@@ -241,25 +245,10 @@ export default {
   @extend %link-reset;
 
   pointer-events: auto;
-  // left: 50%;
-  // transform: translateX(-50%);
-  // box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
   background-color: var(--white);
-
-  // @media (min-width: $medium) {
-  //   left: unset;
-  //   transform: unset;
-  //   // margin-left: calc(
-  //   //   var(--gutter) * 2
-  //   // ); // account for grid-gap and view gutter
-  // }
 }
-
-// .content {
-//   @media (min-width: $medium) {
-//   }
-// }
 // .title {}
 // .body {}
 </style>

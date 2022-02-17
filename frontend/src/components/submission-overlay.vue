@@ -4,103 +4,17 @@
 
     <h2 :class="$style.formTitle">Submission of resource entry</h2>
     <!-- <h2 :class="$style.formTitle">{{ $t('particulars') }}</h2> -->
-
-    <FormulateForm
-      :class="$style.form"
-      :errors="validationMessage"
-      name="submissionForm"
-      @submit="submit"
+    <!-- <form
+      method="post"
+      action="mailto:default@elitemail.org?subject=Permaculture Almanac: New Submission of resource"
     >
-      <!-- @validation="handleValidation" -->
+      <input type="submit" value="Send Email" />
+    </form> -->
 
-      <FormulateInput
-        type="text"
-        name="title"
-        placeholder="title"
-        validation="required"
-        :class="$style.title"
-      />
-      <!-- :placeholder="$t('title')" -->
-      <!-- :validation-messages="{
-          required: $t('titleRequired')
-        }" -->
-      <FormulateInput
-        type="text"
-        name="subtitle"
-        placeholder="subtitle"
-        validation="optional"
-        :class="$style.subtitle"
-      />
-      <!-- :placeholder="$t('subtitle')" -->
-      <FormulateInput
-        type="text"
-        name="url"
-        placeholder="url"
-        validation="required"
-        :class="$style.url"
-      />
-      <!-- :placeholder="$t('url')" -->
-      <!-- :validation-messages="{
-          required: $t('urlRequired')
-        }" -->
-      <!-- :validation-messages="validationMessage" -->
-      <FormulateInput
-        type="text"
-        name="author"
-        placeholder="author"
-        validation="required"
-        :class="$style.author"
-      />
-      <!-- @change="showInput" -->
-      <!-- :placeholder="$t('author')" -->
-      <!-- :validation-messages="{
-          required: $t('authorRequired')
-        }" -->
-      <!-- :validation-messages="validationMessage" -->
-      <FormulateInput
-        type="text"
-        name="publisher"
-        placeholder="publisher"
-        validation="optional"
-        :class="$style.publisher"
-      />
-      <!-- :placeholder="$t('publisher')" -->
-      <FormulateInput
-        type="text"
-        name="isbn"
-        placeholder="isbn"
-        validation="optional"
-        :class="$style.isbn"
-      />
-      <!-- :placeholder="$t('isbn')" -->
-      <!-- :validation-messages="validationMessage" -->
-      <FormulateInput
-        type="textarea"
-        name="description"
-        placeholder="description"
-        validation="optional"
-        :class="$style.description"
-      />
-      <!-- :placeholder="$t('description')" -->
-
-      <!-- error-behavior="submit" -->
-      <!-- necessary fields: dropdown type, tags, separated by commas. check other types for additional fields. first type selection, then specific fields are displayed -->
-      <FormulateInput type="submit" :class="$style.button" id="submit">
-        <!-- <span v-if="!this.isSubmitted" :class="$style.label">{{
-          $t('buttonSend')
-        }}</span> -->
-        <span v-if="!this.isSubmitted" :class="$style.label">
-          send
-        </span>
-        <!-- <span v-else :class="$style.label">{{ $t('buttonSubmitted') }}</span> -->
-        <span v-else :class="$style.label">submitted</span>
-      </FormulateInput>
-      <FormulateErrors />
-      <div v-if="isSubmitted" :class="$style.success">
-        <!-- {{ $t('successMessage') }} -->
-        success
-      </div>
-    </FormulateForm>
+    <a
+      href="mailto:default@elitemail.org?subject=Permaculture Almanac: New Submission of resource"
+      >send</a
+    >
 
     <div v-if="isSubmitted">
       thank you for your submission! we will review it accordingly.
@@ -228,7 +142,7 @@ export default {
 .url,
 .author,
 .description,
-.button {
+.buttons {
   grid-column: 1 / 3;
 }
 
@@ -238,17 +152,23 @@ export default {
   position: relative;
   width: 100%;
 
+  // not buttons
+
   &:not(:last-of-type) {
     margin-bottom: calc(var(--blank-line) * 1.5);
     padding-bottom: var(--spacing-h-small);
   }
+
+  // & [data-type='button'] {
+  //   @extend %button-default;
+  // }
 
   input {
     width: 100%;
   }
 }
 
-:global(.formulate-input-element):not(:global(.formulate-input-element--submit)):not(:global(.formulate-input-element--textarea)) {
+:global(.formulate-input-element):not(:global(.formulate-input-element--submit)):not(:global(.formulate-input-element--button)):not(:global(.formulate-input-element--textarea)) {
   display: inline-block;
   border-bottom: 1px solid var(--green-light);
   width: 100%;
@@ -258,10 +178,35 @@ export default {
   }
 }
 
-:global(.formulate-input-element--submit) {
-  margin-left: 50%;
-  transform: translateX(-50%);
+.buttons {
+  // margin-left: 50%;
+  // transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gutter);
+  width: 100%;
+  bottom: 0;
+  left: 0;
 }
+
+.submit {
+  grid-column: 2 / 3;
+  margin-bottom: 0;
+}
+
+.reset {
+  @extend %button-default;
+
+  grid-column: 1 / 2;
+}
+
+// :global(.formulate-input-element--submit) {
+//   grid-column: 1 /2;
+// }
+
+// :global(.formulate-input-element--button) {
+//   grid-column: 2 /3;
+// }
 
 :global(.formulate-input-element--textarea) {
   textarea {
@@ -304,10 +249,12 @@ textarea {
   color: var(--red);
 }
 
-:global(.formulate-input-element--submit) {
+:global(.formulate-input-element--submit),
+:global(.formulate-input-element--button) {
   display: inline-block;
 
-  button[type='submit'] {
+  button[type='submit'],
+  button[type='button'] {
     @extend %button-default;
   }
 }
