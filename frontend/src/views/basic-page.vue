@@ -1,5 +1,5 @@
 <template>
-  <main :class="$style.view" v-if="page.fields">
+  <main :class="$style.view" v-if="page.fields" :style="spacingTop">
     <base-bodytext :text="page.fields.body" :class="$style.body" />
   </main>
 </template>
@@ -9,6 +9,7 @@ import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 import BaseBodytext from '@/components/base-bodytext'
 import EventBus from '@/event-bus'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -18,6 +19,14 @@ export default {
   data() {
     return {
       page: {}
+    }
+  },
+  computed: {
+    ...mapState(['headerHeight']),
+    spacingTop() {
+      return {
+        paddingTop: this.headerHeight + 'px'
+      }
     }
   },
   async created() {
