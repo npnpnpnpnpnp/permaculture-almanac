@@ -28,14 +28,23 @@
         :selected-authors="filter.selectedAuthors"
         :controls-height="controlsHeight"
       />
+      <div :class="$style.submitWrapper">
+        <a
+          href="mailto:default@elitemail.org?subject=Permaculture Almanac: New Submission of resource"
+          :class="$style.submit"
+          >{{ labels.submit }}
+        </a>
+      </div>
     </div>
-    <button type="button" @click="openSubmission" :class="$style.submit">
+
+    <!-- <button type="button" @click="openSubmission" :class="$style.submit">
       open
-    </button>
-    <submission-overlay
+    </button> -->
+
+    <!-- <submission-overlay
       :submission-visible="submissionVisible"
       @submission-visibility="handleSubmissionVisibility"
-    />
+    /> -->
   </main>
 </template>
 
@@ -49,15 +58,15 @@ import FilterIndicator from '@/components/filter-indicator'
 import { mapState } from 'vuex'
 import { debounce } from 'lodash'
 import EventBus from '@/event-bus'
-import SubmissionOverlay from '@/components/submission-overlay'
+// import SubmissionOverlay from '@/components/submission-overlay'
 
 export default {
   components: {
     RepeaterMatrix,
     ResourceFilter,
     SearchInput,
-    FilterIndicator,
-    SubmissionOverlay
+    FilterIndicator
+    // SubmissionOverlay
   },
   mixins: [metaInfo],
   data() {
@@ -69,7 +78,8 @@ export default {
       filterVisible: false,
       submissionVisible: false,
       labels: {
-        openFilter: 'Filter'
+        openFilter: 'Filter',
+        submit: 'Submit entry'
       },
       controlsHeight: 0
     }
@@ -210,30 +220,35 @@ export default {
   }
 }
 
-.submit {
-  @extend %button-default;
-
+.submitWrapper {
   position: fixed;
-  background-color: var(--white);
-  bottom: var(--blank-line);
+  bottom: calc(var(--blank-line) * 2.5);
+  pointer-events: none;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: var(--box-shadow);
-  padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
 
   @media (min-width: $medium) {
-    left: 33.333%;
+    bottom: 0;
+    left: unset;
     transform: unset;
-    margin-left: calc(
-      var(--gutter) * 2
-    ); // account for grid-gap and view gutter
+    display: flex;
+    align-items: center;
+    height: calc(var(--blank-line) * 4);
+    background-color: var(--white);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 50%);
+    width: 100%;
   }
 }
 
-// .content {
-//   @media (min-width: $medium) {
-//   }
-// }
+.submit {
+  @extend %button-default;
+  @extend %link-reset;
+
+  pointer-events: auto;
+  box-shadow: var(--box-shadow);
+  padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
+  background-color: var(--white);
+}
 // .title {}
 // .body {}
 </style>

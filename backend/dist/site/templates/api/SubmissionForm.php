@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/Helper.php";
 
-class DonationForm {
+class SubmissionForm {
   public static function submitForm($data) {
     Helper::setLanguage();
 

@@ -10,6 +10,7 @@
   --green-dark: rgb(124, 163, 129);
   --grey-light: rgb(240, 240, 240);
   --grey-dark: rgb(83, 83, 83);
+  --red: rgba(232, 64, 76, 1);
 
   /* Typography */
   --fs-base: 0.625em;

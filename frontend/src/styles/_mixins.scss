@@ -41,6 +41,12 @@
   border-radius: 1em;
   transition: background-color var(--xshort);
 
+  &:focus {
+    // @include focus-default(var(--green-light-alpha));
+    // focus color defined by mixin does not allow for additional hover states. likely due to the mixin being applied to whole class and not respecting cascade
+    background-color: var(--green-light-alpha);
+  }
+
   &:hover {
     background-color: var(--green-medium);
   }
