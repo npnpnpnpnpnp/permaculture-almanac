@@ -190,7 +190,7 @@ export default {
 .wrapper {
   @media (min-width: $medium) {
     position: sticky;
-    top: 0;
+    // top: 0;
   }
 }
 

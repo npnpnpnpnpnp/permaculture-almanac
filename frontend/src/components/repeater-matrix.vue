@@ -56,6 +56,10 @@ export default {
     controlsHeight: {
       type: Number,
       required: true
+    },
+    indicatorHeight: {
+      type: Number,
+      required: true
     }
   },
   data() {
@@ -69,7 +73,8 @@ export default {
     ...mapState(['headerHeight']),
     headStyle() {
       return {
-        top: this.headerHeight + this.controlsHeight + 'px'
+        top:
+          this.headerHeight + this.controlsHeight + this.indicatorHeight + 'px'
       }
     },
     marginTop() {
