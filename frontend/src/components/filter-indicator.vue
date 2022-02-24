@@ -79,6 +79,9 @@ export default {
           this.$emit('indicator-height', this.elementHeight)
         })
       }
+    },
+    hasFilterApplied() {
+      if (!this.hasFilterApplied) this.$emit('indicator-height', 0)
     }
   }
 }
