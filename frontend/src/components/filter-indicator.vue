@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showItem" :class="$style.component">
+  <div v-if="showItem" :class="$style.component" ref="component" :style="top">
     <ul :class="$style.list">
       <portal-target name="category-portal" :class="$style.portal" />
       <portal-target name="tag-portal" :class="$style.portal" />
@@ -10,25 +10,43 @@
 
 <script>
 import { mapState } from 'vuex'
+import { debounce } from 'lodash'
+
+// import EventBus from '@/event-bus'
 
 export default {
   props: {
     filter: {
       type: Object,
       required: true
+    },
+    filterVisible: {
+      type: Boolean,
+      required: true
+    },
+    controlsHeight: {
+      type: Number,
+      required: true
     }
   },
-  // data() {
-  //   return {}
-  // },
+  data() {
+    return {
+      elementHeight: 0
+    }
+  },
   computed: {
-    ...mapState(['isDesktop']),
+    ...mapState(['isDesktop', 'headerHeight']),
     classes() {
       return {
         content: [
           this.$style.components,
           this.filterVisible ? '' : this.$style['is-visible']
         ]
+      }
+    },
+    top() {
+      return {
+        top: this.headerHeight + this.controlsHeight + 'px'
       }
     },
     hasFilterApplied() {
@@ -42,13 +60,38 @@ export default {
     showItem() {
       return !this.filterVisible && this.hasFilterApplied && !this.isDesktop
     }
+  },
+  methods: {
+    getElementHeight() {
+      this.elementHeight = this.$refs.component.offsetHeight
+    },
+    onResize: debounce(function() {
+      if (!this.$refs.component) return
+      this.getElementHeight()
+    }, 50)
+  },
+  watch: {
+    filterVisible() {
+      if (!this.filterVisible && this.hasFilterApplied) {
+        this.$nextTick(() => {
+          this.getElementHeight()
+          // send current indicator height to table head in repeater-matrix for stickiness of table header
+          this.$emit('indicator-height', this.elementHeight)
+        })
+      }
+    },
+    hasFilterApplied() {
+      if (!this.hasFilterApplied) this.$emit('indicator-height', 0)
+    }
   }
 }
 </script>
 
 <style lang="scss" module>
 .component {
-  margin-bottom: var(--filter-spacing-bottom);
+  padding-bottom: var(--filter-spacing-bottom);
+  position: sticky;
+  background-color: var(--white);
 }
 
 .list {

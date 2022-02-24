@@ -19,7 +19,12 @@
         />
         <search-input @change-value="handleSearchQuery" :value="query" />
       </div>
-      <filter-indicator :filter="filter" />
+      <filter-indicator
+        :filter="filter"
+        :filter-visible="filterVisible"
+        :controls-height="controlsHeight"
+        @indicator-height="handleIndicatorHeight"
+      />
       <repeater-matrix
         :items="page.children"
         :query="query"
@@ -27,6 +32,7 @@
         :selected-tags="filter.selectedTags"
         :selected-authors="filter.selectedAuthors"
         :controls-height="controlsHeight"
+        :indicator-height="indicatorHeight"
       />
       <div :class="$style.submitWrapper">
         <a
@@ -81,7 +87,8 @@ export default {
         openFilter: 'Filter',
         submit: 'Submit entry'
       },
-      controlsHeight: 0
+      controlsHeight: 0,
+      indicatorHeight: 0
     }
   },
   async created() {
@@ -117,6 +124,9 @@ export default {
     }
   },
   methods: {
+    handleIndicatorHeight(height) {
+      this.indicatorHeight = height
+    },
     openSubmission() {
       this.submissionVisible = true
     },
@@ -169,6 +179,7 @@ export default {
 <style lang="scss" module>
 .view {
   padding: 0 var(--gutter) var(--gutter) var(--gutter);
+  min-height: 100%;
 
   @media (min-width: $medium) {
     display: grid;
