@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     getElementHeight() {
-      // send current controls height to table head in repeater-matrix for stickiness of controls
       this.elementHeight = this.$refs.component.offsetHeight
     },
     onResize: debounce(function() {
@@ -75,7 +74,8 @@ export default {
     filterVisible() {
       if (!this.filterVisible && this.hasFilterApplied) {
         this.$nextTick(() => {
-          console.log(this.elementHeight)
+          this.getElementHeight()
+          // send current indicator height to table head in repeater-matrix for stickiness of table header
           this.$emit('indicator-height', this.elementHeight)
         })
       }
