@@ -70,11 +70,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(['headerHeight']),
+    ...mapState(['headerHeight', 'isDesktop']),
     headStyle() {
+      const top = this.isDesktop
+        ? this.headerHeight + this.controlsHeight + 'px'
+        : this.headerHeight + this.controlsHeight + this.indicatorHeight + 'px'
       return {
-        top:
-          this.headerHeight + this.controlsHeight + this.indicatorHeight + 'px'
+        top: top
       }
     },
     marginTop() {
