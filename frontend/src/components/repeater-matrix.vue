@@ -117,6 +117,14 @@ export default {
 </script>
 
 <style lang="scss" module>
+.component {
+  margin-bottom: calc(var(--blank-line) * 3);
+
+  @media (min-width: $medium) {
+    margin-bottom: calc(var(--blank-line) * 3.5);
+  }
+}
+
 .table {
   width: 100%;
   display: flex;
