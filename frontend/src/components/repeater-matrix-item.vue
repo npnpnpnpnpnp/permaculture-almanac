@@ -17,8 +17,8 @@ export default {
       import('@/components/repeater-matrix-type-video'),
     RepeaterMatrixTypePodcast: () =>
       import('@/components/repeater-matrix-type-podcast'),
-    RepeaterMatrixTypePublication: () =>
-      import('@/components/repeater-matrix-type-publication'),
+    RepeaterMatrixTypePublikation: () =>
+      import('@/components/repeater-matrix-type-publikation'),
     RepeaterMatrixTypeTool: () =>
       import('@/components/repeater-matrix-type-tool'),
     RepeaterMatrixTypePerson: () =>

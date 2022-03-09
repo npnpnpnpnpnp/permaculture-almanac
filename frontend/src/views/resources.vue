@@ -85,7 +85,7 @@ export default {
       submissionVisible: false,
       labels: {
         openFilter: 'Filter',
-        submit: 'Submit entry'
+        submit: 'Eintrag einreichen'
       },
       controlsHeight: 0,
       indicatorHeight: 0
