@@ -233,7 +233,7 @@ export default {
 
 .submitWrapper {
   position: fixed;
-  bottom: calc(var(--blank-line) * 2.5);
+  bottom: calc(var(--blank-line) * 1.5);
   pointer-events: none;
   left: 50%;
   transform: translateX(-50%);

@@ -34,6 +34,7 @@ export default {
 
 .link {
   @extend %link-reset;
+  @include focus-default(transparent);
 }
 
 .is-active {
