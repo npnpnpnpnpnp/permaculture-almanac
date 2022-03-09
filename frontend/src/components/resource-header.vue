@@ -20,11 +20,11 @@ export default {
   data() {
     return {
       labels: {
-        title: 'Title',
+        title: 'Titel',
         author: 'Author',
         tags: 'Tags',
-        type: 'Type',
-        description: 'Description'
+        type: 'Typ',
+        description: 'Beschreibung'
       }
     }
   },

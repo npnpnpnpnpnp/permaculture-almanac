@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       labels: {
-        placeholder: 'Search ...'
+        placeholder: 'Suche ...'
       },
       query: ''
     }
@@ -69,6 +69,7 @@ export default {
 
 <style lang="scss" module>
 .component {
+  display: flex;
   // border-bottom: 1px solid var(--black);
   background-color: var(--green-light-alpha);
   border: none;
@@ -77,6 +78,7 @@ export default {
 
 .form {
   display: flex;
+  width: 100%;
 }
 
 .input {
