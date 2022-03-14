@@ -1,6 +1,18 @@
 <template>
   <main :class="$style.view" v-if="page.fields" :style="spacingTop">
     <base-bodytext :text="page.fields.body" :class="$style.body" />
+    <section :class="$style.imprint">
+      <button
+        v-html="labels.imprint"
+        @click="toggleImprint"
+        :class="classes.button"
+      />
+      <div
+        v-if="imprintVisible"
+        v-html="page.fields.imprint"
+        :class="$style.content"
+      />
+    </section>
   </main>
 </template>
 
@@ -21,15 +33,29 @@ export default {
       page: {},
       labels: {
         imprint: 'Impressum'
-      }
+      },
+      imprintVisible: false
     }
   },
   computed: {
     ...mapState(['headerHeight']),
+    classes() {
+      return {
+        button: [
+          this.$style.button,
+          this.imprintVisible ? this.$style.isVisible : ''
+        ]
+      }
+    },
     spacingTop() {
       return {
         paddingTop: this.headerHeight + 'px'
       }
+    }
+  },
+  methods: {
+    toggleImprint() {
+      this.imprintVisible = !this.imprintVisible
     }
   },
   async created() {
@@ -60,6 +86,32 @@ export default {
   }
 }
 
+.imprint {
+  margin: calc(var(--blank-line) * 2) 0 calc(var(--blank-line) * 3) 0;
+}
+
+.button {
+  @include focus-default($color: transparent);
+  // @extend %hover-default;
+
+  &:before {
+    margin-right: calc(var(--gutter) / 2);
+    content: '\2193';
+    // color: var(--green-light);
+  }
+
+  &.isVisible {
+    &:before {
+      content: '\2191';
+    }
+  }
+}
+
+.content {
+  margin-top: var(--blank-line);
+}
+
+.imprint,
 .body {
   @extend %base-bodytext;
 
