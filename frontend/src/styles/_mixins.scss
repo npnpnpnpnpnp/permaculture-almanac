@@ -65,6 +65,12 @@
   }
 }
 
+%hover-default {
+  &:hover {
+    border-bottom: 1px dashed var(--green-light);
+  }
+}
+
 %grid-columns {
   .link {
     grid-column: 1 / 2;
