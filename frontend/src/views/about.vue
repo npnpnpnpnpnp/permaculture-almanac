@@ -87,13 +87,12 @@ export default {
 }
 
 .imprint {
-  margin-top: calc(var(--blank-line) * 2);
-  grid-column: 2;
+  margin: calc(var(--blank-line) * 2) 0 calc(var(--blank-line) * 3) 0;
 }
 
 .button {
   @include focus-default($color: transparent);
-  @extend %hover-default;
+  // @extend %hover-default;
 
   &:before {
     margin-right: calc(var(--gutter) / 2);
@@ -112,6 +111,7 @@ export default {
   margin-top: var(--blank-line);
 }
 
+.imprint,
 .body {
   @extend %base-bodytext;
 
