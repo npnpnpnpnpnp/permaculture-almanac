@@ -1,6 +1,6 @@
 <template>
   <li :class="$style.component">
-    <router-link :to="author.meta.url" :class="$style.link">
+    <router-link :to="author.meta.url" :class="classes.link">
       <div v-html="author.fields.title" />
     </router-link>
   </li>
@@ -13,6 +13,16 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    classes() {
+      return {
+        link: [this.$style.link, this.hasContent ? '' : this.$style.noContent]
+      }
+    },
+    hasContent() {
+      return this.author.fields.body.length > 0
+    }
   }
 }
 </script>
@@ -24,6 +34,12 @@ export default {
 
 .link {
   @extend %link-reset;
+
+  display: inline-block;
+
+  &.noContent {
+    pointer-events: none;
+  }
 }
 
 // .body {
