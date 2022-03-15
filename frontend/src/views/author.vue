@@ -1,5 +1,5 @@
 <template>
-  <main :class="$style.view" v-if="page.fields" :style="spacingTop">
+  <main :class="$style.view" v-if="page.fields.body" :style="spacingTop">
     <div :class="$style.text">
       <h2 :class="$style.title" v-html="page.fields.title" />
       <base-bodytext :text="page.fields.body" :class="$style.body" />
