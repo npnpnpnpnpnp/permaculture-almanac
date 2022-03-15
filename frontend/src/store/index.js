@@ -15,6 +15,8 @@ export default new Vuex.Store({
     metaDescription: undefined,
     routes: [],
     siteTitle: undefined,
+    imprint: undefined,
+    privacy: undefined,
     breakpoints: {
       medium: window.matchMedia('(min-width: 48em)'),
       large: window.matchMedia('(min-width: 64em)')

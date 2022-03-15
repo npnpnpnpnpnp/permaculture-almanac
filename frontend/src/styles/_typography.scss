@@ -16,9 +16,9 @@
   font-size: 1.6em;
 }
 
-// %fs-small {
-//   font-size: 0.8em;
-// }
+%fs-small {
+  font-size: 0.8em;
+}
 
 %fs-medium {
   @media (min-width: $medium) {

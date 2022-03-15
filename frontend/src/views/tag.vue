@@ -1,5 +1,5 @@
 <template>
-  <main :class="$style.view" v-if="page.fields">
+  <main :class="$style.view" v-if="page.fields" :style="spacingTop">
     <div :class="$style.text">
       <h2 :class="$style.title" v-html="page.fields.title" />
       <!-- <base-bodytext :text="page.fields.body" :class="$style.body" /> -->
@@ -24,6 +24,8 @@ import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
 // import BaseBodytext from '@/components/base-bodytext'
 import ReferenceItem from '@/components/reference-item'
+import { mapState } from 'vuex'
+import EventBus from '@/event-bus'
 
 export default {
   components: {
@@ -39,6 +41,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState(['headerHeight']),
+    spacingTop() {
+      return {
+        paddingTop: this.headerHeight + 'px'
+      }
+    }
+  },
   methods: {
     closeDetail() {
       this.$router.go(-1)
@@ -46,16 +56,13 @@ export default {
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
+    EventBus.$emit('page-loaded')
   }
 }
 </script>
 
 <style lang="scss" module>
 .view {
-  // position: absolute;
-  // top: 0;
-  // width: 100%;
-  // height: 100%;
   padding: var(--gutter);
   background-color: var(--white);
 
@@ -80,6 +87,7 @@ export default {
 .text {
   @media (min-width: $small) {
     order: 1;
+    grid-column: 2 / 3;
   }
 }
 
@@ -109,6 +117,8 @@ export default {
 }
 
 .button {
+  @include focus-default($color: transparent);
+
   margin-top: calc(var(--blank-line) * 2);
 
   &::after {
@@ -116,6 +126,7 @@ export default {
   }
 
   @media (min-width: $medium) {
+    position: fixed;
     display: flex;
     margin-top: 0;
   }
