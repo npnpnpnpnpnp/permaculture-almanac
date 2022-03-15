@@ -48,8 +48,6 @@ export default {
   // height: 100%;
   padding: var(--gutter);
   background-color: var(--white);
-  // min-height: 100%;
-  flex: 1;
 
   &:last-child {
     margin-bottom: calc(var(--blank-line) * 3);

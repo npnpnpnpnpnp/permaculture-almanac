@@ -23,12 +23,14 @@
 <script>
 import PageService from '@/services/page'
 import { metaInfo } from '@/mixins/meta-info'
+import EventBus from '@/event-bus'
 
 export default {
   mixins: [metaInfo],
   data() {
     return {
       page: {},
+      loading: true,
       options: {
         preTypeDelay: 1000, // time before typing starts
         typeDelay: 60,
@@ -58,6 +60,14 @@ export default {
   },
   async created() {
     this.page = await PageService.get({ path: this.$route.path })
+    this.loading = false
+  },
+  watch: {
+    loading() {
+      if (!this.loading) {
+        EventBus.$emit('home-loaded', true)
+      }
+    }
   }
 }
 </script>
@@ -65,8 +75,6 @@ export default {
 <style lang="scss" module>
 .view {
   padding: var(--gutter);
-  position: absolute;
-  top: 0;
   height: 100%;
   width: 100%;
   cursor: pointer;

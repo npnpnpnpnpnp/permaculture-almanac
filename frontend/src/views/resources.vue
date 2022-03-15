@@ -179,8 +179,6 @@ export default {
 <style lang="scss" module>
 .view {
   padding: 0 var(--gutter) var(--gutter) var(--gutter);
-  // min-height: 100%;
-  flex: 1;
 
   @media (min-width: $medium) {
     display: grid;
