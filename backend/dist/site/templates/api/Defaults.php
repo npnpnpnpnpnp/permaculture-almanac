@@ -22,6 +22,8 @@ class Defaults {
     $response->availableLanguages = $languages;
 
     $response->siteTitle = $homepage->title;
+    $response->imprint = $homepage->imprint;
+    $response->privacy = $homepage->privacy;
     $response->metaDescription = $homepage->meta_description;
     $response->routes = FrontendRoutes::getRoutes();
 
