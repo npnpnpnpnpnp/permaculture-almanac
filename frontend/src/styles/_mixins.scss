@@ -123,12 +123,18 @@
     @extend %link-default;
   }
 
-  p {
+  p,
+  ul {
     // hyphens: auto;
     // text-align: justify;
 
     &:not(:last-child) {
       margin-bottom: var(--blank-line);
     }
+  }
+
+  ul {
+    list-style-type: circle;
+    margin-left: calc(var(--gutter) * 1.5);
   }
 }

@@ -2,16 +2,16 @@
   <main :class="$style.view" v-if="page.fields" :style="spacingTop">
     <base-bodytext :text="page.fields.body" :class="$style.body" />
     <section :class="$style.imprint">
-      <button
-        v-html="labels.imprint"
-        @click="toggleImprint"
-        :class="classes.button"
-      />
-      <div
-        v-if="imprintVisible"
-        v-html="page.fields.imprint"
-        :class="$style.content"
-      />
+      <button v-html="labels.imprint" :class="classes.button" />
+      <!-- @click="toggleImprint" -->
+      <base-bodytext :text="page.fields.imprint" :class="$style.content" />
+      <!-- v-if="imprintVisible" -->
+    </section>
+    <section :class="$style.privacy">
+      <button v-html="labels.privacy" :class="classes.button" />
+      <!-- @click="togglePrivacy" -->
+      <base-bodytext :text="page.fields.privacy" :class="$style.content" />
+      <!-- v-if="privacyVisible" -->
     </section>
   </main>
 </template>
@@ -32,9 +32,12 @@ export default {
     return {
       page: {},
       labels: {
-        imprint: 'Impressum'
+        imprint: 'Impressum',
+        privacy: 'Datenschutz'
       },
-      imprintVisible: false
+      imprintVisible: false,
+      privacyVisible: false,
+      isVisible: false
     }
   },
   computed: {
@@ -43,7 +46,8 @@ export default {
       return {
         button: [
           this.$style.button,
-          this.imprintVisible ? this.$style.isVisible : ''
+          this.imprintVisible ? this.$style.imprintVisible : '',
+          this.privacyVisible ? this.$style.privacyVisible : ''
         ]
       }
     },
@@ -55,7 +59,12 @@ export default {
   },
   methods: {
     toggleImprint() {
+      if (this.privacyVisible) this.privacyVisible = false
       this.imprintVisible = !this.imprintVisible
+    },
+    togglePrivacy() {
+      if (this.imprintVisible) this.imprintVisible = false
+      this.privacyVisible = !this.privacyVisible
     }
   },
   async created() {
@@ -74,6 +83,10 @@ export default {
   padding: var(--gutter);
   background-color: var(--white);
 
+  &:last-child {
+    margin-bottom: calc(var(--blank-line) * 3);
+  }
+
   @media (min-width: $medium) {
     display: grid;
     align-items: flex-start;
@@ -86,25 +99,28 @@ export default {
   }
 }
 
-.imprint {
-  margin: calc(var(--blank-line) * 2) 0 calc(var(--blank-line) * 3) 0;
+.imprint,
+.privacy {
+  margin-top: calc(var(--blank-line) * 2);
 }
 
 .button {
   @include focus-default($color: transparent);
+  @extend %fw-bold;
   // @extend %hover-default;
 
-  &:before {
-    margin-right: calc(var(--gutter) / 2);
-    content: '\2193';
-    // color: var(--green-light);
-  }
+  // &:before {
+  //   margin-right: calc(var(--gutter) / 2);
+  //   content: '\2193';
+  //   // color: var(--green-light);
+  // }
 
-  &.isVisible {
-    &:before {
-      content: '\2191';
-    }
-  }
+  // &.privacyVisible,
+  // &.imprintVisible {
+  //   &:before {
+  //     content: '\2191';
+  //   }
+  // }
 }
 
 .content {
@@ -112,7 +128,8 @@ export default {
 }
 
 .imprint,
-.body {
+.body,
+.privacy {
   @extend %base-bodytext;
 
   grid-column: 2;
