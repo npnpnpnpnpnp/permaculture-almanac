@@ -179,7 +179,8 @@ export default {
 <style lang="scss" module>
 .view {
   padding: 0 var(--gutter) var(--gutter) var(--gutter);
-  min-height: 100%;
+  // min-height: 100%;
+  flex: 1;
 
   @media (min-width: $medium) {
     display: grid;
@@ -233,7 +234,7 @@ export default {
 
 .submitWrapper {
   position: fixed;
-  bottom: calc(var(--blank-line) * 1.5);
+  bottom: calc(var(--blank-line) * 3.5);
   pointer-events: none;
   left: 50%;
   transform: translateX(-50%);
@@ -244,9 +245,9 @@ export default {
     transform: unset;
     display: flex;
     align-items: center;
-    height: calc(var(--blank-line) * 4);
+    height: calc(var(--blank-line) * 5);
     background-color: var(--white);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 50%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 35%);
     width: 100%;
   }
 }
@@ -255,10 +256,12 @@ export default {
   @extend %button-default;
   @extend %link-reset;
 
+  display: inline-block;
   pointer-events: auto;
   box-shadow: var(--box-shadow);
   padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
   background-color: var(--white);
+  margin-top: calc(var(--blank-line) * 1.25);
 }
 // .title {}
 // .body {}
