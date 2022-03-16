@@ -47,7 +47,7 @@ class SubmissionForm {
       $mail->subject('Permaculture Almanac: New resource submission');
       $bodyHTML = wireRenderFile(wire('config')->paths->templates . 'mail/default.php', array(
         'title' => 'New resource submission',
-        'body' => "A new entry for the resourc elist on Permaculure Almanac was submitted by  $email.",
+        'body' => "A new entry for the resource list on Permaculure Almanac was submitted by  $email.",
         'form' => $form
       ));
       $mail->bodyHTML($bodyHTML);

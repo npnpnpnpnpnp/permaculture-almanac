@@ -19,13 +19,10 @@
     <?php echo $body; ?>
 
     <p>
-      Anna Sieg<br />
-      <?php echo __('Geschäftsführerin'); ?><br />
-      Stiftung für wissenschaftliche Forschung am Stadtspital Triemli<br />
-      Birmensdorferstrasse 497<br />
-      8063 Zürich<br />
-      <a href="tel:0041444160025">+41 44 416 00 25</a><br />
-      <a href="mailto:stiftung@triemli.zuerich.ch">stiftung@triemli.zuerich.ch</a>
+      Nadine Prigann<br />
+      Digital and land-based permaculture<br />
+      <!-- <a href="tel:"></a><br /> -->
+      <a href="mailto:news@nadineprigann.de">news@nadineprigann.de</a>
     </p>
   </body>
 </html>
