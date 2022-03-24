@@ -53,6 +53,8 @@
 }
 
 %link-reset {
+  @include focus-default($color: transparent);
+
   color: inherit;
   text-decoration: none;
 }
