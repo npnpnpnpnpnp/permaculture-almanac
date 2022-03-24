@@ -41,9 +41,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .component {
-//   // width: 100%;
-// }
+.component {
+  border-top: 1px dashed var(--green-light);
+  padding-top: var(--spacing-h-medium);
+}
 
 .link {
   @extend %link-reset;
@@ -51,43 +52,12 @@ export default {
   display: inline-block;
 }
 
-.title,
-.subtitle {
-  // margin-bottom: calc(var(--blank-line) / 2);
-}
-
-.title {
-  // @extend %fw-bold;
-}
-
-.body,
-.tags {
+.body {
   margin-top: calc(var(--blank-line) / 2);
 }
 
 .tags {
   margin-left: calc(var(--gutter) * -1);
+  margin-top: var(--blank-line);
 }
-
-// .text {
-//   @extend %base-bodytext;
-//   @extend %ff-serif;
-
-//   max-width: 40em;
-
-//   a {
-//     position: relative;
-//     z-index: 2;
-//   }
-// }
-
-// .caption {
-//   @extend %fs-small;
-
-//   position: absolute;
-//   bottom: 0;
-//   width: 100%;
-//   padding: var(--gutter);
-//   text-transform: uppercase;
-// }
 </style>
