@@ -1,46 +1,44 @@
 <template>
-  <div v-show="showFilter" :class="$style.component">
-    <div :class="$style.wrapper" :style="filterStyle">
-      <div v-if="!isDesktop" v-html="labels.title" :class="$style.title" />
-      <div :class="$style.content">
-        <category-filter
-          :default-categories="defaultCategories"
-          :selected-categories="filter.selectedCategories"
-          :filter-visible="filterVisible"
-          @update-categories="updateCategoryFilter"
-        />
-        <tag-filter
-          :default-tags="defaultTags"
-          :selected-tags="filter.selectedTags"
-          :filter-visible="filterVisible"
-          @update-tags="updateTagFilter"
-        />
-        <author-filter
-          :default-authors="defaultAuthors"
-          :selected-authors="filter.selectedAuthors"
-          :filter-visible="filterVisible"
-          @update-authors="updateAuthorFilter"
-        />
-      </div>
-      <div :class="$style.controls">
-        <button
-          v-show="hasFilterApplied"
-          type="button"
-          :class="$style.reset"
-          @click="reset"
-        >
-          <!-- :disabled="isDisabled" -->
-          {{ labels.reset }}
-        </button>
-        <button
-          v-if="!isDesktop"
-          type="button"
-          @click="apply"
-          :class="$style.apply"
-        >
-          {{ labels.apply }}
-        </button>
-      </div>
+  <div v-show="showFilter" :class="$style.component" :style="filterStyle">
+    <div v-if="!isDesktop" v-html="labels.title" :class="$style.title" />
+    <div :class="$style.content">
+      <category-filter
+        :default-categories="defaultCategories"
+        :selected-categories="filter.selectedCategories"
+        :filter-visible="filterVisible"
+        @update-categories="updateCategoryFilter"
+      />
+      <tag-filter
+        :default-tags="defaultTags"
+        :selected-tags="filter.selectedTags"
+        :filter-visible="filterVisible"
+        @update-tags="updateTagFilter"
+      />
+      <author-filter
+        :default-authors="defaultAuthors"
+        :selected-authors="filter.selectedAuthors"
+        :filter-visible="filterVisible"
+        @update-authors="updateAuthorFilter"
+      />
+    </div>
+    <div :class="$style.controls">
+      <button
+        v-show="hasFilterApplied"
+        type="button"
+        :class="$style.reset"
+        @click="reset"
+      >
+        <!-- :disabled="isDisabled" -->
+        {{ labels.reset }}
+      </button>
+      <button
+        v-if="!isDesktop"
+        type="button"
+        @click="apply"
+        :class="$style.apply"
+      >
+        {{ labels.apply }}
+      </button>
     </div>
   </div>
 </template>
@@ -106,7 +104,7 @@ export default {
     filterStyle() {
       if (!this.isDesktop) return
       return {
-        top: this.headerHeight + 'px'
+        paddingTop: this.headerHeight + 'px'
       }
     },
     showFilter() {
@@ -170,27 +168,30 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   background-color: var(--white);
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
   padding: var(--gutter);
+  // hide scrollbars in browsers
+  // scrollbar-width: none;
+
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 
   @media (min-width: $medium) {
-    position: relative;
+    position: fixed;
     left: unset;
     top: unset;
-    height: unset;
-    overflow: unset;
+    width: 33.333%;
     padding: unset;
+    z-index: 0;
   }
-}
 
-.wrapper {
-  @media (min-width: $medium) {
-    position: sticky;
-    // top: 0;
+  @media (min-width: $large) {
+    width: 25%;
   }
 }
 
@@ -220,11 +221,12 @@ export default {
   background-image: linear-gradient(to top, white, rgba(255, 255, 255, 0) 100%);
 
   @media (min-width: $medium) {
-    position: static;
-    top: unset;
+    display: inline-block;
+    width: initial;
     left: unset;
-    padding: unset;
+    padding: 0 0 var(--blank-line) 0;
     background-image: unset;
+    z-index: 2;
   }
 }
 
@@ -234,10 +236,18 @@ export default {
 
   background-color: var(--white);
   max-width: 6em;
+
+  @media (min-width: $medium) {
+    width: 5em;
+  }
 }
 
 .reset {
   grid-column: 1;
+
+  @media (min-width: $medium) {
+    grid-column: unset;
+  }
 }
 
 .apply {
