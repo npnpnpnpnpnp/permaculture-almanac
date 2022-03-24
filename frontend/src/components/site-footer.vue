@@ -71,15 +71,13 @@ export default {
 .component {
   position: fixed;
   bottom: 0;
-  left: 0;
+  right: 0;
   width: 100vw;
   z-index: 1;
   padding: 0 var(--gutter) calc(var(--blank-line) * 1.5) var(--gutter);
 
   @media (min-width: $medium) {
-    display: grid;
-    grid-template-columns: 33.333% auto;
-    grid-gap: calc(var(--gutter) * 1.5);
+    width: initial;
     padding: 0 var(--gutter) calc(var(--blank-line) * 1.25) var(--gutter);
   }
 
