@@ -42,11 +42,7 @@ export default {
 
 <style lang="scss" module>
 .view {
-  // position: absolute;
-  // top: 0;
-  // width: 100%;
-  // height: 100%;
-  padding: var(--gutter);
+  padding: var(--gutter) var(--gutter) calc(var(--blank-line) * 3) var(--gutter);
   background-color: var(--white);
 
   &:last-child {
