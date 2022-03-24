@@ -54,6 +54,7 @@ export default {
 
     display: inline-block;
     margin-left: var(--gutter);
+    margin-top: var(--spacing-h-medium);
   }
 }
 
@@ -61,6 +62,8 @@ export default {
   @extend %link-reset;
 
   .isReference & {
+    @extend %button-default;
+
     display: inline-block;
   }
 }

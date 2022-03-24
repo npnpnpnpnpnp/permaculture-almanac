@@ -102,7 +102,7 @@ export default {
   @media (min-width: $medium) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: var(--gutter);
+    grid-gap: calc(var(--blank-line) * 3) calc(var(--gutter) * 1.5);
   }
 }
 
