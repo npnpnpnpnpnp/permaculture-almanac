@@ -80,6 +80,7 @@ export default {
 <style lang="scss" module>
 .component {
   max-width: var(--max-filter-width);
+  margin-bottom: calc(var(--blank-line) * 3.5);
 }
 
 .title {

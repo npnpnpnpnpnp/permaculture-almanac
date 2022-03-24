@@ -39,6 +39,8 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @include focus-default($color: transparent);
+
   position: relative;
   display: inline-block;
   margin-left: var(--list-indent);

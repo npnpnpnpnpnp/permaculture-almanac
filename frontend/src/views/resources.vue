@@ -191,6 +191,10 @@ export default {
   }
 }
 
+.content {
+  grid-column: 2 / 3;
+}
+
 .controls {
   position: sticky;
   display: grid;
@@ -260,6 +264,7 @@ export default {
   padding: calc(var(--blank-line) / 4) calc(var(--gutter) / 2);
   background-color: var(--white);
   margin-top: calc(var(--blank-line) * 1.25);
+  z-index: 2;
 }
 // .title {}
 // .body {}

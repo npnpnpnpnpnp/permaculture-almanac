@@ -40,6 +40,8 @@ export default {
 
 <style lang="scss" module>
 .component {
+  @include focus-default($color: transparent);
+
   // @extend %ff-sans;
   // @extend %fs-overlay;
   // @extend %button-reset;

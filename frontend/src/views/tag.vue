@@ -63,7 +63,7 @@ export default {
 
 <style lang="scss" module>
 .view {
-  padding: var(--gutter);
+  padding: var(--gutter) var(--gutter) calc(var(--blank-line) * 3) var(--gutter);
   background-color: var(--white);
 
   @media (min-width: $medium) {
