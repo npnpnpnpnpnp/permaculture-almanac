@@ -14,12 +14,12 @@
         :filter-visible="filterVisible"
         @update-tags="updateTagFilter"
       />
-      <author-filter
+      <!-- <author-filter
         :default-authors="defaultAuthors"
         :selected-authors="filter.selectedAuthors"
         :filter-visible="filterVisible"
         @update-authors="updateAuthorFilter"
-      />
+      /> -->
     </div>
     <div :class="$style.controls">
       <button
@@ -46,14 +46,14 @@
 <script>
 import CategoryFilter from '@/components/category-filter'
 import TagFilter from '@/components/tag-filter'
-import AuthorFilter from '@/components/author-filter'
+// import AuthorFilter from '@/components/author-filter'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     CategoryFilter,
-    TagFilter,
-    AuthorFilter
+    TagFilter
+    // AuthorFilter
   },
   props: {
     defaultCategories: {
